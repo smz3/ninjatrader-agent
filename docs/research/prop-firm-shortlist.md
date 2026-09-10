@@ -21,6 +21,15 @@ blocked our fetcher). **Re-check each firm's own rules page before paying.**
 | Topstep | Yes | **No - new Combines are TopstepX-only** | 50% | $2k EOD | Out |
 | Apex | **No - automation prohibited** | Yes | None | EOD | Out |
 
+**DECIDED (user, 2026-09-10): Lucid - LucidDaily 50K, EOD eval drawdown, daily loss
+limit ON ($1,200), personal profile.** Buy only once the bot is backtested.
+
+Lucid commissions (round turn, help center): ES/NQ $3.50, MES/MNQ $1.00. Platforms:
+NinjaTrader, TradingView, Tradovate, Tradesea, Sierra Chart. Standard Lucid accounts
+connect NinjaTrader 8 with the **Tradovate login from the Lucid dashboard (CQG feed)**;
+no documented Rithmic route for NinjaTrader (proptradingvibes, 2026-08-04). NinjaScript
+bots allowed over it. Confirm with support at checkout.
+
 ## Tradeify Growth 50K
 
 - $145 one-time, no activation fee. $3,000 target, $2,000 EOD trailing (breach is
