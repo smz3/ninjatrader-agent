@@ -4,7 +4,7 @@
   "priority": 1,
   "category": "app",
   "task_title": "Build high-WR low-RR strategy (prop math)",
-  "task_details": "Video = sizing framework, not entries. Need setup with ~65-75% WR at 0.5-1 RR AFTER costs, 3-5 trades/day. Size from tools/prop_sim grid (sweet spot so far: ~0.5-0.7 RR, risk ~15-25% of DD per trade). Next: pick instrument (MNQ/NQ/MES), candidate setups, backtest in NinjaTrader, feed real WR/RR back into prop_sim.",
+  "task_details": "Video = sizing framework, not entries. Need setup with ~65-75% WR at 0.5-1 RR AFTER costs, 3-5 trades/day. Size from tools/prop_sim grid (sweet spot so far: ~0.5-0.7 RR, risk ~15-25% of DD per trade). Next: pick instrument (MNQ/NQ/MES), candidate setups, backtest in NinjaTrader, feed real WR/RR back into prop_sim.\n[2026-09-10T09:22:31.072323+00:00 -> open] Funded payout logic (Lucid support confirmed 2026-09-10): LucidFlex 50K max payout = 50% of profit IN THAT CYCLE, cap $2k gross; cycle resets after each payout, leftover profit never becomes withdrawable (just cushion). So bot should: aim ~$4k profit per cycle + 5 days >=$150, then stop trading and request payout; stay flat until processed (trades before processing can void the request). Up to 5 funded accts per household, copier allowed -> run same bot on all 5.",
   "created_ts": "2026-09-10T07:45:46.154008+00:00",
-  "updated_ts": "2026-09-10T07:45:46.154008+00:00"
+  "updated_ts": "2026-09-10T09:22:31.072350+00:00"
 }

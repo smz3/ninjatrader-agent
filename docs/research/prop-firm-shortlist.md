@@ -107,6 +107,12 @@ threshold still come from third-party sites.
 - MLL trails EOD from $48,000; locks at $50,100 once balance hits $52,100.
 - Payouts: 90/10, 5 days at min profit per cycle + positive cycle net, request any
   day, funds within 2 business days, max doesn't grow with more payouts.
+- **Lucid support confirmed (2026-09-10): max = 50% of profit made in that cycle**
+  (not total account profit), cap $2,000. Cycle resets after each payout, so profit
+  left behind never becomes withdrawable - it only adds cushion. Sweet spot: ~$4,000
+  per cycle, then request. Max out of one account = 5 x $1,800 = ~$9,000.
+- What happens to leftover sim profit when moved to LucidLive: **unknown** (support
+  couldn't say).
 
 **LucidLive (after up to 5 payouts, risk team's call)**
 - All funded accounts with >=1 payout move live together; all sim accounts close;
