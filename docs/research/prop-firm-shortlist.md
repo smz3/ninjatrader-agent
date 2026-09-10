@@ -181,8 +181,15 @@ switch to 60% of peak EOD profit once past $52,100. Chosen at purchase, can't ch
 to 5 funded (household max) with the copier. Runner-up: LucidDaily (EOD eval, DLL on)
 if the bot gets a solid news filter.
 
-Conflict to re-check: LucidFlex 50K eval max contracts - help center read earlier said
-2 minis/20 micros; proptradingvibes (2026-09-08) says 4/40.
+Conflicts to re-check with Lucid support before buying:
+- LucidFlex 50K eval max contracts - help center read earlier said 2 minis/20 micros;
+  proptradingvibes (2026-09-08) says 4/40.
+- Lucid summary pasted by user (2026-09-10) says LucidPro has "no simulated payout
+  caps" and Flex pays "$500-$1,000 per request". Help center + proptradingvibes both
+  show Pro 50K max $2,000 first / $2,500 after, and support earlier confirmed Flex 50K
+  cap $2,000. Probably the summary means other sizes or lifetime caps - ask. The
+  summary also leaves out Pro's 40% funded consistency.
+- Decision still LucidPro 50K DLL ON either way (user asked for a call 2026-09-10).
 
 ## Sim check (tools/prop_sim, 73.3% WR, 0.5 RR, 3 trades/day)
 
