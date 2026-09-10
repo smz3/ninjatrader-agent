@@ -233,6 +233,11 @@ blow-ups. Pro = safer, live bonus, no hard-breach rule. Still leaning Pro for a
 first, untested bot; Daily is fine once the bot is proven. Mixing is allowed (5 funded
 per household total).
 
+Daily eval config (prop_sim, 50% consistency, $300 risk): EOD eval 82.5% pass, ~$140
+expected fees per pass ($115.50 each); intraday eval 80.8% pass, **~$118 per pass**
+($95.20 each). Intraday sim ignores open-profit peaks, but the funded sim shows those
+barely matter for us -> **if Daily, buy Intraday + DLL ON** (cheapest per pass).
+
 Daily news filter needs: USD high-impact calendar (ask Lucid which one it uses), flatten
 + block entries a few minutes around each event, and a fallback - if the VPS or data
 drops with a trade open at news time, the account is gone (Lucid doesn't adjust for
