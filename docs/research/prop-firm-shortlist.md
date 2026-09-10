@@ -191,6 +191,53 @@ Conflicts to re-check with Lucid support before buying:
   summary also leaves out Pro's 40% funded consistency.
 - Decision still LucidPro 50K DLL ON either way (user asked for a call 2026-09-10).
 
+## LucidDaily vs LucidPro 50K in full (2026-09-10, session 3)
+
+User decided: **personal** profile (open a personal bank account for WorkMarket).
+
+| | LucidDaily | LucidPro |
+|---|---|---|
+| Price, EOD eval + DLL on (list / code) | $160-165 / ~$112-116 | $172 / $120 |
+| Eval drawdown | pick EOD or intraday | EOD |
+| Eval consistency | 50% with cushion (doesn't matter for us) | none |
+| Funded drawdown | **intraday**, trails open-profit peaks until locked at $50,100 | EOD, same lock |
+| News | **red-folder USD news = hard breach** in funded (flat 1 min before to 1 min after); eval undocumented - assume same | no news rule |
+| DLL (if on) | $1,200 fixed | $1,200, then scales up past $52,100 |
+| Funded consistency | none | 40% of cycle profit |
+| Payouts | any day, $500 min, **all above $52,100, no cap** | 3-day cycles, $500 goal, cap $2k then $2.5k |
+| Payouts before live | no fixed count, risk team's call; auto-review if a day makes $8k+ | 5 |
+| Moving live | sim profit above buffer paid out, capped at $15k total; **no live bonus** | live bonus ($2,000 on 50K, first-time live traders) |
+
+Funded-stage sim (`python -m tools.prop_sim.funded`, 73.3% WR, 0.5 RR, $300 risk,
+3/day, no costs, 5,000 runs; $ = gross withdrawn per account, blown accounts keep what
+they already withdrew):
+
+| Plan | 60 days: blown / $ out | 120 days: blown / moved live / $ out |
+|---|---|---|
+| Flex | 31% / $2,302 | 33% / 64% / $2,988 |
+| Pro | **21%** / $3,035 | **28%** / 67% / $4,579 (+ live bonus) |
+| Daily | 27% / **$3,297** | 43% / n/a / **$7,168** (never moved live in sim) |
+| Daily, no intraday effect | 25% / $3,336 | 42% / n/a / $7,324 |
+
+- The intraday drawdown barely matters for our bot (~2 pts more blown, ~$40).
+- Daily blows up more because it pulls everything above $52,100 out, so the account
+  sits on its minimum $2k cushion. Pro's caps + cycles leave more cushion.
+- First payout: median day 21 on both; Flex day 12 but half the money.
+- 120-day Daily number is inflated vs Pro: Pro stops at 5 payouts because it goes live
+  (plus bonus); Daily keeps farming sim until Lucid decides.
+- With $5/trade costs every plan drops hard (Pro 39% blown, $3,804) - our edge is thin
+  (+0.1R), so task #2 must beat this.
+
+**Verdict: close.** With a news filter, Daily = more cash, sooner cash-out, more
+blow-ups. Pro = safer, live bonus, no hard-breach rule. Still leaning Pro for a
+first, untested bot; Daily is fine once the bot is proven. Mixing is allowed (5 funded
+per household total).
+
+Daily news filter needs: USD high-impact calendar (ask Lucid which one it uses), flatten
++ block entries a few minutes around each event, and a fallback - if the VPS or data
+drops with a trade open at news time, the account is gone (Lucid doesn't adjust for
+connection problems).
+
 ## Sim check (tools/prop_sim, 73.3% WR, 0.5 RR, 3 trades/day)
 
 | Rule set | $300 risk | $500 risk |

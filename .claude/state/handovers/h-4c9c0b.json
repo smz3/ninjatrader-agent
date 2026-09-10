@@ -1,0 +1,8 @@
+{
+  "id": "h-4c9c0b",
+  "ts": "2026-09-10T09:45:45.713922+00:00",
+  "session_id": "1b50de93-60d6-4102-9e07-b8eba85f446e",
+  "summary": "Task #1: compared all 4 Lucid plans (Flex/Pro/Daily/Direct) from Lucid help center via r.jina.ai; recommended LucidPro 50K DLL ON. User decided PERSONAL profile. Full Daily vs Pro comparison + new funded-stage sim tools/prop_sim/funded.py (60 days: Pro 21% blown/3,035 out, Daily 27%/3,297, intraday DD barely matters; with 5 USD/trade costs everything drops hard). Verdict close, leaning Pro for untested bot. All in docs/research/prop-firm-shortlist.md.",
+  "next_steps": "Task #1: user picks Pro vs Daily (or mix). Ask Lucid support: Pro 50K per-payout cap (user's pasted summary said no caps), which news calendar Daily uses, Flex eval max contracts. Open personal bank account (USD-capable) for WorkMarket. Don't buy eval until bot is backtested (30 days no P/L = account deleted). Then task #2: build bot - edge +0.1R is thin, costs kill it; if Daily, bot needs red-folder news filter.",
+  "questions": "Pro or Daily? Pro 50K payout cap real? Which red-folder calendar does Lucid use?"
+}
