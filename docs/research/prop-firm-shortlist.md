@@ -266,6 +266,45 @@ connection problems).
   (no payout consistency). Tradeify is still simplest to pass.
 - $300 risk: median ~24 trading days to pass. $500: ~11 days, lower pass rate.
 
+## Eval risk vs funded risk - LucidDaily 50K (2026-09-10, session 3)
+
+Same bot, different size per stage. Assumes 73.3% WR, 0.5 RR, 3 trades/day, no costs -
+**replace with real backtest numbers once the bot exists.**
+
+Eval (`python -m tools.prop_sim ... --consistency 0.5 --daily-loss 1200 --fee 115.5`):
+
+| Risk/trade | Pass | Median days | Fees per pass |
+|---|---|---|---|
+| $300 | 82.5% | 24 | $140 |
+| $500 | 69.0% | 11 | $167 |
+| $800 | 59.0% | 6 | $196 |
+| $1,000 | 56.8% | 4 | $203 |
+| $1,200 | 55.3% | 5 | $209 |
+
+- **1-day pass is impossible on Daily**: 50% consistency means a best day can be ~52%
+  of profit at most -> 2 days minimum. (LucidPro eval has no consistency.)
+- Above $1,000 nothing improves (DLL + MLL cap it). At $1,000, 2 losses = -$2,000 =
+  MLL, so a day-1 blow-up is real.
+- Going fast is worth it *if the edge is real*: ~20 days sooner funded x ~$55/day
+  funded income (60-day sim) = ~$1,100 vs ~$60 extra fees per pass.
+
+Funded Daily, 60 days (`python -m tools.prop_sim.funded --days 60 --risk N`):
+
+| Risk/trade | Blown | $ out (gross) | 1st payout (median day) |
+|---|---|---|---|
+| $150 | 1.5% | $845 | 42 |
+| $200 | 7.1% | $1,762 | 34 |
+| $300 | 27% | $3,297 | 21 |
+| $500 | 83% | $4,282 | 11 |
+
+- Blown accounts keep what they already withdrew, so $ out keeps rising with risk, but
+  at $500 almost every account dies -> constant re-buying + re-passing.
+- **Plan: eval ~$800-1,000 risk, funded ~$200-300 risk.** Finalise after backtest.
+
+Free testing before buying anything (NinjaTrader 8, all free): Strategy Analyzer
+(backtest on history), Market Replay (replay past days tick by tick), Sim101 (paper
+trade live). Lucid's eval is also sim, but costs money - do the free steps first.
+
 ## Sources
 
 - https://proptradingvibes.com/blog/tradeify-trading-rules-overview
