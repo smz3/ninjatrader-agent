@@ -14,7 +14,7 @@ blocked our fetcher). **Re-check each firm's own rules page before paying.**
 
 | Firm | Bots OK? | NinjaTrader? | Eval consistency | Drawdown | Verdict |
 |---|---|---|---|---|---|
-| **Lucid Flex 50K** | Yes (per reviews, confirm) | Yes | 50% (with cushion) | $2k EOD, no DLL | **#1 - only one open to Malaysia** |
+| **Lucid Flex 50K** | **Yes (Lucid's own help center)** | Yes | 50% (with cushion) | $2k EOD, DLL optional | **#1 - only one open to Malaysia** |
 | **Tradeify Growth 50K** | Yes, with conditions | Yes (Tradovate/Rithmic) | **None** | $2k EOD | **Out - Malaysia restricted** |
 | MyFundedFutures | Allowed since Jul 2025 (mixed reports) | Yes | 30-50% | EOD (Rapid EOD) | Backup |
 | Take Profit Trader | Unclear | Yes | 50% | EOD in test, **intraday in PRO** | Skip |
@@ -81,6 +81,53 @@ Lucid payout rails for a Malaysian:
   convert to MYR instead of eating the bank's default rate.
 - Min payout $500 -> the fixed $10-25 wire fee is small (2-5%) at that size.
 
+## Lucid - verified on Lucid's own help center (2026-09-10)
+
+Lucid's site 403s our fetcher, but `https://r.jina.ai/<article url>` returns the text.
+Some tables on their pages are images, so payout min/max and the microscalping
+threshold still come from third-party sites.
+
+**Bots / setup**
+- Automated strategies and trade copiers: **allowed**; you own any software errors.
+- VPS: **fine**. VPN: allowed. Your connection problems don't get account adjustments
+  (Lucid support chat, pasted by user).
+- Banned: HFT, microscalping (third-party: >50% of profit from trades <=5 sec), hedging
+  (incl. opposite/correlated positions across accounts **or across other prop firms**).
+- Flat by 4:45 PM ET (auto-closed, not a breach). Opens Sun-Thu 6 PM ET.
+- Inactivity: an account with no $1+ net P/L for 30 calendar days is **deleted**.
+
+**LucidFlex 50K**
+- Eval: $3,000 target, $2,000 EOD MLL, **max 2 minis / 20 micros** (not 4), no scaling.
+- Consistency (eval only): biggest day / total profit <= 50%, small cushion (~$1,560
+  on 50K). Break it = keep trading, not fail.
+- DLL is picked at purchase and can't change: ON = $1,200 soft daily limit, ~$10
+  cheaper; OFF = none.
+- Funded scaling (end of day): profit $0-999 = 2 minis/20 micros, $1k-1,999 = 3/30,
+  $2k+ = 4/40.
+- MLL trails EOD from $48,000; locks at $50,100 once balance hits $52,100.
+- Payouts: 90/10, 5 days at min profit per cycle + positive cycle net, request any
+  day, funds within 2 business days, max doesn't grow with more payouts.
+
+**LucidLive (after up to 5 payouts, risk team's call)**
+- All funded accounts with >=1 payout move live together; all sim accounts close;
+  funded accounts with 0 payouts are refunded.
+- 50K live: $2,000 EOD drawdown, starts 2 minis/20 micros, 3/30 at $2k profit,
+  4/40 at $4k. No consistency. Daily payouts. No swing trades (Rithmic flat 4:15 PM ET).
+- One-time live bonus: hit $2,100 on a 50K -> $2,000 bonus (90/10).
+- Household: if one member is live, nobody else in the house can trade sim.
+- **Live data/platform fees: not published.** Ask support.
+
+**Accounts / payments**
+- Buy evals by card only (Visa/MC/Amex/Discover/Diners/Maestro).
+- Max 5 funded + 10 total accounts per household.
+- Register personal OR business - **one profile forever, can't convert**. Business:
+  put business name in First + Last Name; email compliance@lucidtrading.com proof of
+  incorporation + proof of ownership + ID of 25%+ owners; then do business KYC with
+  WorkMarket support separately. Business accounts must be paid as the business.
+- User's only active bank account is the Malaysian sole prop *Quantum Capital
+  Global*. A sole prop is SSM-registered, not incorporated -> **ask compliance
+  whether the SSM certificate + SSM business profile count before registering.**
+
 ## Sim check (tools/prop_sim, 73.3% WR, 0.5 RR, 3 trades/day)
 
 | Rule set | $300 risk | $500 risk |
@@ -124,3 +171,10 @@ Lucid payout rails for a Malaysian:
 - https://daytradingz.com/tradeify-review/
 - https://crosstrade.io/docs/getting-started/prop-firm-connection-guide
 - https://workmarket.zendesk.com/hc/en-us/articles/18410846928151-Payment-Accounts-Overview-Bank-Hyperwallet-PayPal-Wisely
+- Lucid help center (read via r.jina.ai): articles 11404634 registering-as-a-business,
+  11404728 other-trading-activities, 11404729 allowed-trading-times, 11404742
+  microscalping, 11404734 hedging, 11404736 HFT, 11404632 inactivity, 11404617 max
+  accounts, 11404628 payment methods, 12890325 payout methods, 12945790/95/96/805/808/815
+  LucidFlex eval/funded/payouts/consistency/scaling/drawdown, 16226050 customization,
+  13425130 new live structure, 15245873 live scaling plan
+- https://proptradingvibes.com/blog/lucid-trading-50k-account-rules (DLL price)
