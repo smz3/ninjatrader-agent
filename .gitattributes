@@ -1,0 +1,2 @@
+# SQLite db: never diff, merge, or rewrite line endings as if it were text
+.claude/state.db binary

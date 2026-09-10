@@ -1,4 +1,7 @@
-.claude/state.db
+# state.db IS tracked (user's call, 2026-09-10) - only its SQLite side files are ignored
+.claude/state.db-journal
+.claude/state.db-wal
+.claude/state.db-shm
 .claude/db-history/
 __pycache__/
 

@@ -1,5 +1,5 @@
 """
-CLI entrypoint for state.db (SQLite, gitignored) - session continuity for
+CLI entrypoint for state.db (SQLite, git-tracked) - session continuity for
 Claude Code hooks/skills in this repo. Stdlib only, no deps.
 
 This file (and git_safe.py, its sibling) stays at the top of scripts/ on

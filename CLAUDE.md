@@ -2,8 +2,9 @@
 
 ## Session continuity
 
-- `.claude/state.db` (SQLite, gitignored) holds `handovers`, `context_watch`,
-  `sessions`, `tasks`. Full schema + rationale: docstring in
+- `.claude/state.db` (SQLite, git-tracked + pushed, binary - a merge
+  conflict on it means picking one side, not combining) holds `handovers`,
+  `context_watch`, `sessions`, `tasks`. Full schema + rationale: docstring in
   `.claude/scripts/lib/schema.py`. `db.py` is just the CLI entrypoint/router;
   logic lives under `.claude/scripts/{hooks,cli,lib}/` by who calls it -
   `hooks/` = only ever invoked by a settings.json hook, `cli/` = only ever

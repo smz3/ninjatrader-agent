@@ -1,5 +1,5 @@
 """
-Schema + connection for state.db (SQLite, gitignored). Stdlib only, no deps.
+Schema + connection for state.db (SQLite, git-tracked). Stdlib only, no deps.
 Shared by every hooks/cli module - nothing here depends on them.
 
 Table: handovers(id, ts, summary, next_steps, questions, session_id, delivered)
