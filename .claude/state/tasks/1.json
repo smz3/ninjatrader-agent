@@ -1,0 +1,10 @@
+{
+  "id": "1",
+  "status": "discussing",
+  "priority": 1,
+  "category": "app",
+  "task_title": "Pick futures prop firm for our bot",
+  "task_details": "Criteria (docs/research/prop-firm-math.md): 50k acct, NO consistency rule in eval, EOD drawdown (not intraday trailing), allows automated NinjaTrader trading, cheap fee, sane funded payout rules. Shortlist from memory: Lucid Flex, Tradeify, Topstep, Take Profit Trader, Apex, MFFU. Must verify CURRENT rules on each firm site - esp. bot/automation policy.\n[2026-09-10T07:56:48.832620+00:00 -> discussing] Researched 2026-09-10 -> docs/research/prop-firm-shortlist.md. #1 Tradeify Growth 50K (, no eval consistency,  EOD, bots OK w/ video proof + no multi-firm bot use). #2 Lucid Flex (50% eval consistency barely matters at our sizing per sim; no funded consistency). Out: Topstep (TopstepX-only, no NinjaTrader), Apex (no automation). Waiting on user to pick; confirm Lucid bot policy on its own site (403 to our fetcher).",
+  "created_ts": "2026-09-10T07:45:46.044055+00:00",
+  "updated_ts": "2026-09-10T07:56:48.832636+00:00"
+}

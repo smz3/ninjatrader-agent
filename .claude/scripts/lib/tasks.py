@@ -37,11 +37,12 @@ def check_task_bloat(conn):
 def tasks_note(conn):
     """Every task still open or discussing, for SessionStart - so an item can't
     silently drop off just because a later handover's prose didn't repeat it.
-    Sorted priority-first, then by id.
+    Sorted priority-first, then oldest first (ids are random, so they don't
+    sort by age).
     """
     rows = conn.execute(
         "SELECT id, status, priority, category, task_title FROM tasks "
-        "WHERE status IN ('open', 'discussing') ORDER BY priority, id"
+        "WHERE status IN ('open', 'discussing') ORDER BY priority, created_ts, id"
     ).fetchall()
     if not rows:
         return "No open or discussing tasks."

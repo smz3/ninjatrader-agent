@@ -75,6 +75,10 @@ def has_conflicts():
 
 
 def get_changed_files():
+    """(path, already_staged) per changed path. already_staged = the index
+    already holds the whole change (worktree column blank), so there's
+    nothing to `git add` - and for e.g. a `git rm --cached` of a file that's
+    now gitignored, `git add` would refuse the path and abort the commit."""
     out = run_git(["status", "--porcelain=v1"])
     paths = []
     for line in out.splitlines():
@@ -83,7 +87,8 @@ def get_changed_files():
         rest = line[3:]
         if " -> " in rest:
             rest = rest.split(" -> ", 1)[1]
-        paths.append(rest.strip('"'))
+        already_staged = line[0] not in (" ", "?") and line[1] == " "
+        paths.append((rest.strip('"'), already_staged))
     return paths
 
 
@@ -111,7 +116,9 @@ def cmd_commit(args):
         return
 
     staged, skipped = [], []
-    for path in changed:
+    for path, already_staged in changed:
+        if already_staged:
+            continue
         (skipped if is_secret_path(path) else staged).append(path)
 
     if skipped:
@@ -119,7 +126,7 @@ def cmd_commit(args):
         for p in skipped:
             print(f"  {p}")
 
-    if not staged:
+    if not staged and not any(already for _, already in changed):
         print("Nothing safe to stage. Commit aborted.")
         return
 

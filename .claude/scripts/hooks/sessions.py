@@ -6,6 +6,7 @@ import json
 from lib.handovers import format_handovers, recent_handovers
 from lib.schema import get_conn, read_stdin_json
 from lib.sessions import git_worktree_summary, session_activity_note, touch_session
+from lib.state_files import format_problems, sync_from_files
 from lib.tasks import tasks_note
 
 
@@ -13,6 +14,10 @@ def cmd_session_start(_args):
     data = read_stdin_json()
     session_id = data.get("session_id", "")
     conn = get_conn()
+    # get_conn() already tried the import and only warned on stderr, which
+    # a hook's model never sees - ask again so a broken .claude/state/ file
+    # (e.g. conflict markers after a merge) is surfaced in the context.
+    problems = sync_from_files(conn)
     activity_note = session_activity_note(conn, session_id)
     tasks_line = tasks_note(conn)
     touch_session(conn, session_id)
@@ -23,7 +28,8 @@ def cmd_session_start(_args):
     handover_block = format_handovers(handovers)
 
     context = (
-        f"{handover_block}\n\n"
+        (f"{format_problems(problems)}\n\n" if problems else "")
+        + f"{handover_block}\n\n"
         f"{git_line}\n"
         f"{activity_note}\n\n"
         f"{tasks_line}\n\n"

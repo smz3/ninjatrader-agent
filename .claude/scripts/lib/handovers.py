@@ -2,36 +2,45 @@
 handler. Writing a handover (cmd_log) is CLI-only - see cli/handovers.py.
 See lib/schema.py for the handovers table's shape/lifecycle.
 """
+from lib.schema import now
 
 # SessionStart shows at most this many distinct sessions' latest undelivered
-# handover (current + 1 previous) - not a time window. Combined with the
-# delivered flag, a handover is shown once (to whichever session starts
-# next) and then never replayed again.
+# handover (current + 1 previous) - not a time window. Combined with
+# handovers_delivered, a handover is shown once (to whichever session starts
+# next in this checkout) and then never replayed again.
 HANDOVER_SHOW_COUNT = 2
 
 
 def recent_handovers(conn, exclude_session_id, limit=HANDOVER_SHOW_COUNT):
     """Latest undelivered handover from up to `limit` distinct sessions (other
-    than exclude_session_id), most recent first. Marks exactly the returned
-    rows delivered=1, so this same handover never gets shown again.
+    than exclude_session_id), most recent first.
+
+    Marks EVERY undelivered handover it looked at as delivered, not just the
+    ones returned - the rest are either superseded (an older handover from a
+    session whose newer one is shown) or older than the `limit` sessions
+    shown. Otherwise a fresh checkout, whose local db has never delivered
+    anything, would drip-feed the whole handover history two at a time over
+    the next sessions.
     """
     rows = conn.execute(
-        "SELECT id, session_id, ts, summary, next_steps, questions FROM handovers "
-        "WHERE delivered = 0 AND session_id != ? ORDER BY ts DESC",
+        "SELECT id, session_id, ts, summary, next_steps, questions FROM handovers h "
+        "WHERE session_id != ? AND NOT EXISTS "
+        "(SELECT 1 FROM handovers_delivered d WHERE d.handover_id = h.id) "
+        "ORDER BY ts DESC",
         (exclude_session_id,),
     ).fetchall()
-    picked_ids, out, seen_sessions = [], [], set()
-    for row_id, session_id, ts, summary, next_steps, questions in rows:
-        if session_id in seen_sessions:
+    out, seen_sessions = [], set()
+    for _row_id, session_id, ts, summary, next_steps, questions in rows:
+        if session_id in seen_sessions or len(out) >= limit:
             continue
         seen_sessions.add(session_id)
-        picked_ids.append(row_id)
         out.append((session_id, (ts, summary, next_steps, questions)))
-        if len(out) >= limit:
-            break
-    if picked_ids:
-        placeholders = ",".join("?" for _ in picked_ids)
-        conn.execute(f"UPDATE handovers SET delivered = 1 WHERE id IN ({placeholders})", picked_ids)
+    if rows:
+        ts = now()
+        conn.executemany(
+            "INSERT OR IGNORE INTO handovers_delivered (handover_id, ts) VALUES (?, ?)",
+            [(row[0], ts) for row in rows],
+        )
         conn.commit()
     return out
 

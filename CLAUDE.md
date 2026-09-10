@@ -2,15 +2,25 @@
 
 ## Session continuity
 
-- `.claude/state.db` (SQLite, git-tracked + pushed, binary - a merge
-  conflict on it means picking one side, not combining) holds `handovers`,
-  `context_watch`, `sessions`, `tasks`. Full schema + rationale: docstring in
-  `.claude/scripts/lib/schema.py`. `db.py` is just the CLI entrypoint/router;
-  logic lives under `.claude/scripts/{hooks,cli,lib}/` by who calls it -
-  `hooks/` = only ever invoked by a settings.json hook, `cli/` = only ever
-  invoked manually, `lib/` = shared helpers used by both.
+- Shared state = one JSON file per record, git-tracked:
+  `.claude/state/tasks/<id>.json` and `.claude/state/handovers/<id>.json`
+  (random ids like `t-3fa9c1`; older tasks keep `1`, `2`, `3`). Branches and
+  worktrees merge record by record - only both sides editing the same task
+  conflicts, as a normal text conflict in that one file. Until it's
+  resolved, db calls warn and keep the last good import. Change them via
+  `db.py`, not by hand.
+- `.claude/state.db` (SQLite) is a local, gitignored cache of those files
+  plus local-only tables (`sessions`, `context_watch`,
+  `handovers_delivered`). Safe to delete - rebuilt from the files on the
+  next db call. Full schema + rationale: docstrings in
+  `.claude/scripts/lib/schema.py` and `lib/state_files.py`. `db.py` is just
+  the CLI entrypoint/router; logic lives under
+  `.claude/scripts/{hooks,cli,lib}/` by who calls it - `hooks/` = only ever
+  invoked by a settings.json hook, `cli/` = only ever invoked manually,
+  `lib/` = shared helpers used by both.
 - SessionStart shows the current + 1 previous undelivered handover, then
-  marks them delivered so they don't repeat.
+  marks them (and anything older) delivered in this checkout so they don't
+  repeat.
 - `/handover` — wrap up a session: saves work, syncs tasks, logs a handover.
 - `tasks` table is the source of truth for cross-session work items. Manage
   via `db.py task-add` / `task-status` / `task-list`. When the user hands you

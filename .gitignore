@@ -1,7 +1,10 @@
-# state.db IS tracked (user's call, 2026-09-10) - only its SQLite side files are ignored
+# state.db is a local cache - the shared tasks/handovers are tracked as
+# JSON files under .claude/state/ instead (see .claude/scripts/lib/state_files.py)
+.claude/state.db
 .claude/state.db-journal
 .claude/state.db-wal
 .claude/state.db-shm
+.claude/state/**/*.tmp
 .claude/db-history/
 __pycache__/
 

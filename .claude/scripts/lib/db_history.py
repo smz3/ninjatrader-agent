@@ -2,12 +2,13 @@
 Local-only backup history for state.db.
 
 .claude/db-history/ is its own git repo (own .git, no remote) that
-snapshots state.db over time. Since 2026-09-10 the project repo also
-tracks and pushes state.db (user's call), but only as a side effect of
-whatever else gets committed. This repo stays separate so snapshots can be
-taken on their own schedule and restored point-in-time without touching
-project history. It has no origin configured, so `git push` here is a
-no-op.
+snapshots state.db over time. The project repo doesn't track state.db (it
+was tracked briefly on 2026-09-10, then replaced by the JSON files under
+.claude/state/ - see lib/state_files.py), so tasks/handovers already have
+real history there; these snapshots mostly matter for the local-only
+tables (sessions, context_watch, handovers_delivered). Snapshots are taken
+on their own schedule and restored point-in-time without touching project
+history. It has no origin configured, so `git push` here is a no-op.
 
 snapshot() uses sqlite3's own backup() API rather than a plain file copy,
 so a concurrent writer (another live session) can't produce a torn/

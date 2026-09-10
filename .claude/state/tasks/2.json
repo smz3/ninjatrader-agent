@@ -1,0 +1,10 @@
+{
+  "id": "2",
+  "status": "open",
+  "priority": 1,
+  "category": "app",
+  "task_title": "Build high-WR low-RR strategy (prop math)",
+  "task_details": "Video = sizing framework, not entries. Need setup with ~65-75% WR at 0.5-1 RR AFTER costs, 3-5 trades/day. Size from tools/prop_sim grid (sweet spot so far: ~0.5-0.7 RR, risk ~15-25% of DD per trade). Next: pick instrument (MNQ/NQ/MES), candidate setups, backtest in NinjaTrader, feed real WR/RR back into prop_sim.",
+  "created_ts": "2026-09-10T07:45:46.154008+00:00",
+  "updated_ts": "2026-09-10T07:45:46.154008+00:00"
+}

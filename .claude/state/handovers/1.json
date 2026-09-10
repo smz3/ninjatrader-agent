@@ -1,0 +1,8 @@
+{
+  "id": "1",
+  "ts": "2026-09-10T07:56:48.947209+00:00",
+  "session_id": "38651e52-3d0f-4251-89f4-9e0702d6b7f9",
+  "summary": "Saved prop-firm-math video notes (docs/research/prop-firm-math.md). Built tools/prop_sim Monte Carlo pass-rate sim - confirms video: same edge, 0.5 RR @ ~\\ risk passes ~83% vs 3 RR ~40-50%. Researched firms -> docs/research/prop-firm-shortlist.md: Tradeify Growth 50K #1, Lucid Flex #2, Topstep/Apex out. Renamed master->main, added GitHub remote (PUBLIC repo), started tracking .claude/state.db (binary via .gitattributes), pushed.",
+  "next_steps": "User picks Tradeify vs Lucid (task 1). Then task 2: choose instrument (MNQ/NQ/MES) + candidate high-WR low-RR setups, decide stack (NinjaScript C# likely), backtest, feed real WR/RR/costs into prop_sim.",
+  "questions": "Tradeify or Lucid? OK that state.db is public on GitHub?"
+}

@@ -1,5 +1,5 @@
 ---
-description: Wrap up this session - save uncommitted work, sync the tasks table, log a handover to state.db, confirm it's safe to close.
+description: Wrap up this session - save uncommitted work, sync the tasks table, log a handover, confirm it's safe to close.
 allowed-tools: Bash(python .claude/scripts/db.py *), Bash(python .claude/scripts/git_safe.py *), Bash(git status)
 ---
 

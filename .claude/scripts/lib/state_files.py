@@ -34,7 +34,6 @@ import json
 import re
 import secrets
 import sqlite3
-import sys
 from pathlib import Path
 
 STATE_DIR = Path(__file__).resolve().parents[2] / "state"
@@ -55,9 +54,11 @@ def new_id(prefix, directory):
             return rid
 
 
-def _write(directory, fields, record):
+def _write(directory, fields, record, overwrite):
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / f"{record['id']}.json"
+    if not overwrite and path.exists():
+        return
     tmp = path.with_name(path.name + ".tmp")
     body = json.dumps({f: record.get(f) for f in fields}, indent=2, ensure_ascii=False)
     with open(tmp, "w", encoding="utf-8", newline="\n") as fh:
@@ -65,12 +66,12 @@ def _write(directory, fields, record):
     tmp.replace(path)
 
 
-def write_task(record):
-    _write(TASKS_DIR, TASK_FIELDS, record)
+def write_task(record, overwrite=True):
+    _write(TASKS_DIR, TASK_FIELDS, record, overwrite)
 
 
-def write_handover(record):
-    _write(HANDOVERS_DIR, HANDOVER_FIELDS, record)
+def write_handover(record, overwrite=True):
+    _write(HANDOVERS_DIR, HANDOVER_FIELDS, record, overwrite)
 
 
 def read_task(task_id):
@@ -115,12 +116,16 @@ def _insert_sql(table, fields):
 
 def sync_from_files(conn):
     """Rebuild the tasks/handovers tables from .claude/state/ if the files
-    changed since the last import. No-op when nothing changed."""
+    changed since the last import. No-op when nothing changed.
+
+    Returns a list of problems (empty = fine). On any problem nothing is
+    imported and the signature isn't stored, so the next call re-checks -
+    the warning keeps coming back until the files are fixed."""
     files = _files()
     sig = _signature(files)
     row = conn.execute("SELECT value FROM meta WHERE key = 'files_sig'").fetchone()
     if row and row[0] == sig:
-        return
+        return []
 
     bad = []
     tasks = _load(TASKS_DIR, TASK_FIELDS, bad)
@@ -137,9 +142,11 @@ def sync_from_files(conn):
                 )
         except sqlite3.IntegrityError as e:
             bad.append(f"a record breaks a table constraint: {e}")
-    if bad:
-        print(
-            "[state] NOT importing .claude/state/ - fix these first "
-            "(unresolved merge conflict?):\n  " + "\n  ".join(bad),
-            file=sys.stderr,
-        )
+    return bad
+
+
+def format_problems(bad):
+    return (
+        "[state] NOT importing .claude/state/ - the db is still on its last good "
+        "import. Fix these first (unresolved merge conflict?):\n  " + "\n  ".join(bad)
+    )

@@ -1,2 +1,3 @@
-# SQLite db: never diff, merge, or rewrite line endings as if it were text
-.claude/state.db binary
+# Shared state (tasks/handovers) - one small JSON file per record, merged
+# as plain text. Force LF so Windows checkouts don't flip every file.
+.claude/state/** text eol=lf

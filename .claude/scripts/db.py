@@ -1,6 +1,8 @@
 """
-CLI entrypoint for state.db (SQLite, git-tracked) - session continuity for
-Claude Code hooks/skills in this repo. Stdlib only, no deps.
+CLI entrypoint for session continuity for Claude Code hooks/skills in this
+repo. Stdlib only, no deps. Shared tasks/handovers are git-tracked as one
+JSON file per record under .claude/state/ (lib/state_files.py); state.db
+(SQLite) is a local gitignored cache of them plus local-only tables.
 
 This file (and git_safe.py, its sibling) stays at the top of scripts/ on
 purpose - settings.json and the /handover skill reference both by this
@@ -17,7 +19,8 @@ because git_safe.py does `import db as state_db` and calls
 `state_db.get_conn()` / `state_db.session_activity_note(...)` directly.
 
 Subcommands:
-  init                                        create db/table if missing
+  init                                        create/migrate the db and
+                                                import .claude/state/
   session-start                                stdin: hook JSON (session_id).
                                                 Prints SessionStart
                                                 hookSpecificOutput JSON with
@@ -101,10 +104,12 @@ Subcommands:
                                                 Silent on the hook path; never
                                                 blocks.
   log --session ID --summary S --next N [--questions Q]
-                                                Insert a handover row. The
-                                                only way a handover ever gets
-                                                written - normally invoked
-                                                via the /handover skill.
+                                                Write a handover file
+                                                (.claude/state/handovers/).
+                                                The only way a handover ever
+                                                gets written - normally
+                                                invoked via the /handover
+                                                skill.
   db-snapshot                                  Backup command, not a hook -
                                                 copies state.db into
                                                 db-history/ (a separate
@@ -120,7 +125,10 @@ Subcommands:
                                                 handovers are never deleted.
                                                 Manual only - not wired to a
                                                 hook.
-  task-add --title T --category infra|app       Insert a task, status='open'.
+  task-add --title T --category infra|app       Write a new task file
+                                                 (.claude/state/tasks/),
+                                                 status='open', random id
+                                                 like t-3fa9c1.
     --priority 1-4 [--details D]                Priority is required, same
                                                  as category. --title must be
                                                  <= TASK_TITLE_MAX_LEN chars
@@ -130,22 +138,25 @@ Subcommands:
                                                  Prints its id (+ a bloat
                                                  reminder once open+discussing
                                                  reaches TASK_BLOAT_THRESHOLD).
-  task-status --id N --status S [--note N]      Update a task's status
+  task-status --id ID --status S [--note N]     Update a task's status
     [--priority 1-4] [--category infra|app]     ('open'|'discussing'|
                                                  'rejected'|'closed'). --note
                                                  is appended (timestamped) to
                                                  task_details, not a
                                                  replacement. Omit --priority/
                                                  --category to leave unchanged.
-  task-retitle --id N --title T                 Replace a task's title in
+  task-retitle --id ID --title T                Replace a task's title in
                                                  place (same TASK_TITLE_MAX_LEN
                                                  check as task-add). The only
                                                  way to fix a bad title after
                                                  creation - task-status never
                                                  touches task_title.
   task-list [--status S1,S2,...]               Print tasks as JSON, sorted
-    [--category infra|app]                     priority-first. Default
-                                                status filter: open,discussing.
+    [--category infra|app]                     priority-first, then oldest
+                                                first. Default status
+                                                filter: open,discussing.
+  --id takes the task's id as shown (t-3fa9c1, or 3 for a pre-2026-09-10
+  task); a leading '#' is ignored.
 """
 import argparse
 import json
@@ -159,6 +170,10 @@ from hooks.sessions import cmd_session_end, cmd_session_start, cmd_stop_check
 from hooks.task_remind import cmd_task_remind
 from lib.schema import get_conn
 from lib.sessions import session_activity_note
+
+
+def task_id(value):
+    return value.strip().lstrip("#")
 
 
 def cmd_init(_args):
@@ -225,7 +240,7 @@ def main():
     task_add_p.set_defaults(func=cmd_task_add)
 
     task_status_p = sub.add_parser("task-status")
-    task_status_p.add_argument("--id", type=int, required=True)
+    task_status_p.add_argument("--id", type=task_id, required=True)
     task_status_p.add_argument(
         "--status", required=True, choices=["open", "discussing", "rejected", "closed"]
     )
@@ -240,7 +255,7 @@ def main():
     task_status_p.set_defaults(func=cmd_task_status)
 
     task_retitle_p = sub.add_parser("task-retitle")
-    task_retitle_p.add_argument("--id", type=int, required=True)
+    task_retitle_p.add_argument("--id", type=task_id, required=True)
     task_retitle_p.add_argument("--title", required=True)
     task_retitle_p.set_defaults(func=cmd_task_retitle)
 
