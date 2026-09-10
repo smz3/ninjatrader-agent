@@ -140,6 +140,50 @@ threshold still come from third-party sites.
   B is lower risk - the profile choice is permanent, and a sole prop gives no tax
   edge in Malaysia (its income is taxed as the owner's personal income anyway).
 
+## Lucid plan comparison - which account to buy (2026-09-10, session 3)
+
+Rules from Lucid's help center (via r.jina.ai); prices from proptradingvibes
+(updated 2026-09-08, 30% code VIBES). All 50K, 90/10 split, $2,000 MLL.
+
+| | Flex | Pro | Daily | Direct |
+|---|---|---|---|---|
+| Price (DLL on, list / code) | $136 / $95 | $172 / $120 | $136-165 / $95-116 | $520 / $364 |
+| Eval | $3k target, 50% consistency (cushion) | $3k target, **no consistency** | $3k target, 50% consistency (cushion) | **none** (straight to funded) |
+| Eval drawdown | EOD | EOD | pick EOD or intraday | - |
+| Funded drawdown | EOD | EOD | **intraday always** | EOD |
+| Funded contracts | 2 minis, scales to 4 | 4 minis | 4 minis | 4 minis |
+| Funded consistency | none | **40%** of cycle profit | none | **20%** of cycle profit |
+| Buffer before payouts | none | $52,100 balance | $52,100 balance | $52,100 + $3k goal, then $2.5k/cycle |
+| Payout size | **50% of cycle profit**, cap $2k | all above buffer, cap $2k then $2.5k | all above buffer, no per-request cap | cap $2k (1-3), $2.5k (4-5) |
+| Payout timing | 5 days of $150+ per cycle | 3-day cycle, $500 min goal | any day, +$1 since last payout | when goal + consistency met |
+| Payouts before live | 5 | 5 | risk team's call; auto-live if one day hits $6k+ sim profit | 5 |
+| Extra traps | leftover cycle profit never withdrawable | - | **red-folder news = hard breach** (flat 1 min before/after); sim profit above buffer capped at $15k when moved live, rest forfeited; no live bonus | 20% consistency = 5+ days/cycle |
+
+DLL (soft, pauses for the day): Pro/Daily/Direct 50K = $1,200 fixed, then Pro/Direct
+switch to 60% of peak EOD profit once past $52,100. Chosen at purchase, can't change.
+
+**Fit for our bot** (rough, 73% WR / 0.5 RR / $300 risk / 3 trades a day):
+- Expected edge ~$30/trade -> **~$90/day**. Days are lumpy: +$450 (3 wins), $0, -$450.
+- Flex only pays out **50%** of what you earn in a cycle. Pro/Daily pay out ~all of it
+  once past the one-time $2,100 buffer. Past ~$4.2k lifetime profit per account,
+  Pro/Daily beat Flex; at $10k lifetime: Flex ~$5k vs Pro ~$7.9k gross.
+- Pro's 40% consistency: a $450 best day needs a $1,125+ cycle -> ~2-week cycles. Fine.
+- Daily is the most flexible, but funded intraday drawdown + hard news breach are
+  extra ways for a bot bug to kill the account.
+- Direct: $364 to skip an eval our sim passes ~83% of the time (~$115 expected
+  eval cost on Flex/Pro). Not worth it.
+- DLL ON: our worst normal day is -$900 (3 losses) < $1,200, so it never blocks us, it's
+  cheaper, and it stops a runaway bot.
+- Don't buy before the bot is backtested: 30 days with no $1+ net P/L **deletes** the
+  account.
+
+**Recommendation: LucidPro 50K, DLL ON.** 1 account first to prove the bot, then scale
+to 5 funded (household max) with the copier. Runner-up: LucidDaily (EOD eval, DLL on)
+if the bot gets a solid news filter.
+
+Conflict to re-check: LucidFlex 50K eval max contracts - help center read earlier said
+2 minis/20 micros; proptradingvibes (2026-09-08) says 4/40.
+
 ## Sim check (tools/prop_sim, 73.3% WR, 0.5 RR, 3 trades/day)
 
 | Rule set | $300 risk | $500 risk |
@@ -190,3 +234,9 @@ threshold still come from third-party sites.
   LucidFlex eval/funded/payouts/consistency/scaling/drawdown, 16226050 customization,
   13425130 new live structure, 15245873 live scaling plan
 - https://proptradingvibes.com/blog/lucid-trading-50k-account-rules (DLL price)
+- Lucid help center (r.jina.ai), session 3: LucidPro 12890029/069/092/109/122/136,
+  16226068; LucidDirect 12890148/164/178/185/192; LucidDaily 15996664, 15997244/266,
+  15998336/425, 16085900, 16033858, 16010520
+- https://proptradingvibes.com/blog/lucid-pro-vs-lucid-flex-vs-lucid-direct
+- https://proptradingvibes.com/blog/lucid-trading-discount
+- https://phidiaspropfirm.com/education/luciddaily (daily profit ceiling, via search)
