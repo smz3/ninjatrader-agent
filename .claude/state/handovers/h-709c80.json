@@ -1,0 +1,8 @@
+{
+  "id": "h-709c80",
+  "ts": "2026-09-10T09:24:56.531003+00:00",
+  "session_id": "adf41012-2760-44ac-a15d-8c492347f739",
+  "summary": "Task #1: Tradeify ruled out (Malaysia restricted); Lucid chosen. Read Lucid's own help center via r.jina.ai proxy (direct fetch 403s) and logged everything in docs/research/prop-firm-shortlist.md: bots/copiers allowed, VPS/VPN ok (support), crypto payouts banned for MY -> WorkMarket bank only, eval max 2 minis/20 micros, DLL on/off picked at purchase, profile personal/business is permanent. Lucid support confirmed: SSM docs not confirmed for business profile; personal profile can't pay into sole prop bank; FlexI payout = 50% of profit in that cycle, cap 2k, cycle resets (leftover never withdrawable). Payout-driven bot rules added to task #2. Saved user memory (Malaysia resident, sole prop Quantum Capital Global). All committed + pushed (last 8546518).",
+  "next_steps": "Task #1: discuss which Lucid account type to open (Flex vs Pro vs Direct, size, DLL on/off, how many accounts) - user wants this next. Read Pro/Direct rules via https://r.jina.ai/<support.lucidtrading.com article url> (collections: 16780433-lucidpro, 16780869-luciddirect). Then personal vs business signup, buy account. Then task #2 (bot, payout logic in its notes).",
+  "questions": "Which Lucid account type/size and how many? Personal (open personal bank acct) or business (needs written SSM pre-approval)? What happens to leftover sim profit at LucidLive transition? LucidLive data fees?"
+}
