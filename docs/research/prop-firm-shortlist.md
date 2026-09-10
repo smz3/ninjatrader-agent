@@ -127,6 +127,12 @@ threshold still come from third-party sites.
 - User's only active bank account is the Malaysian sole prop *Quantum Capital
   Global*. A sole prop is SSM-registered, not incorporated -> **ask compliance
   whether the SSM certificate + SSM business profile count before registering.**
+- Lucid support reply (2026-09-10): SSM docs **not confirmed** (doc types unspecified).
+  Personal profile paid into the sole prop bank account: **no**.
+- So: (A) get compliance to pre-approve the SSM docs in writing before creating a
+  business profile, or (B) open a personal bank account and register personal.
+  B is lower risk - the profile choice is permanent, and a sole prop gives no tax
+  edge in Malaysia (its income is taxed as the owner's personal income anyway).
 
 ## Sim check (tools/prop_sim, 73.3% WR, 0.5 RR, 3 trades/day)
 
