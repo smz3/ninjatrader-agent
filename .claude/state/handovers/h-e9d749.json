@@ -1,0 +1,8 @@
+{
+  "id": "h-e9d749",
+  "ts": "2026-09-10T11:09:40.076119+00:00",
+  "session_id": "1b50de93-60d6-4102-9e07-b8eba85f446e",
+  "summary": "Task #1 CLOSED: locked Lucid - LucidDaily 50K, EOD eval drawdown, DLL 1,200, personal profile (compared Flex/Pro/Daily/Direct from Lucid help center via r.jina.ai). New tools/prop_sim/funded.py = funded-stage payout sim (Flex/Pro/Daily rules). Risk plan from sims: eval ~800-1,000/trade (~57-59% pass, 4-6 days; 1-day pass impossible due to 50% consistency), funded ~200-300/trade. Instrument = ES; platform = NinjaTrader 8 + NinjaScript C# via Lucid's Tradovate login; CLAUDE.md Stack section filled in. New task t-6d0bb8 for account setup. All in docs/research/prop-firm-shortlist.md; everything committed + pushed.",
+  "next_steps": "Task #2: build ORB on ES in NinjaTrader 8 - two range windows tested separately (9:15-9:30 ET and 9:30-9:45 ET); first plain vanilla ORB, then ORB+ATR. Backtest in Strategy Analyzer with ES costs (3.50 RT + slippage), then Market Replay/Sim101, then feed real WR/RR into prop_sim to set eval/funded risk. Need historical ES data in NT8. Task t-6d0bb8: personal USD bank acct, questions for Lucid support, buy eval only after backtest.",
+  "questions": "Exact vanilla ORB rules (entry on break/close, stop = other side or mid, target size)? ORB+ATR = ATR for stop/target or as a range-size filter? Where to get ES tick history for NT8 backtests? Which red-folder calendar does Lucid use?"
+}

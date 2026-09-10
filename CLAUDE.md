@@ -52,4 +52,12 @@
 
 ## Stack
 
-Not yet decided.
+- Prop firm: Lucid Trading - LucidDaily 50K, EOD eval drawdown, $1,200 daily
+  loss limit, personal profile. Funded = intraday drawdown + red-folder USD
+  news is a hard breach (bot must be flat around it). Research + rules:
+  `docs/research/prop-firm-shortlist.md`.
+- Platform: NinjaTrader 8, strategies in NinjaScript (C#), connected via the
+  Lucid dashboard's Tradovate login. Runs on a Windows VPS.
+- Instrument: ES (MES only when a stop is too wide for exact risk sizing).
+- Prop math / risk sizing: `tools/prop_sim` (eval) and
+  `python -m tools.prop_sim.funded` (funded payouts).
