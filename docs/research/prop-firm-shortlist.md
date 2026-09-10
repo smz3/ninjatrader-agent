@@ -14,8 +14,8 @@ blocked our fetcher). **Re-check each firm's own rules page before paying.**
 
 | Firm | Bots OK? | NinjaTrader? | Eval consistency | Drawdown | Verdict |
 |---|---|---|---|---|---|
-| **Tradeify Growth 50K** | Yes, with conditions | Yes (Tradovate/Rithmic) | **None** | $2k EOD | **#1 pick** |
-| **Lucid Flex 50K** | Yes (per reviews, confirm) | Yes | 50% (with cushion) | $2k EOD, no DLL | **#2 - best funded stage** |
+| **Lucid Flex 50K** | Yes (per reviews, confirm) | Yes | 50% (with cushion) | $2k EOD, no DLL | **#1 - only one open to Malaysia** |
+| **Tradeify Growth 50K** | Yes, with conditions | Yes (Tradovate/Rithmic) | **None** | $2k EOD | **Out - Malaysia restricted** |
 | MyFundedFutures | Allowed since Jul 2025 (mixed reports) | Yes | 30-50% | EOD (Rapid EOD) | Backup |
 | Take Profit Trader | Unclear | Yes | 50% | EOD in test, **intraday in PRO** | Skip |
 | Topstep | Yes | **No - new Combines are TopstepX-only** | 50% | $2k EOD | Out |
@@ -37,6 +37,49 @@ blocked our fetcher). **Re-check each firm's own rules page before paying.**
 - No daily loss limit. EOD drawdown. Flat by 4:45 PM ET.
 - Funded: **no consistency rule, no payout buffer**, 90% split.
 - Bots/scripts allowed; no HFT or microscalping (>50% of profit from trades <=5 sec).
+
+## Costs + Malaysia payouts (researched 2026-09-10, session 2)
+
+**Blocker: Tradeify lists Malaysia as a restricted country** (pickapropfirm, data
+updated 2026-09-10; funded.now; search snippets of Tradeify's own help page). An
+older Feb 2026 list didn't have it, so it looks newly added. We can't open or get
+paid on a Tradeify account as Malaysian residents -> **Tradeify is out** unless
+their support says otherwise.
+
+**Lucid does allow Malaysia** (not on its 81-entry list, checked 2026-07-29), but
+since 2026-08-26 Malaysia residents **can't take crypto payouts** - WorkMarket only.
+
+| Cost | Lucid Flex 50K | Tradeify Growth 50K |
+|---|---|---|
+| Upfront (eval) | $130-149 list, ~$65-90 with promo codes | $145 list, ~$73 with promo |
+| Monthly | None (one-time, no expiry) | None (one-time) |
+| Activation | None | None |
+| Reset | Buy a new eval | Buy a new eval |
+| Data | $0 if you certify CME **Non-Professional**; $112/exchange/mo if Pro | $0 |
+| NinjaTrader | $0 (NT 8.1+ needs no license for prop accounts) | $0 |
+| Commission (round turn) | MNQ ~$1.00, NQ ~$3.50 | MNQ ~$1.82, NQ ~$5.76 |
+| Malaysia | **Allowed** | **Restricted** |
+
+Lucid Flex funded payouts (50K): 90/10 split, min $500, cap 50% of cycle profit up to
+$2,000 per payout, needs 5 days of $150+ profit per cycle, no consistency, no buffer.
+Max 5 payouts, then moved to LucidLive (data costs there not published - ask).
+Watch: MLL locks at $50,100 once balance passes $52,100 and withdrawals don't reset
+it, so pulling profit eats your cushion.
+
+Lucid payout rails for a Malaysian:
+
+| Rail | Works for MY? | Speed | Cost |
+|---|---|---|---|
+| Plaid | No (US only) | - | - |
+| Crypto | **No** (banned for MY since 2026-08-26) | - | - |
+| WorkMarket -> bank (SWIFT, paid in USD) | Yes | ~2-4 business days | ~$10-25 wire/intermediary + ~1-2% FX at your MY bank |
+| WorkMarket -> PayPal -> bank | Yes | ~5-8 days | ~3-4% FX spread + fees - worst option |
+
+- Best path: WorkMarket bank transfer into a **USD-capable account** (e.g. a
+  Malaysian bank foreign-currency account, or a multi-currency account like
+  Wise/Revolut/YouTrip if WorkMarket accepts its details) so you pick when to
+  convert to MYR instead of eating the bank's default rate.
+- Min payout $500 -> the fixed $10-25 wire fee is small (2-5%) at that size.
 
 ## Sim check (tools/prop_sim, 73.3% WR, 0.5 RR, 3 trades/day)
 
@@ -67,3 +110,17 @@ blocked our fetcher). **Re-check each firm's own rules page before paying.**
 - https://app.tradersforge.net/prop-firms/topstep
 - https://proptradingvibes.com/blog/topstep-trading-combine-rules
 - https://proptradingvibes.com/blog/apex-trader-funding-rules-overview
+- https://pickapropfirm.com/futures/prop-firms/tradeify/
+- https://funded.now/restricted-countries/tradeify
+- https://funded.now/restricted-countries/lucid-trading
+- https://www.surgefunded.com/tradeify-supported-and-restricted-countries/
+- https://proptradingvibes.com/blog/lucid-trading-restricted-countries
+- https://proptradingvibes.com/blog/lucid-trading-payout-methods
+- https://proptradingvibes.com/blog/lucid-trading-payout-rules
+- https://proptradingvibes.com/blog/tradeify-rise-payouts
+- https://saveonpropfirms.com/blog/lucid-trading-lucidflex-guide
+- https://damnpropfirms.com/account-plans/lucid-trading-flex-50000/
+- https://support.lucidtrading.com/en/articles/11508978-approved-products-and-commissions
+- https://daytradingz.com/tradeify-review/
+- https://crosstrade.io/docs/getting-started/prop-firm-connection-guide
+- https://workmarket.zendesk.com/hc/en-us/articles/18410846928151-Payment-Accounts-Overview-Bank-Hyperwallet-PayPal-Wisely
