@@ -12,6 +12,9 @@ __pycache__/
 # extracts from tools/pdf_extract - findings go to docs/research/ instead
 inbox/
 
+# market data (Databento etc.) - licensed, large; re-download via tools/databento_dl
+data/
+
 # secrets - never track these (see .claude/scripts/git_safe.py SECRET_GLOBS)
 .env
 .env.*
