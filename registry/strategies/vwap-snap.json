@@ -3,32 +3,61 @@
   "name": "VWAP snap-back",
   "kind": "setup",
   "family": "mean-reversion",
-  "status": "idea",
+  "status": "spec",
   "version": 1,
   "source": "task #2 test plan 2026-09-11",
   "thesis": "Morning moves stretched far from VWAP tend to revert toward it - frequent small wins.",
-  "rules": "In the morning, when price is stretched N ATR (or N std-dev bands) from session VWAP, fade back toward VWAP. Stop beyond the stretch extreme; target VWAP or part of the way.",
+  "rules": "Session VWAP + volume-weighted std dev from 09:30. When a bar closes beyond VWAP +/- stretch_mult x std, fade at next bar open. Stop = spec.stop x ATR14 from fill; target = VWAP at the signal bar, or halfway to it. A side re-arms only after a close back inside the band. Entries 10:00-12:00, flat 12:30, max 2/day. Code: tools/backtest/setups/vwap_snap.py.",
   "data_needed": [
     "ohlcv-1m",
     "ohlcv-1d",
     "news"
   ],
-  "spec": null,
+  "spec": {
+    "instrument": "ES",
+    "bar": "1m",
+    "sides": "both",
+    "entry_window": [
+      "10:00",
+      "12:00"
+    ],
+    "flat_by": "12:30",
+    "entry_order": "market",
+    "stop": {
+      "type": "atr",
+      "value": 0.2
+    },
+    "target": {
+      "type": "structure",
+      "value": null,
+      "note": "params.target_at: VWAP at the signal bar, or half way"
+    },
+    "max_stop_pts": 20,
+    "max_trades_per_day": 2,
+    "news_buffer_min": [
+      5,
+      5
+    ]
+  },
   "params": {
-    "vwap_anchor": null,
-    "stretch_unit": null,
-    "stretch_mult": null,
-    "target_at": null
+    "vwap_anchor": "09:30",
+    "stretch_unit": "std",
+    "stretch_mult": 2.0,
+    "target_at": "vwap"
   },
   "grid": {
-    "params.stretch_unit": [
-      "atr",
-      "std"
-    ],
     "params.stretch_mult": [
       1.5,
       2.0,
       2.5
+    ],
+    "spec.stop.value": [
+      0.1,
+      0.2
+    ],
+    "params.target_at": [
+      "vwap",
+      "half"
     ]
   },
   "filters": [],
@@ -36,8 +65,12 @@
     {
       "ts": "2026-09-11T04:42:55+00:00",
       "text": "seeded - idea, numbers not pinned yet"
+    },
+    {
+      "ts": "2026-09-11T06:18:16+00:00",
+      "text": "-> spec: numbers pinned for the python 1m backtest (tools/backtest); grid = what gets swept in-sample"
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T04:42:55+00:00"
+  "updated_ts": "2026-09-11T06:18:16+00:00"
 }

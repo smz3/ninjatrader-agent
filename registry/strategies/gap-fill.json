@@ -3,30 +3,76 @@
   "name": "Small gap fill",
   "kind": "setup",
   "family": "mean-reversion",
-  "status": "idea",
+  "status": "spec",
   "version": 1,
   "source": "task #2 test plan 2026-09-11",
   "thesis": "Small opening gaps vs the prior RTH close often fill the same morning.",
-  "rules": "At 9:30 ET, if the open is gapped a little (between min and max size) from the prior RTH close (16:00 ET), trade toward that close; target = gap filled; stop = fixed size or beyond the opening extreme.",
+  "rules": "gap = 09:30 open - prior RTH close (same contract). If min_gap <= |gap| <= max_gap (x ATR14), trade toward the prior close at the open of the bar entry_delay_min after 09:30 (skip if already filled). Stop = spec.stop x ATR14 from fill, target = prior close. Max 1/day, flat 12:00. Code: tools/backtest/setups/gap_fill.py.",
   "data_needed": [
     "ohlcv-1m",
     "news"
   ],
-  "spec": null,
-  "params": {
-    "gap_unit": null,
-    "min_gap": null,
-    "max_gap": null,
-    "entry_delay_min": null
+  "spec": {
+    "instrument": "ES",
+    "bar": "1m",
+    "sides": "both",
+    "entry_window": [
+      "09:30",
+      "09:45"
+    ],
+    "flat_by": "12:00",
+    "entry_order": "market",
+    "stop": {
+      "type": "atr",
+      "value": 0.15
+    },
+    "target": {
+      "type": "structure",
+      "value": null,
+      "note": "prior RTH close (gap filled)"
+    },
+    "max_stop_pts": 20,
+    "max_trades_per_day": 1,
+    "news_buffer_min": [
+      5,
+      5
+    ]
   },
-  "grid": {},
+  "params": {
+    "gap_unit": "atr",
+    "min_gap": 0.05,
+    "max_gap": 0.25,
+    "entry_delay_min": 0
+  },
+  "grid": {
+    "params.min_gap": [
+      0.03,
+      0.08
+    ],
+    "params.max_gap": [
+      0.2,
+      0.35
+    ],
+    "spec.stop.value": [
+      0.1,
+      0.2
+    ],
+    "params.entry_delay_min": [
+      0,
+      5
+    ]
+  },
   "filters": [],
   "notes": [
     {
       "ts": "2026-09-11T04:42:55+00:00",
       "text": "seeded - idea, numbers not pinned yet"
+    },
+    {
+      "ts": "2026-09-11T06:18:16+00:00",
+      "text": "-> spec: numbers pinned for the python 1m backtest (tools/backtest); grid = what gets swept in-sample"
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T04:42:55+00:00"
+  "updated_ts": "2026-09-11T06:18:16+00:00"
 }

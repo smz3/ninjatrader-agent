@@ -22,8 +22,8 @@ from . import store
 pd.options.display.width = 250
 pd.options.display.max_columns = None
 pd.options.display.max_colwidth = 60
-METRIC_COLS = ("trades", "trades_per_day", "win_rate", "rr", "expectancy_usd", "profit_factor",
-               "max_dd_usd", "worst_day_usd")
+METRIC_COLS = ("trades", "trades_per_day", "win_rate", "rr", "expectancy_usd", "expectancy_r",
+               "profit_factor", "max_dd_usd", "worst_day_usd")
 
 
 def rows_table(runs: list[dict]) -> pd.DataFrame:

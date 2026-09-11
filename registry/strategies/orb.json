@@ -3,27 +3,53 @@
   "name": "Opening Range Breakout",
   "kind": "setup",
   "family": "breakout",
-  "status": "idea",
+  "status": "spec",
   "version": 1,
   "source": "task #2 plan 2026-09-10 (user)",
   "thesis": "Momentum out of the first 15-min range tends to continue. Usually a lower-WR breakout play - must prove it fits high-WR / low-RR after costs.",
-  "rules": "Range = high/low of 9:15-9:30 ET (A) or 9:30-9:45 ET (B), tested separately. Enter on a break of the range high (long) or low (short). Stop at the other side or the middle of the range. Fixed target. Variant: ATR-based stop/target and/or skip days whose range is too wide vs ATR.",
+  "rules": "Range = high/low of params.range_window (09:30-09:45 or 09:15-09:30 ET). Buy stop 1 tick above the high / sell stop 1 tick below the low; first break is the only trade of the day, entries 09:30-11:00 (from range end), flat 11:30. Stop: other side of the range (1 tick past) or range middle. Target = 0.5 R (x stop distance). ATR modes: off, range-filter (skip if range > 0.35 x ATR14), atr-stop (stop = 0.1 x ATR14 from fill). Bar breaking both sides = skip. Code: tools/backtest/setups/orb.py.",
   "data_needed": [
     "ohlcv-1m",
     "ohlcv-1d",
     "news"
   ],
-  "spec": null,
+  "spec": {
+    "instrument": "ES",
+    "bar": "1m",
+    "sides": "both",
+    "entry_window": [
+      "09:30",
+      "11:00"
+    ],
+    "flat_by": "11:30",
+    "entry_order": "stop",
+    "stop": {
+      "type": "structure",
+      "value": null,
+      "note": "params.stop_at: other side of range / range middle; atr-stop mode: atr_stop x ATR"
+    },
+    "target": {
+      "type": "r",
+      "value": 0.5
+    },
+    "max_stop_pts": 20,
+    "max_trades_per_day": 1,
+    "news_buffer_min": [
+      5,
+      5
+    ]
+  },
   "params": {
-    "range_window": null,
-    "stop_at": null,
-    "atr_mode": null,
-    "atr_len": null
+    "range_window": "09:30-09:45",
+    "stop_at": "other-side",
+    "atr_mode": "off",
+    "range_max_atr": 0.35,
+    "atr_stop": 0.1
   },
   "grid": {
     "params.range_window": [
-      "09:15-09:30",
-      "09:30-09:45"
+      "09:30-09:45",
+      "09:15-09:30"
     ],
     "params.stop_at": [
       "other-side",
@@ -31,8 +57,12 @@
     ],
     "params.atr_mode": [
       "off",
-      "stop-target",
-      "range-filter"
+      "range-filter",
+      "atr-stop"
+    ],
+    "spec.target.value": [
+      0.5,
+      1.0
     ]
   },
   "filters": [],
@@ -40,8 +70,12 @@
     {
       "ts": "2026-09-11T04:42:55+00:00",
       "text": "seeded - idea, numbers not pinned yet"
+    },
+    {
+      "ts": "2026-09-11T06:18:16+00:00",
+      "text": "-> spec: numbers pinned for the python 1m backtest (tools/backtest); grid = what gets swept in-sample"
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T04:42:55+00:00"
+  "updated_ts": "2026-09-11T06:18:16+00:00"
 }

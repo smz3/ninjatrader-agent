@@ -3,9 +3,10 @@
 Compares Lucid-style payout rules: how much you actually withdraw and how often
 the account blows before you're moved live. Trades are binary like engine.py.
 
-Intraday drawdown trails open-profit peaks. Winners are assumed to close at
-their target (open peak = the win), but a loser may first run into profit
-before stopping out: its open peak is a random 0..`loser_mfe` share of a win.
+Intraday drawdown trails open-profit peaks. Binary trades: winners are assumed
+to close at their target (open peak = the win), but a loser may first run into
+profit before stopping out: its open peak is a random 0..`loser_mfe` share of
+a win. Empirical trades (engine.Empirical) carry their real peaks.
 
 Run:  python -m tools.prop_sim.funded --wr 0.733 --rr 0.5 --risk 300
 """
@@ -14,7 +15,7 @@ import argparse
 import random
 import statistics
 
-from .engine import Strategy
+from .engine import Empirical, Strategy
 
 
 @dataclass
@@ -48,12 +49,11 @@ PLANS = {
 }
 
 
-def run_one(acct: Funded, strat: Strategy, rng: random.Random, days: int,
+def run_one(acct: Funded, strat: "Strategy | Empirical", rng: random.Random, days: int,
             loser_mfe: float) -> tuple[str, float, int, int | None]:
     """Return (outcome, $ withdrawn gross, payouts, day of first payout)."""
     p = acct.payout
-    win = strat.risk * strat.rr - strat.cost
-    loss = strat.risk + strat.cost
+    intraday = acct.dd_mode == "intraday"
     lock = acct.start + 100
     bal = peak = acct.start
     mll = acct.start - acct.max_dd
@@ -68,15 +68,10 @@ def run_one(acct: Funded, strat: Strategy, rng: random.Random, days: int,
 
     for day in range(1, days + 1):
         day_start = bal
-        for _ in range(strat.trades_per_day):
-            if rng.random() < strat.win_rate:
-                bal += win
-                if acct.dd_mode == "intraday":
-                    trail(bal)
-            else:
-                if acct.dd_mode == "intraday":
-                    trail(bal + rng.uniform(0, loser_mfe) * win)
-                bal -= loss
+        for pnl, peak in strat.day(rng, loser_mfe if intraday else None):
+            if intraday:
+                trail(bal + max(peak, pnl))
+            bal += pnl
             if bal <= mll:
                 return "blown", paid, n_paid, first
         if acct.dd_mode == "eod":
@@ -110,7 +105,7 @@ def run_one(acct: Funded, strat: Strategy, rng: random.Random, days: int,
     return "running", paid, n_paid, first
 
 
-def run_many(acct: Funded, strat: Strategy, days: int = 120, loser_mfe: float = 0.0,
+def run_many(acct: Funded, strat: "Strategy | Empirical", days: int = 120, loser_mfe: float = 0.0,
              n: int = 5000, seed: int = 1) -> dict:
     rng = random.Random(seed)
     outs = [run_one(acct, strat, rng, days, loser_mfe) for _ in range(n)]

@@ -3,16 +3,40 @@
   "name": "Key level fade",
   "kind": "setup",
   "family": "mean-reversion",
-  "status": "idea",
+  "status": "spec",
   "version": 1,
   "source": "task #2 test plan 2026-09-11",
   "thesis": "First touch of an obvious level (prior-day high/low, overnight high/low) often bounces at least a few points.",
-  "rules": "Mark prior-day RTH high/low and overnight high/low. On the first touch in the session, fade it with a small target; stop a few points past the level.",
+  "rules": "Levels: prior-day RTH high/low, overnight (18:00-09:30) high/low, only if the RTH open is on the near side. Resting limit touch_ticks inside the level (sell pdh/onh, buy pdl/onl), first touch only. Stop = spec.stop x ATR14 from fill, target = spec.target R. Entries 09:30-11:30, flat 12:00, max 2/day. Code: tools/backtest/setups/key_level_fade.py.",
   "data_needed": [
     "ohlcv-1m",
     "news"
   ],
-  "spec": null,
+  "spec": {
+    "instrument": "ES",
+    "bar": "1m",
+    "sides": "both",
+    "entry_window": [
+      "09:30",
+      "11:30"
+    ],
+    "flat_by": "12:00",
+    "entry_order": "limit",
+    "stop": {
+      "type": "atr",
+      "value": 0.08
+    },
+    "target": {
+      "type": "r",
+      "value": 0.5
+    },
+    "max_stop_pts": 20,
+    "max_trades_per_day": 2,
+    "news_buffer_min": [
+      5,
+      5
+    ]
+  },
   "params": {
     "levels": [
       "pdh",
@@ -20,14 +44,21 @@
       "onh",
       "onl"
     ],
-    "touch_ticks": null,
+    "touch_ticks": 0,
     "first_touch_only": true
   },
   "grid": {
     "params.touch_ticks": [
       0,
-      1,
       2
+    ],
+    "spec.stop.value": [
+      0.05,
+      0.1
+    ],
+    "spec.target.value": [
+      0.5,
+      1.0
     ]
   },
   "filters": [],
@@ -35,8 +66,12 @@
     {
       "ts": "2026-09-11T04:42:55+00:00",
       "text": "seeded - idea, numbers not pinned yet"
+    },
+    {
+      "ts": "2026-09-11T06:18:16+00:00",
+      "text": "-> spec: numbers pinned for the python 1m backtest (tools/backtest); grid = what gets swept in-sample"
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T04:42:55+00:00"
+  "updated_ts": "2026-09-11T06:18:16+00:00"
 }

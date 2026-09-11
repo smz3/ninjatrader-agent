@@ -75,6 +75,10 @@
   with `python -m tools.registry list` / `runs`. Rule/number change = bump
   `version`. Never delete runs or rejected strategies.
 - Run `python -m tools.registry check` before committing registry changes.
+- Python 1m backtester: `python -m tools.backtest run <id>|all` (grid, in-sample
+  2016-09 -> 2024, recorded as a run + prop_sim on resampled real days).
+  Out-of-sample (2025+) = one final check of a picked combo only (`--vary`).
+  Fill model + rules: docstrings in `tools/backtest/sim.py` and `setups/*.py`.
 - Also mirrored into `.claude/state.db` as tables `strategies`, `runs`,
   `run_rows` (one line per combo tested) - read-only cache, rebuilt on the
   next db call. Edit the JSON (via tools/registry), never these tables.

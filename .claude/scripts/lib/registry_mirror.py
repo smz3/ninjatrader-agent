@@ -31,10 +31,12 @@ REGISTRY = Path(__file__).resolve().parents[3] / "registry"
 
 METRICS = {"trades": "INTEGER", "days": "INTEGER", "trades_per_day": "REAL", "win_rate": "REAL",
            "avg_win_usd": "REAL", "avg_loss_usd": "REAL", "rr": "REAL", "expectancy_usd": "REAL",
-           "profit_factor": "REAL", "net_usd": "REAL", "max_dd_usd": "REAL",
-           "worst_day_usd": "REAL", "news_skipped": "INTEGER"}
+           "expectancy_r": "REAL", "avg_risk_pts": "REAL", "profit_factor": "REAL",
+           "net_usd": "REAL", "max_dd_usd": "REAL", "worst_day_usd": "REAL",
+           "news_skipped": "INTEGER"}
 PROP = {"risk_usd": "REAL", "eval_pass_rate": "REAL", "eval_median_days": "REAL",
-        "funded_blown_rate": "REAL", "funded_got_paid_rate": "REAL", "funded_avg_paid_usd": "REAL"}
+        "funded_risk_usd": "REAL", "funded_blown_rate": "REAL", "funded_got_paid_rate": "REAL",
+        "funded_avg_paid_usd": "REAL"}
 TABLES = {
     "strategies": {"id": "TEXT PRIMARY KEY", "name": "TEXT", "kind": "TEXT", "family": "TEXT",
                    "status": "TEXT", "version": "INTEGER", "source": "TEXT", "thesis": "TEXT",

@@ -48,10 +48,10 @@ class F:
 
 
 LEVEL = {
-    "type": F(str, "how the distance is measured",
-              choices=("points", "ticks", "atr", "range", "structure")),
-    "value": F(NUM, "size in that unit (6 points, 1.5 ATR, 0.5 of range); null only for structure",
-               null=True),
+    "type": F(str, "how the distance is measured (r = multiple of the stop distance, targets only)",
+              choices=("points", "ticks", "atr", "range", "r", "structure")),
+    "value": F(NUM, "size in that unit (6 points, 1.5 ATR, 0.5 of range, 0.5 R); null only for "
+                    "structure", null=True),
     "note": F(str, "e.g. 'other side of range', 'beyond the poke extreme'", required=False),
 }
 
@@ -102,6 +102,9 @@ METRICS = {
     "avg_loss_usd": F(NUM, "per 1 ES, after costs (negative)"),
     "rr": F(NUM, "avg_win / |avg_loss|"),
     "expectancy_usd": F(NUM, "average P/L per trade after costs - THE number"),
+    "expectancy_r": F(NUM, "average P/L per trade in R (1 R = stop distance) after costs - what "
+                           "risk-sized trading earns", required=False),
+    "avg_risk_pts": F(NUM, "average stop distance in points", required=False),
     "profit_factor": F(NUM, "gross win / gross loss", null=True),
     "net_usd": F(NUM, "total P/L per 1 ES after costs"),
     "max_dd_usd": F(NUM, "worst peak-to-trough of closed-trade equity (positive)"),
@@ -110,9 +113,10 @@ METRICS = {
 }
 
 PROP = {
-    "risk_usd": F(NUM, "$ risk per trade fed to prop_sim"),
+    "risk_usd": F(NUM, "$ risk per trade in the eval sim"),
     "eval_pass_rate": F(NUM, "tools.prop_sim - 0-1"),
     "eval_median_days": F(NUM, "tools.prop_sim", null=True),
+    "funded_risk_usd": F(NUM, "$ risk per trade in the funded sim", required=False),
     "funded_blown_rate": F(NUM, "tools.prop_sim.funded - 0-1"),
     "funded_got_paid_rate": F(NUM, "tools.prop_sim.funded - 0-1"),
     "funded_avg_paid_usd": F(NUM, "tools.prop_sim.funded"),
