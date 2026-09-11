@@ -3,7 +3,7 @@
   "name": "Small gap fill",
   "kind": "setup",
   "family": "mean-reversion",
-  "status": "spec",
+  "status": "tested",
   "version": 1,
   "source": "task #2 test plan 2026-09-11",
   "thesis": "Small opening gaps vs the prior RTH close often fill the same morning.",
@@ -71,8 +71,12 @@
     {
       "ts": "2026-09-11T06:18:16+00:00",
       "text": "-> spec: numbers pinned for the python 1m backtest (tools/backtest); grid = what gets swept in-sample"
+    },
+    {
+      "ts": "2026-09-11T06:20:18+00:00",
+      "text": "-> tested: run r-34dd00 (in-sample, 16 combos)"
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T06:18:16+00:00"
+  "updated_ts": "2026-09-11T06:20:18+00:00"
 }

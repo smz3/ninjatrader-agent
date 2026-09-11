@@ -3,7 +3,7 @@
   "name": "Key level fade",
   "kind": "setup",
   "family": "mean-reversion",
-  "status": "spec",
+  "status": "tested",
   "version": 1,
   "source": "task #2 test plan 2026-09-11",
   "thesis": "First touch of an obvious level (prior-day high/low, overnight high/low) often bounces at least a few points.",
@@ -70,8 +70,12 @@
     {
       "ts": "2026-09-11T06:18:16+00:00",
       "text": "-> spec: numbers pinned for the python 1m backtest (tools/backtest); grid = what gets swept in-sample"
+    },
+    {
+      "ts": "2026-09-11T06:20:15+00:00",
+      "text": "-> tested: run r-93cedf (in-sample, 8 combos)"
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T06:18:16+00:00"
+  "updated_ts": "2026-09-11T06:20:15+00:00"
 }

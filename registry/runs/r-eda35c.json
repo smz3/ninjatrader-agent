@@ -1,0 +1,682 @@
+{
+  "id": "r-eda35c",
+  "strategy_id": "orb",
+  "strategy_version": 1,
+  "ts": "2026-09-11T06:20:00+00:00",
+  "engine": "python-1m",
+  "code_commit": "86e2cb5",
+  "data": {
+    "source": "databento ES.v.0 ohlcv-1m",
+    "start": "2016-09-01",
+    "end": "2024-12-31",
+    "split": "in-sample"
+  },
+  "costs": {
+    "commission_rt_usd": 3.5,
+    "slippage_ticks": 1
+  },
+  "spec": {
+    "instrument": "ES",
+    "bar": "1m",
+    "sides": "both",
+    "entry_window": [
+      "09:30",
+      "11:00"
+    ],
+    "flat_by": "11:30",
+    "entry_order": "stop",
+    "stop": {
+      "type": "structure",
+      "value": null,
+      "note": "params.stop_at: other side of range / range middle; atr-stop mode: atr_stop x ATR"
+    },
+    "target": {
+      "type": "r",
+      "value": 0.5
+    },
+    "max_stop_pts": 20,
+    "max_trades_per_day": 1,
+    "news_buffer_min": [
+      5,
+      5
+    ]
+  },
+  "params": {
+    "range_window": "09:30-09:45",
+    "stop_at": "other-side",
+    "atr_mode": "off",
+    "range_max_atr": 0.35,
+    "atr_stop": 0.1
+  },
+  "filters": [],
+  "rows": [
+    {
+      "vary": {
+        "params.range_window": "09:30-09:45",
+        "params.stop_at": "other-side",
+        "params.atr_mode": "off",
+        "spec.target.value": 0.5
+      },
+      "metrics": {
+        "trades": 1736,
+        "days": 2149,
+        "trades_per_day": 0.808,
+        "win_rate": 0.5461,
+        "avg_win_usd": 224.2,
+        "avg_loss_usd": -327.55,
+        "rr": 0.684,
+        "expectancy_usd": -26.25,
+        "expectancy_r": -0.0875,
+        "avg_risk_pts": 9.44,
+        "profit_factor": 0.823,
+        "net_usd": -45563.5,
+        "max_dd_usd": 49221.5,
+        "worst_day_usd": -1003.5,
+        "news_skipped": 107
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:30-09:45",
+        "params.stop_at": "other-side",
+        "params.atr_mode": "off",
+        "spec.target.value": 1.0
+      },
+      "metrics": {
+        "trades": 1736,
+        "days": 2149,
+        "trades_per_day": 0.808,
+        "win_rate": 0.4418,
+        "avg_win_usd": 354.18,
+        "avg_loss_usd": -326.38,
+        "rr": 1.085,
+        "expectancy_usd": -25.7,
+        "expectancy_r": -0.0844,
+        "avg_risk_pts": 9.44,
+        "profit_factor": 0.859,
+        "net_usd": -44613.5,
+        "max_dd_usd": 53488.5,
+        "worst_day_usd": -1003.5,
+        "news_skipped": 107
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:30-09:45",
+        "params.stop_at": "other-side",
+        "params.atr_mode": "range-filter",
+        "spec.target.value": 0.5
+      },
+      "metrics": {
+        "trades": 1589,
+        "days": 2149,
+        "trades_per_day": 0.739,
+        "win_rate": 0.5469,
+        "avg_win_usd": 222.25,
+        "avg_loss_usd": -328.26,
+        "rr": 0.677,
+        "expectancy_usd": -27.19,
+        "expectancy_r": -0.0919,
+        "avg_risk_pts": 9.27,
+        "profit_factor": 0.817,
+        "net_usd": -43211.5,
+        "max_dd_usd": 46848.0,
+        "worst_day_usd": -1003.5,
+        "news_skipped": 97
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:30-09:45",
+        "params.stop_at": "other-side",
+        "params.atr_mode": "range-filter",
+        "spec.target.value": 1.0
+      },
+      "metrics": {
+        "trades": 1589,
+        "days": 2149,
+        "trades_per_day": 0.739,
+        "win_rate": 0.4412,
+        "avg_win_usd": 351.6,
+        "avg_loss_usd": -324.87,
+        "rr": 1.082,
+        "expectancy_usd": -26.44,
+        "expectancy_r": -0.089,
+        "avg_risk_pts": 9.27,
+        "profit_factor": 0.854,
+        "net_usd": -42011.5,
+        "max_dd_usd": 50493.0,
+        "worst_day_usd": -1003.5,
+        "news_skipped": 97
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:30-09:45",
+        "params.stop_at": "other-side",
+        "params.atr_mode": "atr-stop",
+        "spec.target.value": 0.5
+      },
+      "metrics": {
+        "trades": 1980,
+        "days": 2149,
+        "trades_per_day": 0.921,
+        "win_rate": 0.5207,
+        "avg_win_usd": 136.75,
+        "avg_loss_usd": -221.36,
+        "rr": 0.618,
+        "expectancy_usd": -34.89,
+        "expectancy_r": -0.239,
+        "avg_risk_pts": 5.0,
+        "profit_factor": 0.671,
+        "net_usd": -69080.0,
+        "max_dd_usd": 69651.5,
+        "worst_day_usd": -1016.0,
+        "news_skipped": 106
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:30-09:45",
+        "params.stop_at": "other-side",
+        "params.atr_mode": "atr-stop",
+        "spec.target.value": 1.0
+      },
+      "metrics": {
+        "trades": 1980,
+        "days": 2149,
+        "trades_per_day": 0.921,
+        "win_rate": 0.3904,
+        "avg_win_usd": 253.5,
+        "avg_loss_usd": -231.41,
+        "rr": 1.095,
+        "expectancy_usd": -42.1,
+        "expectancy_r": -0.2602,
+        "avg_risk_pts": 5.0,
+        "profit_factor": 0.702,
+        "net_usd": -83355.0,
+        "max_dd_usd": 84461.5,
+        "worst_day_usd": -1016.0,
+        "news_skipped": 106
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:30-09:45",
+        "params.stop_at": "middle",
+        "params.atr_mode": "off",
+        "spec.target.value": 0.5
+      },
+      "metrics": {
+        "trades": 1984,
+        "days": 2149,
+        "trades_per_day": 0.923,
+        "win_rate": 0.5408,
+        "avg_win_usd": 154.2,
+        "avg_loss_usd": -256.71,
+        "rr": 0.601,
+        "expectancy_usd": -34.48,
+        "expectancy_r": -0.1914,
+        "avg_risk_pts": 5.89,
+        "profit_factor": 0.707,
+        "net_usd": -68406.5,
+        "max_dd_usd": 69699.5,
+        "worst_day_usd": -991.0,
+        "news_skipped": 107
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:30-09:45",
+        "params.stop_at": "middle",
+        "params.atr_mode": "off",
+        "spec.target.value": 1.0
+      },
+      "metrics": {
+        "trades": 1984,
+        "days": 2149,
+        "trades_per_day": 0.923,
+        "win_rate": 0.4138,
+        "avg_win_usd": 291.38,
+        "avg_loss_usd": -263.9,
+        "rr": 1.104,
+        "expectancy_usd": -34.12,
+        "expectancy_r": -0.1957,
+        "avg_risk_pts": 5.89,
+        "profit_factor": 0.779,
+        "net_usd": -67694.0,
+        "max_dd_usd": 70900.5,
+        "worst_day_usd": -991.0,
+        "news_skipped": 107
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:30-09:45",
+        "params.stop_at": "middle",
+        "params.atr_mode": "range-filter",
+        "spec.target.value": 0.5
+      },
+      "metrics": {
+        "trades": 1749,
+        "days": 2149,
+        "trades_per_day": 0.814,
+        "win_rate": 0.5334,
+        "avg_win_usd": 144.79,
+        "avg_loss_usd": -245.58,
+        "rr": 0.59,
+        "expectancy_usd": -37.34,
+        "expectancy_r": -0.2079,
+        "avg_risk_pts": 5.51,
+        "profit_factor": 0.674,
+        "net_usd": -65309.0,
+        "max_dd_usd": 65861.5,
+        "worst_day_usd": -991.0,
+        "news_skipped": 97
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:30-09:45",
+        "params.stop_at": "middle",
+        "params.atr_mode": "range-filter",
+        "spec.target.value": 1.0
+      },
+      "metrics": {
+        "trades": 1749,
+        "days": 2149,
+        "trades_per_day": 0.814,
+        "win_rate": 0.4054,
+        "avg_win_usd": 275.52,
+        "avg_loss_usd": -252.35,
+        "rr": 1.092,
+        "expectancy_usd": -38.36,
+        "expectancy_r": -0.2162,
+        "avg_risk_pts": 5.51,
+        "profit_factor": 0.744,
+        "net_usd": -67096.5,
+        "max_dd_usd": 69626.5,
+        "worst_day_usd": -991.0,
+        "news_skipped": 97
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:30-09:45",
+        "params.stop_at": "middle",
+        "params.atr_mode": "atr-stop",
+        "spec.target.value": 0.5
+      },
+      "metrics": {
+        "trades": 1980,
+        "days": 2149,
+        "trades_per_day": 0.921,
+        "win_rate": 0.5207,
+        "avg_win_usd": 136.75,
+        "avg_loss_usd": -221.36,
+        "rr": 0.618,
+        "expectancy_usd": -34.89,
+        "expectancy_r": -0.239,
+        "avg_risk_pts": 5.0,
+        "profit_factor": 0.671,
+        "net_usd": -69080.0,
+        "max_dd_usd": 69651.5,
+        "worst_day_usd": -1016.0,
+        "news_skipped": 106
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:30-09:45",
+        "params.stop_at": "middle",
+        "params.atr_mode": "atr-stop",
+        "spec.target.value": 1.0
+      },
+      "metrics": {
+        "trades": 1980,
+        "days": 2149,
+        "trades_per_day": 0.921,
+        "win_rate": 0.3904,
+        "avg_win_usd": 253.5,
+        "avg_loss_usd": -231.41,
+        "rr": 1.095,
+        "expectancy_usd": -42.1,
+        "expectancy_r": -0.2602,
+        "avg_risk_pts": 5.0,
+        "profit_factor": 0.702,
+        "net_usd": -83355.0,
+        "max_dd_usd": 84461.5,
+        "worst_day_usd": -1016.0,
+        "news_skipped": 106
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:15-09:30",
+        "params.stop_at": "other-side",
+        "params.atr_mode": "off",
+        "spec.target.value": 0.5
+      },
+      "metrics": {
+        "trades": 2000,
+        "days": 2149,
+        "trades_per_day": 0.931,
+        "win_rate": 0.574,
+        "avg_win_usd": 134.76,
+        "avg_loss_usd": -271.4,
+        "rr": 0.497,
+        "expectancy_usd": -38.26,
+        "expectancy_r": -0.1645,
+        "avg_risk_pts": 5.33,
+        "profit_factor": 0.669,
+        "net_usd": -76525.0,
+        "max_dd_usd": 78229.0,
+        "worst_day_usd": -1016.0,
+        "news_skipped": 9
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:15-09:30",
+        "params.stop_at": "other-side",
+        "params.atr_mode": "off",
+        "spec.target.value": 1.0
+      },
+      "metrics": {
+        "trades": 2000,
+        "days": 2149,
+        "trades_per_day": 0.931,
+        "win_rate": 0.45,
+        "avg_win_usd": 249.42,
+        "avg_loss_usd": -273.86,
+        "rr": 0.911,
+        "expectancy_usd": -38.39,
+        "expectancy_r": -0.1498,
+        "avg_risk_pts": 5.33,
+        "profit_factor": 0.745,
+        "net_usd": -76775.0,
+        "max_dd_usd": 77773.5,
+        "worst_day_usd": -1016.0,
+        "news_skipped": 9
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:15-09:30",
+        "params.stop_at": "other-side",
+        "params.atr_mode": "range-filter",
+        "spec.target.value": 0.5
+      },
+      "metrics": {
+        "trades": 1981,
+        "days": 2149,
+        "trades_per_day": 0.922,
+        "win_rate": 0.5745,
+        "avg_win_usd": 134.78,
+        "avg_loss_usd": -272.17,
+        "rr": 0.495,
+        "expectancy_usd": -38.39,
+        "expectancy_r": -0.1645,
+        "avg_risk_pts": 5.32,
+        "profit_factor": 0.669,
+        "net_usd": -76058.5,
+        "max_dd_usd": 77918.0,
+        "worst_day_usd": -1016.0,
+        "news_skipped": 9
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:15-09:30",
+        "params.stop_at": "other-side",
+        "params.atr_mode": "range-filter",
+        "spec.target.value": 1.0
+      },
+      "metrics": {
+        "trades": 1981,
+        "days": 2149,
+        "trades_per_day": 0.922,
+        "win_rate": 0.4508,
+        "avg_win_usd": 249.24,
+        "avg_loss_usd": -274.79,
+        "rr": 0.907,
+        "expectancy_usd": -38.56,
+        "expectancy_r": -0.1491,
+        "avg_risk_pts": 5.32,
+        "profit_factor": 0.744,
+        "net_usd": -76396.0,
+        "max_dd_usd": 77766.5,
+        "worst_day_usd": -1016.0,
+        "news_skipped": 9
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:15-09:30",
+        "params.stop_at": "other-side",
+        "params.atr_mode": "atr-stop",
+        "spec.target.value": 0.5
+      },
+      "metrics": {
+        "trades": 1997,
+        "days": 2149,
+        "trades_per_day": 0.929,
+        "win_rate": 0.5068,
+        "avg_win_usd": 138.05,
+        "avg_loss_usd": -238.73,
+        "rr": 0.578,
+        "expectancy_usd": -47.79,
+        "expectancy_r": -0.2797,
+        "avg_risk_pts": 5.0,
+        "profit_factor": 0.594,
+        "net_usd": -95439.5,
+        "max_dd_usd": 95668.5,
+        "worst_day_usd": -1003.5,
+        "news_skipped": 9
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:15-09:30",
+        "params.stop_at": "other-side",
+        "params.atr_mode": "atr-stop",
+        "spec.target.value": 1.0
+      },
+      "metrics": {
+        "trades": 1997,
+        "days": 2149,
+        "trades_per_day": 0.929,
+        "win_rate": 0.3946,
+        "avg_win_usd": 258.33,
+        "avg_loss_usd": -248.05,
+        "rr": 1.041,
+        "expectancy_usd": -48.24,
+        "expectancy_r": -0.2747,
+        "avg_risk_pts": 5.0,
+        "profit_factor": 0.679,
+        "net_usd": -96327.0,
+        "max_dd_usd": 96888.5,
+        "worst_day_usd": -1003.5,
+        "news_skipped": 9
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:15-09:30",
+        "params.stop_at": "middle",
+        "params.atr_mode": "off",
+        "spec.target.value": 0.5
+      },
+      "metrics": {
+        "trades": 2017,
+        "days": 2149,
+        "trades_per_day": 0.939,
+        "win_rate": 0.2667,
+        "avg_win_usd": 102.45,
+        "avg_loss_usd": -149.1,
+        "rr": 0.687,
+        "expectancy_usd": -82.0,
+        "expectancy_r": -0.6876,
+        "avg_risk_pts": 2.88,
+        "profit_factor": 0.25,
+        "net_usd": -165397.0,
+        "max_dd_usd": 165463.5,
+        "worst_day_usd": -853.5,
+        "news_skipped": 9
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:15-09:30",
+        "params.stop_at": "middle",
+        "params.atr_mode": "off",
+        "spec.target.value": 1.0
+      },
+      "metrics": {
+        "trades": 2017,
+        "days": 2149,
+        "trades_per_day": 0.939,
+        "win_rate": 0.2132,
+        "avg_win_usd": 169.96,
+        "avg_loss_usd": -152.35,
+        "rr": 1.116,
+        "expectancy_usd": -83.64,
+        "expectancy_r": -0.6918,
+        "avg_risk_pts": 2.88,
+        "profit_factor": 0.302,
+        "net_usd": -168697.0,
+        "max_dd_usd": 168931.5,
+        "worst_day_usd": -853.5,
+        "news_skipped": 9
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:15-09:30",
+        "params.stop_at": "middle",
+        "params.atr_mode": "range-filter",
+        "spec.target.value": 0.5
+      },
+      "metrics": {
+        "trades": 1993,
+        "days": 2149,
+        "trades_per_day": 0.927,
+        "win_rate": 0.2664,
+        "avg_win_usd": 101.87,
+        "avg_loss_usd": -148.43,
+        "rr": 0.686,
+        "expectancy_usd": -81.74,
+        "expectancy_r": -0.6887,
+        "avg_risk_pts": 2.85,
+        "profit_factor": 0.249,
+        "net_usd": -162913.0,
+        "max_dd_usd": 163026.0,
+        "worst_day_usd": -853.5,
+        "news_skipped": 9
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:15-09:30",
+        "params.stop_at": "middle",
+        "params.atr_mode": "range-filter",
+        "spec.target.value": 1.0
+      },
+      "metrics": {
+        "trades": 1993,
+        "days": 2149,
+        "trades_per_day": 0.927,
+        "win_rate": 0.2127,
+        "avg_win_usd": 169.11,
+        "avg_loss_usd": -151.64,
+        "rr": 1.115,
+        "expectancy_usd": -83.4,
+        "expectancy_r": -0.6931,
+        "avg_risk_pts": 2.85,
+        "profit_factor": 0.301,
+        "net_usd": -166213.0,
+        "max_dd_usd": 166526.0,
+        "worst_day_usd": -853.5,
+        "news_skipped": 9
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:15-09:30",
+        "params.stop_at": "middle",
+        "params.atr_mode": "atr-stop",
+        "spec.target.value": 0.5
+      },
+      "metrics": {
+        "trades": 1997,
+        "days": 2149,
+        "trades_per_day": 0.929,
+        "win_rate": 0.5068,
+        "avg_win_usd": 138.05,
+        "avg_loss_usd": -238.73,
+        "rr": 0.578,
+        "expectancy_usd": -47.79,
+        "expectancy_r": -0.2797,
+        "avg_risk_pts": 5.0,
+        "profit_factor": 0.594,
+        "net_usd": -95439.5,
+        "max_dd_usd": 95668.5,
+        "worst_day_usd": -1003.5,
+        "news_skipped": 9
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.range_window": "09:15-09:30",
+        "params.stop_at": "middle",
+        "params.atr_mode": "atr-stop",
+        "spec.target.value": 1.0
+      },
+      "metrics": {
+        "trades": 1997,
+        "days": 2149,
+        "trades_per_day": 0.929,
+        "win_rate": 0.3946,
+        "avg_win_usd": 258.33,
+        "avg_loss_usd": -248.05,
+        "rr": 1.041,
+        "expectancy_usd": -48.24,
+        "expectancy_r": -0.2747,
+        "avg_risk_pts": 5.0,
+        "profit_factor": 0.679,
+        "net_usd": -96327.0,
+        "max_dd_usd": 96888.5,
+        "worst_day_usd": -1003.5,
+        "news_skipped": 9
+      },
+      "prop": null
+    }
+  ],
+  "selected": null,
+  "verdict": null,
+  "trades_file": "data/backtests/r-eda35c.parquet",
+  "notes": "tools/backtest: 1m bars, stop-first, limits need 1-tick trade-through. prop = LucidDaily eval (risk $800) + funded daily 60d (risk $300), 2000 sims on resampled real days; only rows with >= 30 trades and expectancy_r > 0."
+}

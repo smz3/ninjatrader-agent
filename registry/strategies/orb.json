@@ -3,7 +3,7 @@
   "name": "Opening Range Breakout",
   "kind": "setup",
   "family": "breakout",
-  "status": "spec",
+  "status": "tested",
   "version": 1,
   "source": "task #2 plan 2026-09-10 (user)",
   "thesis": "Momentum out of the first 15-min range tends to continue. Usually a lower-WR breakout play - must prove it fits high-WR / low-RR after costs.",
@@ -74,8 +74,12 @@
     {
       "ts": "2026-09-11T06:18:16+00:00",
       "text": "-> spec: numbers pinned for the python 1m backtest (tools/backtest); grid = what gets swept in-sample"
+    },
+    {
+      "ts": "2026-09-11T06:20:00+00:00",
+      "text": "-> tested: run r-eda35c (in-sample, 24 combos)"
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T06:18:16+00:00"
+  "updated_ts": "2026-09-11T06:20:00+00:00"
 }

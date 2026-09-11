@@ -1,0 +1,513 @@
+{
+  "id": "r-34dd00",
+  "strategy_id": "gap-fill",
+  "strategy_version": 1,
+  "ts": "2026-09-11T06:20:18+00:00",
+  "engine": "python-1m",
+  "code_commit": "86e2cb5",
+  "data": {
+    "source": "databento ES.v.0 ohlcv-1m",
+    "start": "2016-09-01",
+    "end": "2024-12-31",
+    "split": "in-sample"
+  },
+  "costs": {
+    "commission_rt_usd": 3.5,
+    "slippage_ticks": 1
+  },
+  "spec": {
+    "instrument": "ES",
+    "bar": "1m",
+    "sides": "both",
+    "entry_window": [
+      "09:30",
+      "09:45"
+    ],
+    "flat_by": "12:00",
+    "entry_order": "market",
+    "stop": {
+      "type": "atr",
+      "value": 0.15
+    },
+    "target": {
+      "type": "structure",
+      "value": null,
+      "note": "prior RTH close (gap filled)"
+    },
+    "max_stop_pts": 20,
+    "max_trades_per_day": 1,
+    "news_buffer_min": [
+      5,
+      5
+    ]
+  },
+  "params": {
+    "gap_unit": "atr",
+    "min_gap": 0.05,
+    "max_gap": 0.25,
+    "entry_delay_min": 0
+  },
+  "filters": [],
+  "rows": [
+    {
+      "vary": {
+        "params.min_gap": 0.03,
+        "params.max_gap": 0.2,
+        "spec.stop.value": 0.1,
+        "params.entry_delay_min": 0
+      },
+      "metrics": {
+        "trades": 729,
+        "days": 2149,
+        "trades_per_day": 0.339,
+        "win_rate": 0.4719,
+        "avg_win_usd": 252.53,
+        "avg_loss_usd": -246.03,
+        "rr": 1.026,
+        "expectancy_usd": -10.77,
+        "expectancy_r": -0.1095,
+        "avg_risk_pts": 5.09,
+        "profit_factor": 0.917,
+        "net_usd": -7851.5,
+        "max_dd_usd": 13687.5,
+        "worst_day_usd": -828.5,
+        "news_skipped": 2
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.03,
+        "params.max_gap": 0.2,
+        "spec.stop.value": 0.1,
+        "params.entry_delay_min": 5
+      },
+      "metrics": {
+        "trades": 525,
+        "days": 2149,
+        "trades_per_day": 0.244,
+        "win_rate": 0.4571,
+        "avg_win_usd": 277.54,
+        "avg_loss_usd": -249.55,
+        "rr": 1.112,
+        "expectancy_usd": -8.6,
+        "expectancy_r": -0.0702,
+        "avg_risk_pts": 5.18,
+        "profit_factor": 0.937,
+        "net_usd": -4512.5,
+        "max_dd_usd": 6930.0,
+        "worst_day_usd": -828.5,
+        "news_skipped": 0
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.03,
+        "params.max_gap": 0.2,
+        "spec.stop.value": 0.2,
+        "params.entry_delay_min": 0
+      },
+      "metrics": {
+        "trades": 680,
+        "days": 2149,
+        "trades_per_day": 0.316,
+        "win_rate": 0.6456,
+        "avg_win_usd": 222.27,
+        "avg_loss_usd": -354.23,
+        "rr": 0.627,
+        "expectancy_usd": 17.95,
+        "expectancy_r": 0.0179,
+        "avg_risk_pts": 9.23,
+        "profit_factor": 1.143,
+        "net_usd": 12207.5,
+        "max_dd_usd": 8276.0,
+        "worst_day_usd": -916.0,
+        "news_skipped": 2
+      },
+      "prop": {
+        "risk_usd": 800,
+        "eval_pass_rate": 0.182,
+        "eval_median_days": 40.0,
+        "funded_risk_usd": 300,
+        "funded_blown_rate": 0.04,
+        "funded_got_paid_rate": 0.0035,
+        "funded_avg_paid_usd": 2.09
+      }
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.03,
+        "params.max_gap": 0.2,
+        "spec.stop.value": 0.2,
+        "params.entry_delay_min": 5
+      },
+      "metrics": {
+        "trades": 493,
+        "days": 2149,
+        "trades_per_day": 0.229,
+        "win_rate": 0.6024,
+        "avg_win_usd": 260.35,
+        "avg_loss_usd": -364.6,
+        "rr": 0.714,
+        "expectancy_usd": 11.89,
+        "expectancy_r": 0.0055,
+        "avg_risk_pts": 9.52,
+        "profit_factor": 1.082,
+        "net_usd": 5862.0,
+        "max_dd_usd": 7544.5,
+        "worst_day_usd": -1016.0,
+        "news_skipped": 0
+      },
+      "prop": {
+        "risk_usd": 800,
+        "eval_pass_rate": 0.1355,
+        "eval_median_days": 37,
+        "funded_risk_usd": 300,
+        "funded_blown_rate": 0.032,
+        "funded_got_paid_rate": 0.001,
+        "funded_avg_paid_usd": 0.55
+      }
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.03,
+        "params.max_gap": 0.35,
+        "spec.stop.value": 0.1,
+        "params.entry_delay_min": 0
+      },
+      "metrics": {
+        "trades": 1237,
+        "days": 2149,
+        "trades_per_day": 0.576,
+        "win_rate": 0.3921,
+        "avg_win_usd": 313.97,
+        "avg_loss_usd": -252.2,
+        "rr": 1.245,
+        "expectancy_usd": -30.22,
+        "expectancy_r": -0.1491,
+        "avg_risk_pts": 5.05,
+        "profit_factor": 0.803,
+        "net_usd": -37379.5,
+        "max_dd_usd": 38088.5,
+        "worst_day_usd": -1003.5,
+        "news_skipped": 5
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.03,
+        "params.max_gap": 0.35,
+        "spec.stop.value": 0.1,
+        "params.entry_delay_min": 5
+      },
+      "metrics": {
+        "trades": 1032,
+        "days": 2149,
+        "trades_per_day": 0.48,
+        "win_rate": 0.3857,
+        "avg_win_usd": 344.68,
+        "avg_loss_usd": -249.87,
+        "rr": 1.379,
+        "expectancy_usd": -20.58,
+        "expectancy_r": -0.1211,
+        "avg_risk_pts": 5.09,
+        "profit_factor": 0.866,
+        "net_usd": -21237.0,
+        "max_dd_usd": 22103.5,
+        "worst_day_usd": -828.5,
+        "news_skipped": 0
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.03,
+        "params.max_gap": 0.35,
+        "spec.stop.value": 0.2,
+        "params.entry_delay_min": 0
+      },
+      "metrics": {
+        "trades": 1160,
+        "days": 2149,
+        "trades_per_day": 0.54,
+        "win_rate": 0.5621,
+        "avg_win_usd": 290.54,
+        "avg_loss_usd": -365.36,
+        "rr": 0.795,
+        "expectancy_usd": 3.3,
+        "expectancy_r": -0.0057,
+        "avg_risk_pts": 9.22,
+        "profit_factor": 1.021,
+        "net_usd": 3827.5,
+        "max_dd_usd": 11668.0,
+        "worst_day_usd": -953.5,
+        "news_skipped": 5
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.03,
+        "params.max_gap": 0.35,
+        "spec.stop.value": 0.2,
+        "params.entry_delay_min": 5
+      },
+      "metrics": {
+        "trades": 972,
+        "days": 2149,
+        "trades_per_day": 0.452,
+        "win_rate": 0.5278,
+        "avg_win_usd": 316.5,
+        "avg_loss_usd": -366.65,
+        "rr": 0.863,
+        "expectancy_usd": -6.1,
+        "expectancy_r": -0.0244,
+        "avg_risk_pts": 9.37,
+        "profit_factor": 0.965,
+        "net_usd": -5927.0,
+        "max_dd_usd": 23598.0,
+        "worst_day_usd": -1016.0,
+        "news_skipped": 0
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.08,
+        "params.max_gap": 0.2,
+        "spec.stop.value": 0.1,
+        "params.entry_delay_min": 0
+      },
+      "metrics": {
+        "trades": 518,
+        "days": 2149,
+        "trades_per_day": 0.241,
+        "win_rate": 0.4208,
+        "avg_win_usd": 319.38,
+        "avg_loss_usd": -247.46,
+        "rr": 1.291,
+        "expectancy_usd": -8.91,
+        "expectancy_r": -0.0962,
+        "avg_risk_pts": 4.97,
+        "profit_factor": 0.938,
+        "net_usd": -4613.0,
+        "max_dd_usd": 10177.5,
+        "worst_day_usd": -828.5,
+        "news_skipped": 2
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.08,
+        "params.max_gap": 0.2,
+        "spec.stop.value": 0.1,
+        "params.entry_delay_min": 5
+      },
+      "metrics": {
+        "trades": 433,
+        "days": 2149,
+        "trades_per_day": 0.201,
+        "win_rate": 0.4596,
+        "avg_win_usd": 293.86,
+        "avg_loss_usd": -244.63,
+        "rr": 1.201,
+        "expectancy_usd": 2.85,
+        "expectancy_r": -0.0301,
+        "avg_risk_pts": 5.09,
+        "profit_factor": 1.022,
+        "net_usd": 1234.5,
+        "max_dd_usd": 5082.0,
+        "worst_day_usd": -828.5,
+        "news_skipped": 0
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.08,
+        "params.max_gap": 0.2,
+        "spec.stop.value": 0.2,
+        "params.entry_delay_min": 0
+      },
+      "metrics": {
+        "trades": 489,
+        "days": 2149,
+        "trades_per_day": 0.228,
+        "win_rate": 0.6155,
+        "avg_win_usd": 275.9,
+        "avg_loss_usd": -348.78,
+        "rr": 0.791,
+        "expectancy_usd": 35.74,
+        "expectancy_r": 0.0515,
+        "avg_risk_pts": 9.21,
+        "profit_factor": 1.267,
+        "net_usd": 17476.0,
+        "max_dd_usd": 5714.5,
+        "worst_day_usd": -916.0,
+        "news_skipped": 2
+      },
+      "prop": {
+        "risk_usd": 800,
+        "eval_pass_rate": 0.1825,
+        "eval_median_days": 40,
+        "funded_risk_usd": 300,
+        "funded_blown_rate": 0.018,
+        "funded_got_paid_rate": 0.0015,
+        "funded_avg_paid_usd": 0.85
+      }
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.08,
+        "params.max_gap": 0.2,
+        "spec.stop.value": 0.2,
+        "params.entry_delay_min": 5
+      },
+      "metrics": {
+        "trades": 409,
+        "days": 2149,
+        "trades_per_day": 0.19,
+        "win_rate": 0.6039,
+        "avg_win_usd": 268.72,
+        "avg_loss_usd": -368.55,
+        "rr": 0.729,
+        "expectancy_usd": 16.3,
+        "expectancy_r": 0.0147,
+        "avg_risk_pts": 9.45,
+        "profit_factor": 1.112,
+        "net_usd": 6668.5,
+        "max_dd_usd": 7200.5,
+        "worst_day_usd": -1016.0,
+        "news_skipped": 0
+      },
+      "prop": {
+        "risk_usd": 800,
+        "eval_pass_rate": 0.1185,
+        "eval_median_days": 42,
+        "funded_risk_usd": 300,
+        "funded_blown_rate": 0.0165,
+        "funded_got_paid_rate": 0.0005,
+        "funded_avg_paid_usd": 0.56
+      }
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.08,
+        "params.max_gap": 0.35,
+        "spec.stop.value": 0.1,
+        "params.entry_delay_min": 0
+      },
+      "metrics": {
+        "trades": 1026,
+        "days": 2149,
+        "trades_per_day": 0.477,
+        "win_rate": 0.3499,
+        "avg_win_usd": 376.13,
+        "avg_loss_usd": -253.63,
+        "rr": 1.483,
+        "expectancy_usd": -33.28,
+        "expectancy_r": -0.1505,
+        "avg_risk_pts": 4.98,
+        "profit_factor": 0.798,
+        "net_usd": -34141.0,
+        "max_dd_usd": 34850.0,
+        "worst_day_usd": -1003.5,
+        "news_skipped": 5
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.08,
+        "params.max_gap": 0.35,
+        "spec.stop.value": 0.1,
+        "params.entry_delay_min": 5
+      },
+      "metrics": {
+        "trades": 940,
+        "days": 2149,
+        "trades_per_day": 0.437,
+        "win_rate": 0.3798,
+        "avg_win_usd": 361.49,
+        "avg_loss_usd": -247.93,
+        "rr": 1.458,
+        "expectancy_usd": -16.48,
+        "expectancy_r": -0.1076,
+        "avg_risk_pts": 5.04,
+        "profit_factor": 0.893,
+        "net_usd": -15490.0,
+        "max_dd_usd": 16401.0,
+        "worst_day_usd": -828.5,
+        "news_skipped": 0
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.08,
+        "params.max_gap": 0.35,
+        "spec.stop.value": 0.2,
+        "params.entry_delay_min": 0
+      },
+      "metrics": {
+        "trades": 969,
+        "days": 2149,
+        "trades_per_day": 0.451,
+        "win_rate": 0.5304,
+        "avg_win_usd": 340.27,
+        "avg_loss_usd": -364.41,
+        "rr": 0.934,
+        "expectancy_usd": 9.39,
+        "expectancy_r": 0.0066,
+        "avg_risk_pts": 9.2,
+        "profit_factor": 1.055,
+        "net_usd": 9096.0,
+        "max_dd_usd": 9749.0,
+        "worst_day_usd": -953.5,
+        "news_skipped": 5
+      },
+      "prop": {
+        "risk_usd": 800,
+        "eval_pass_rate": 0.2885,
+        "eval_median_days": 24,
+        "funded_risk_usd": 300,
+        "funded_blown_rate": 0.24,
+        "funded_got_paid_rate": 0.044,
+        "funded_avg_paid_usd": 39.12
+      }
+    },
+    {
+      "vary": {
+        "params.min_gap": 0.08,
+        "params.max_gap": 0.35,
+        "spec.stop.value": 0.2,
+        "params.entry_delay_min": 5
+      },
+      "metrics": {
+        "trades": 888,
+        "days": 2149,
+        "trades_per_day": 0.413,
+        "win_rate": 0.5214,
+        "avg_win_usd": 327.03,
+        "avg_loss_usd": -368.32,
+        "rr": 0.888,
+        "expectancy_usd": -5.77,
+        "expectancy_r": -0.023,
+        "avg_risk_pts": 9.32,
+        "profit_factor": 0.967,
+        "net_usd": -5120.5,
+        "max_dd_usd": 22786.5,
+        "worst_day_usd": -1016.0,
+        "news_skipped": 0
+      },
+      "prop": null
+    }
+  ],
+  "selected": null,
+  "verdict": null,
+  "trades_file": "data/backtests/r-34dd00.parquet",
+  "notes": "tools/backtest: 1m bars, stop-first, limits need 1-tick trade-through. prop = LucidDaily eval (risk $800) + funded daily 60d (risk $300), 2000 sims on resampled real days; only rows with >= 30 trades and expectancy_r > 0."
+}

@@ -1,0 +1,477 @@
+{
+  "id": "r-853332",
+  "strategy_id": "range-mode",
+  "strategy_version": 1,
+  "ts": "2026-09-11T06:20:06+00:00",
+  "engine": "python-1m",
+  "code_commit": "86e2cb5",
+  "data": {
+    "source": "databento ES.v.0 ohlcv-1m",
+    "start": "2016-09-01",
+    "end": "2024-12-31",
+    "split": "in-sample"
+  },
+  "costs": {
+    "commission_rt_usd": 3.5,
+    "slippage_ticks": 1
+  },
+  "spec": {
+    "instrument": "ES",
+    "bar": "1m",
+    "sides": "both",
+    "entry_window": [
+      "09:45",
+      "11:30"
+    ],
+    "flat_by": "12:00",
+    "entry_order": "market",
+    "stop": {
+      "type": "structure",
+      "value": null,
+      "note": "poke extreme + params.stop_buffer_ticks"
+    },
+    "target": {
+      "type": "structure",
+      "value": null,
+      "note": "params.target_at: POC of the profile window"
+    },
+    "max_stop_pts": 20,
+    "max_trades_per_day": 2,
+    "news_buffer_min": [
+      5,
+      5
+    ]
+  },
+  "params": {
+    "profile_window": "09:30-10:00",
+    "value_area_pct": 70,
+    "poke_ticks": 2,
+    "reclaim_bars": 3,
+    "stop_buffer_ticks": 2,
+    "target_at": "poc",
+    "min_rr": 0.3
+  },
+  "filters": [],
+  "rows": [
+    {
+      "vary": {
+        "params.profile_window": "09:30-10:00",
+        "params.poke_ticks": 1,
+        "params.reclaim_bars": 1,
+        "params.min_rr": 0.3
+      },
+      "metrics": {
+        "trades": 733,
+        "days": 2149,
+        "trades_per_day": 0.341,
+        "win_rate": 0.3629,
+        "avg_win_usd": 144.86,
+        "avg_loss_usd": -135.25,
+        "rr": 1.071,
+        "expectancy_usd": -33.6,
+        "expectancy_r": -0.3585,
+        "avg_risk_pts": 2.52,
+        "profit_factor": 0.61,
+        "net_usd": -24628.0,
+        "max_dd_usd": 24737.0,
+        "worst_day_usd": -669.5,
+        "news_skipped": 180
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-10:00",
+        "params.poke_ticks": 1,
+        "params.reclaim_bars": 1,
+        "params.min_rr": 0.6
+      },
+      "metrics": {
+        "trades": 579,
+        "days": 2149,
+        "trades_per_day": 0.269,
+        "win_rate": 0.3178,
+        "avg_win_usd": 186.31,
+        "avg_loss_usd": -132.96,
+        "rr": 1.401,
+        "expectancy_usd": -31.5,
+        "expectancy_r": -0.3631,
+        "avg_risk_pts": 2.48,
+        "profit_factor": 0.653,
+        "net_usd": -18239.0,
+        "max_dd_usd": 18649.0,
+        "worst_day_usd": -669.5,
+        "news_skipped": 180
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-10:00",
+        "params.poke_ticks": 1,
+        "params.reclaim_bars": 3,
+        "params.min_rr": 0.3
+      },
+      "metrics": {
+        "trades": 1371,
+        "days": 2149,
+        "trades_per_day": 0.638,
+        "win_rate": 0.4194,
+        "avg_win_usd": 132.48,
+        "avg_loss_usd": -149.1,
+        "rr": 0.889,
+        "expectancy_usd": -31.01,
+        "expectancy_r": -0.295,
+        "avg_risk_pts": 2.82,
+        "profit_factor": 0.642,
+        "net_usd": -42511.0,
+        "max_dd_usd": 42641.5,
+        "worst_day_usd": -1119.5,
+        "news_skipped": 283
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-10:00",
+        "params.poke_ticks": 1,
+        "params.reclaim_bars": 3,
+        "params.min_rr": 0.6
+      },
+      "metrics": {
+        "trades": 1065,
+        "days": 2149,
+        "trades_per_day": 0.496,
+        "win_rate": 0.3446,
+        "avg_win_usd": 179.88,
+        "avg_loss_usd": -144.62,
+        "rr": 1.244,
+        "expectancy_usd": -32.8,
+        "expectancy_r": -0.3329,
+        "avg_risk_pts": 2.69,
+        "profit_factor": 0.654,
+        "net_usd": -34927.5,
+        "max_dd_usd": 35210.0,
+        "worst_day_usd": -1119.5,
+        "news_skipped": 284
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-10:00",
+        "params.poke_ticks": 4,
+        "params.reclaim_bars": 1,
+        "params.min_rr": 0.3
+      },
+      "metrics": {
+        "trades": 321,
+        "days": 2149,
+        "trades_per_day": 0.149,
+        "win_rate": 0.4112,
+        "avg_win_usd": 205.31,
+        "avg_loss_usd": -176.78,
+        "rr": 1.161,
+        "expectancy_usd": -19.66,
+        "expectancy_r": -0.1852,
+        "avg_risk_pts": 3.42,
+        "profit_factor": 0.811,
+        "net_usd": -6311.0,
+        "max_dd_usd": 8598.0,
+        "worst_day_usd": -466.0,
+        "news_skipped": 100
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-10:00",
+        "params.poke_ticks": 4,
+        "params.reclaim_bars": 1,
+        "params.min_rr": 0.6
+      },
+      "metrics": {
+        "trades": 249,
+        "days": 2149,
+        "trades_per_day": 0.116,
+        "win_rate": 0.3494,
+        "avg_win_usd": 273.37,
+        "avg_loss_usd": -173.33,
+        "rr": 1.577,
+        "expectancy_usd": -17.26,
+        "expectancy_r": -0.1903,
+        "avg_risk_pts": 3.36,
+        "profit_factor": 0.847,
+        "net_usd": -4296.5,
+        "max_dd_usd": 6842.0,
+        "worst_day_usd": -544.5,
+        "news_skipped": 100
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-10:00",
+        "params.poke_ticks": 4,
+        "params.reclaim_bars": 3,
+        "params.min_rr": 0.3
+      },
+      "metrics": {
+        "trades": 791,
+        "days": 2149,
+        "trades_per_day": 0.368,
+        "win_rate": 0.4829,
+        "avg_win_usd": 168.91,
+        "avg_loss_usd": -198.03,
+        "rr": 0.853,
+        "expectancy_usd": -20.82,
+        "expectancy_r": -0.1341,
+        "avg_risk_pts": 3.76,
+        "profit_factor": 0.797,
+        "net_usd": -16468.5,
+        "max_dd_usd": 21729.0,
+        "worst_day_usd": -1119.5,
+        "news_skipped": 163
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-10:00",
+        "params.poke_ticks": 4,
+        "params.reclaim_bars": 3,
+        "params.min_rr": 0.6
+      },
+      "metrics": {
+        "trades": 566,
+        "days": 2149,
+        "trades_per_day": 0.263,
+        "win_rate": 0.3993,
+        "avg_win_usd": 239.92,
+        "avg_loss_usd": -194.57,
+        "rr": 1.233,
+        "expectancy_usd": -21.08,
+        "expectancy_r": -0.1492,
+        "avg_risk_pts": 3.66,
+        "profit_factor": 0.82,
+        "net_usd": -11931.0,
+        "max_dd_usd": 17528.0,
+        "worst_day_usd": -1119.5,
+        "news_skipped": 163
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-09:45",
+        "params.poke_ticks": 1,
+        "params.reclaim_bars": 1,
+        "params.min_rr": 0.3
+      },
+      "metrics": {
+        "trades": 797,
+        "days": 2149,
+        "trades_per_day": 0.371,
+        "win_rate": 0.4404,
+        "avg_win_usd": 112.88,
+        "avg_loss_usd": -128.64,
+        "rr": 0.878,
+        "expectancy_usd": -22.27,
+        "expectancy_r": -0.2454,
+        "avg_risk_pts": 2.38,
+        "profit_factor": 0.691,
+        "net_usd": -17752.0,
+        "max_dd_usd": 19599.5,
+        "worst_day_usd": -582.0,
+        "news_skipped": 101
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-09:45",
+        "params.poke_ticks": 1,
+        "params.reclaim_bars": 1,
+        "params.min_rr": 0.6
+      },
+      "metrics": {
+        "trades": 609,
+        "days": 2149,
+        "trades_per_day": 0.283,
+        "win_rate": 0.3777,
+        "avg_win_usd": 149.98,
+        "avg_loss_usd": -126.78,
+        "rr": 1.183,
+        "expectancy_usd": -22.26,
+        "expectancy_r": -0.2607,
+        "avg_risk_pts": 2.34,
+        "profit_factor": 0.718,
+        "net_usd": -13556.5,
+        "max_dd_usd": 15415.0,
+        "worst_day_usd": -582.0,
+        "news_skipped": 101
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-09:45",
+        "params.poke_ticks": 1,
+        "params.reclaim_bars": 3,
+        "params.min_rr": 0.3
+      },
+      "metrics": {
+        "trades": 1476,
+        "days": 2149,
+        "trades_per_day": 0.687,
+        "win_rate": 0.4648,
+        "avg_win_usd": 109.93,
+        "avg_loss_usd": -144.16,
+        "rr": 0.763,
+        "expectancy_usd": -26.07,
+        "expectancy_r": -0.2514,
+        "avg_risk_pts": 2.79,
+        "profit_factor": 0.662,
+        "net_usd": -38478.5,
+        "max_dd_usd": 39973.5,
+        "worst_day_usd": -1094.5,
+        "news_skipped": 218
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-09:45",
+        "params.poke_ticks": 1,
+        "params.reclaim_bars": 3,
+        "params.min_rr": 0.6
+      },
+      "metrics": {
+        "trades": 1089,
+        "days": 2149,
+        "trades_per_day": 0.507,
+        "win_rate": 0.3949,
+        "avg_win_usd": 145.66,
+        "avg_loss_usd": -140.53,
+        "rr": 1.037,
+        "expectancy_usd": -27.52,
+        "expectancy_r": -0.2693,
+        "avg_risk_pts": 2.64,
+        "profit_factor": 0.676,
+        "net_usd": -29974.0,
+        "max_dd_usd": 31743.5,
+        "worst_day_usd": -832.0,
+        "news_skipped": 214
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-09:45",
+        "params.poke_ticks": 4,
+        "params.reclaim_bars": 1,
+        "params.min_rr": 0.3
+      },
+      "metrics": {
+        "trades": 308,
+        "days": 2149,
+        "trades_per_day": 0.143,
+        "win_rate": 0.4838,
+        "avg_win_usd": 152.04,
+        "avg_loss_usd": -176.22,
+        "rr": 0.863,
+        "expectancy_usd": -17.42,
+        "expectancy_r": -0.1536,
+        "avg_risk_pts": 3.41,
+        "profit_factor": 0.809,
+        "net_usd": -5365.5,
+        "max_dd_usd": 6771.5,
+        "worst_day_usd": -807.0,
+        "news_skipped": 53
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-09:45",
+        "params.poke_ticks": 4,
+        "params.reclaim_bars": 1,
+        "params.min_rr": 0.6
+      },
+      "metrics": {
+        "trades": 222,
+        "days": 2149,
+        "trades_per_day": 0.103,
+        "win_rate": 0.4009,
+        "avg_win_usd": 210.12,
+        "avg_loss_usd": -175.87,
+        "rr": 1.195,
+        "expectancy_usd": -21.12,
+        "expectancy_r": -0.1783,
+        "avg_risk_pts": 3.36,
+        "profit_factor": 0.8,
+        "net_usd": -4689.5,
+        "max_dd_usd": 6267.0,
+        "worst_day_usd": -807.0,
+        "news_skipped": 53
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-09:45",
+        "params.poke_ticks": 4,
+        "params.reclaim_bars": 3,
+        "params.min_rr": 0.3
+      },
+      "metrics": {
+        "trades": 833,
+        "days": 2149,
+        "trades_per_day": 0.388,
+        "win_rate": 0.5042,
+        "avg_win_usd": 138.43,
+        "avg_loss_usd": -195.24,
+        "rr": 0.709,
+        "expectancy_usd": -27.0,
+        "expectancy_r": -0.1772,
+        "avg_risk_pts": 3.86,
+        "profit_factor": 0.721,
+        "net_usd": -22490.5,
+        "max_dd_usd": 23263.0,
+        "worst_day_usd": -1094.5,
+        "news_skipped": 133
+      },
+      "prop": null
+    },
+    {
+      "vary": {
+        "params.profile_window": "09:30-09:45",
+        "params.poke_ticks": 4,
+        "params.reclaim_bars": 3,
+        "params.min_rr": 0.6
+      },
+      "metrics": {
+        "trades": 553,
+        "days": 2149,
+        "trades_per_day": 0.257,
+        "win_rate": 0.4394,
+        "avg_win_usd": 188.58,
+        "avg_loss_usd": -194.31,
+        "rr": 0.971,
+        "expectancy_usd": -26.06,
+        "expectancy_r": -0.1735,
+        "avg_risk_pts": 3.76,
+        "profit_factor": 0.761,
+        "net_usd": -14410.5,
+        "max_dd_usd": 15360.5,
+        "worst_day_usd": -832.0,
+        "news_skipped": 136
+      },
+      "prop": null
+    }
+  ],
+  "selected": null,
+  "verdict": null,
+  "trades_file": "data/backtests/r-853332.parquet",
+  "notes": "tools/backtest: 1m bars, stop-first, limits need 1-tick trade-through. prop = LucidDaily eval (risk $800) + funded daily 60d (risk $300), 2000 sims on resampled real days; only rows with >= 30 trades and expectancy_r > 0."
+}

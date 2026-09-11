@@ -3,7 +3,7 @@
   "name": "Range mode - failed auction to POC",
   "kind": "setup",
   "family": "mean-reversion",
-  "status": "spec",
+  "status": "tested",
   "version": 1,
   "source": "docs/research/orderflow-deepcharts-ebook.md; task t-d47e1f s5; task #2",
   "thesis": "In a balanced open, pokes beyond the value-area edge that fail (trapped traders) snap back to the POC - high WR, small target.",
@@ -76,8 +76,12 @@
     {
       "ts": "2026-09-11T06:18:16+00:00",
       "text": "-> spec: numbers pinned for the python 1m backtest (tools/backtest); grid = what gets swept in-sample"
+    },
+    {
+      "ts": "2026-09-11T06:20:06+00:00",
+      "text": "-> tested: run r-853332 (in-sample, 16 combos)"
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T06:18:16+00:00"
+  "updated_ts": "2026-09-11T06:20:06+00:00"
 }

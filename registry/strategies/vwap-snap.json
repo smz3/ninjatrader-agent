@@ -3,7 +3,7 @@
   "name": "VWAP snap-back",
   "kind": "setup",
   "family": "mean-reversion",
-  "status": "spec",
+  "status": "tested",
   "version": 1,
   "source": "task #2 test plan 2026-09-11",
   "thesis": "Morning moves stretched far from VWAP tend to revert toward it - frequent small wins.",
@@ -69,8 +69,12 @@
     {
       "ts": "2026-09-11T06:18:16+00:00",
       "text": "-> spec: numbers pinned for the python 1m backtest (tools/backtest); grid = what gets swept in-sample"
+    },
+    {
+      "ts": "2026-09-11T06:20:12+00:00",
+      "text": "-> tested: run r-01e320 (in-sample, 12 combos)"
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T06:18:16+00:00"
+  "updated_ts": "2026-09-11T06:20:12+00:00"
 }
