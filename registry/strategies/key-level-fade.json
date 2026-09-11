@@ -7,7 +7,7 @@
   "version": 1,
   "source": "task #2 test plan 2026-09-11",
   "thesis": "First touch of an obvious level (prior-day high/low, overnight high/low) often bounces at least a few points.",
-  "rules": "Levels: prior-day RTH high/low, overnight (18:00-09:30) high/low, only if the RTH open is on the near side. Resting limit touch_ticks inside the level (sell pdh/onh, buy pdl/onl), first touch only. Stop = spec.stop x ATR14 from fill, target = spec.target R. Entries 09:30-11:30, flat 12:00, max 2/day. Code: tools/backtest/setups/key_level_fade.py.",
+  "rules": "Levels: prior-day RTH high/low, overnight (18:00-09:30) high/low, only if the RTH open is on the near side. Resting limit touch_ticks inside the level (sell pdh/onh, buy pdl/onl), first touch only. Stop = spec.stop x ATR14 from fill, target = spec.target R. Entries 09:30-11:30, flat 12:00, max 2/day. Code: tools/backtest/nautilus/setups/key_level_fade.py.",
   "data_needed": [
     "ohlcv-1m",
     "news"
@@ -77,5 +77,5 @@
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T06:20:15+00:00"
+  "updated_ts": "2026-09-11T08:13:52+00:00"
 }

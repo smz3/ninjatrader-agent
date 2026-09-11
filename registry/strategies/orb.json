@@ -7,7 +7,7 @@
   "version": 1,
   "source": "task #2 plan 2026-09-10 (user)",
   "thesis": "Momentum out of the first 15-min range tends to continue. Usually a lower-WR breakout play - must prove it fits high-WR / low-RR after costs.",
-  "rules": "Range = high/low of params.range_window (09:30-09:45 or 09:15-09:30 ET). Buy stop 1 tick above the high / sell stop 1 tick below the low; first break is the only trade of the day, entries 09:30-11:00 (from range end), flat 11:30. Stop: other side of the range (1 tick past) or range middle. Target = 0.5 R (x stop distance). ATR modes: off, range-filter (skip if range > 0.35 x ATR14), atr-stop (stop = 0.1 x ATR14 from fill). Bar breaking both sides = skip. Code: tools/backtest/setups/orb.py.",
+  "rules": "Range = high/low of params.range_window (09:30-09:45 or 09:15-09:30 ET). Buy stop 1 tick above the high / sell stop 1 tick below the low; first break is the only trade of the day, entries 09:30-11:00 (from range end), flat 11:30. Stop: other side of the range (1 tick past) or range middle. Target = 0.5 R (x stop distance). ATR modes: off, range-filter (skip if range > 0.35 x ATR14), atr-stop (stop = 0.1 x ATR14 from fill). Bar breaking both sides = skip. Code: tools/backtest/nautilus/setups/orb.py.",
   "data_needed": [
     "ohlcv-1m",
     "ohlcv-1d",
@@ -81,5 +81,5 @@
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T06:20:00+00:00"
+  "updated_ts": "2026-09-11T08:13:52+00:00"
 }

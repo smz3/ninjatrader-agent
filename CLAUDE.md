@@ -79,7 +79,9 @@
   2016-09 -> 2024, recorded as a run + prop_sim on resampled real days).
   Out-of-sample (2025+) = one final check of a picked combo only (`--vary`).
   Engine = NautilusTrader (`tools/backtest/nautilus/`). Fill settings + rules:
-  docstrings in `nautilus/engine.py`, `nautilus/base.py` and the setup files.
+  docstrings in `nautilus/engine.py`, `nautilus/base.py` and the setup files
+  (`nautilus/setups/<id>.py`, one per setup). Fill tests on synthetic days:
+  `python -m pytest tools/backtest/tests -q`.
 - Also mirrored into `.claude/state.db` as tables `strategies`, `runs`,
   `run_rows` (one line per combo tested) - read-only cache, rebuilt on the
   next db call. Edit the JSON (via tools/registry), never these tables.

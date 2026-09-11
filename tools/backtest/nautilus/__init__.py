@@ -2,7 +2,7 @@
 
   engine.py  venue/instrument/bar feed, one BacktestEngine per run, grid combos
   base.py    day rules every setup shares (window, news, flat_by, brackets, trades)
-  setups.py  the 5 setups as Nautilus strategies
+  setups/    the 5 setups as Nautilus strategies, one file each (orb.py, ...)
 """
 from .engine import COSTS, Engine
 from .setups import SETUPS

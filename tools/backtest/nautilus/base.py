@@ -56,6 +56,13 @@ def tick(x: float) -> float:
     return round(x / TICK) * TICK
 
 
+def window_mask(d, spec: str):
+    """Bars of day d inside 'HH:MM-HH:MM' -> (mask, end minute, has half the bars)."""
+    a, b = (hm(x) for x in spec.split("-"))
+    r = (d.mins >= a) & (d.mins < b)
+    return r, b, r.sum() >= (b - a) // 2
+
+
 KINDS = {"market": OrderType.MARKET, "limit": OrderType.LIMIT, "stop": OrderType.STOP_MARKET}
 
 

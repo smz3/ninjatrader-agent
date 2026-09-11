@@ -7,7 +7,7 @@
   "version": 1,
   "source": "task #2 test plan 2026-09-11",
   "thesis": "Small opening gaps vs the prior RTH close often fill the same morning.",
-  "rules": "gap = 09:30 open - prior RTH close (same contract). If min_gap <= |gap| <= max_gap (x ATR14), trade toward the prior close at the open of the bar entry_delay_min after 09:30 (skip if already filled). Stop = spec.stop x ATR14 from fill, target = prior close. Max 1/day, flat 12:00. Code: tools/backtest/setups/gap_fill.py.",
+  "rules": "gap = 09:30 open - prior RTH close (same contract). If min_gap <= |gap| <= max_gap (x ATR14), trade toward the prior close at the open of the bar entry_delay_min after 09:30 (skip if already filled). Stop = spec.stop x ATR14 from fill, target = prior close. Max 1/day, flat 12:00. Code: tools/backtest/nautilus/setups/gap_fill.py.",
   "data_needed": [
     "ohlcv-1m",
     "news"
@@ -78,5 +78,5 @@
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T06:20:18+00:00"
+  "updated_ts": "2026-09-11T08:13:52+00:00"
 }

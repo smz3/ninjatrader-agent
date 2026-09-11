@@ -7,7 +7,7 @@
   "version": 1,
   "source": "docs/research/orderflow-deepcharts-ebook.md; task t-d47e1f s5; task #2",
   "thesis": "In a balanced open, pokes beyond the value-area edge that fail (trapped traders) snap back to the POC - high WR, small target.",
-  "rules": "Volume profile of params.profile_window (1m bars, volume spread per tick - approximation until trades data), value area 70%. Poke = bar trades poke_ticks+ beyond VAH/VAL; if a bar closes back inside within reclaim_bars (poke bar = 1st), fade at next bar open. Stop = poke extreme + 2 ticks, target = POC, skip if reward < min_rr x risk. No reclaim in time = that side dead for the day. Entries from profile end to 11:30, flat 12:00, max 2/day. Code: tools/backtest/setups/range_mode.py.",
+  "rules": "Volume profile of params.profile_window (1m bars, volume spread per tick - approximation until trades data), value area 70%. Poke = bar trades poke_ticks+ beyond VAH/VAL; if a bar closes back inside within reclaim_bars (poke bar = 1st), fade at next bar open. Stop = poke extreme + 2 ticks, target = POC, skip if reward < min_rr x risk. No reclaim in time = that side dead for the day. Entries from profile end to 11:30, flat 12:00, max 2/day. Code: tools/backtest/nautilus/setups/range_mode.py.",
   "data_needed": [
     "ohlcv-1m",
     "trades",
@@ -83,5 +83,5 @@
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T06:20:06+00:00"
+  "updated_ts": "2026-09-11T08:13:52+00:00"
 }

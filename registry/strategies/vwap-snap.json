@@ -7,7 +7,7 @@
   "version": 1,
   "source": "task #2 test plan 2026-09-11",
   "thesis": "Morning moves stretched far from VWAP tend to revert toward it - frequent small wins.",
-  "rules": "Session VWAP + volume-weighted std dev from 09:30. When a bar closes beyond VWAP +/- stretch_mult x std, fade at next bar open. Stop = spec.stop x ATR14 from fill; target = VWAP at the signal bar, or halfway to it. A side re-arms only after a close back inside the band. Entries 10:00-12:00, flat 12:30, max 2/day. Code: tools/backtest/setups/vwap_snap.py.",
+  "rules": "Session VWAP + volume-weighted std dev from 09:30. When a bar closes beyond VWAP +/- stretch_mult x std, fade at next bar open. Stop = spec.stop x ATR14 from fill; target = VWAP at the signal bar, or halfway to it. A side re-arms only after a close back inside the band. Entries 10:00-12:00, flat 12:30, max 2/day. Code: tools/backtest/nautilus/setups/vwap_snap.py.",
   "data_needed": [
     "ohlcv-1m",
     "ohlcv-1d",
@@ -76,5 +76,5 @@
     }
   ],
   "created_ts": "2026-09-11T04:42:55+00:00",
-  "updated_ts": "2026-09-11T06:20:12+00:00"
+  "updated_ts": "2026-09-11T08:13:52+00:00"
 }
