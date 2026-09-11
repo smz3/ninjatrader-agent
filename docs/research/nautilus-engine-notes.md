@@ -24,7 +24,7 @@ with NautilusTrader (open source, trusted), keep our data. Then test it, before 
 - STOP_MARKET: triggers when ask >= trigger (buy). Hit during H/L/C -> filled AT the
   trigger price; hit by the bar's open (gap) -> filled at the open (~line 6590).
 - `prob_slippage` (default 0) moves EVERY fill 1 tick worse, limit fills too
-  (apply_fills ~line 7382) -> don't use it; add 1 tick per market/stop fill ourselves.
+  (apply_fills ~line 7382). Left at its default (0) - see Settings below.
 - Fees: `PerContractFeeModel(Money(1.75, USD))` = per side per contract = $3.50 RT.
   (FixedFeeModel charges per order.)
 - `use_message_queue=True` (default): strategy commands wait for the next data point,
@@ -72,8 +72,14 @@ with NautilusTrader (open source, trusted), keep our data. Then test it, before 
 - Trades built from fills (entry/exit px, exit reason via tags) into the same Trade
   fields, so metrics/prop don't change. Add "nautilus-1m" to
   tools/registry/schema.py ENGINES.
-- Settings: adaptive ordering on; limit touch fills (flag as optimistic, try
-  prob_fill_on_limit 0.5 as a check); fees 1.75/side; +1 tick per market/stop fill.
+- Settings (user decision 2026-09-11): Nautilus DEFAULTS, no tweaks of our own -
+  no prob_fill_on_limit change, no adaptive ordering, no extra slippage ticks. Only
+  set what Nautilus can't know: the ES contract spec + fees 1.75/side. If a setting
+  must change for a strategy to work at all (e.g. same-bar cancel for ORB - try an
+  OCO order list first), ask the user before changing it.
+- Old engine's ~$23/trade = $3.50 commission + 1 tick ($12.50) slippage on every
+  market/stop fill (entry and non-target exit) - our own assumption, not Nautilus's.
+  Real slippage to be checked against tick data (Databento), not guessed.
 - Tests: synthetic days with known answers (target hit, stop hit, gap through stop,
   stop+target in one bar, news flatten, flat_by), then the 5 base combos, compare vs
   the old engine's trade files (data/backtests/r-*.parquet), hand-check ~10 trades vs
