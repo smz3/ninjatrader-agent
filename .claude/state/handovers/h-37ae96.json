@@ -1,0 +1,8 @@
+{
+  "id": "h-37ae96",
+  "ts": "2026-09-11T08:31:14.632973+00:00",
+  "session_id": "e16b4d21-288c-4424-8603-01cc3d1d24ef",
+  "summary": "Split nautilus setups into nautilus/setups/ + 10 synthetic fill tests (bf13f46). User then dropped Python backtests: backtest in NinjaTrader 8 with NT8's own metrics, fully automated (user presses nothing in NT8), ORB only first. Researched NT8 automation (StrategyBase.RunBacktest() public; auto-compile on file save while a NinjaScript Editor is open; ES 1m history missing in NT db) -> docs/research/nt8-automation-notes.md, task t-b2d143 (e11c374). User was angry I asked the ORB both-sides-bar question - standard ORB = OCO stops, first side hit fills; no question needed.",
+  "next_steps": "See task t-b2d143: build AddOn backtest runner + no-click compile + ES 1m history in NT + Orb.cs (standard OCO stop entries), first automated backtest with NT8 metrics. Fix orb.json rules text per task #2 note.",
+  "questions": "none"
+}
