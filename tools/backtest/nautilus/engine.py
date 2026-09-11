@@ -10,8 +10,15 @@ never touch a position. Bars: UTC open-time index, ts_init = bar close
 Venue = Nautilus defaults, except (user decisions 2026-09-11):
 - fee_model PerContractFeeModel $1.75/side = $3.50 RT (Lucid ES) - Nautilus can't know it;
 - use_message_queue=False - orders/cancels act instantly (real OCO), needed when
-  one of 2+ pending entries fills.
-So: default FillModel (no slippage), default O-H-L-C bar path, limits fill on touch.
+  one of 2+ pending entries fills;
+- bar_adaptive_high_low_ordering=True - the bar extreme nearer the open is hit
+  first. The default (always O-H-L-C) let a short limit filled at the high hit
+  its target at the low in the same bar: key-level-fade 2023 = +0.163R default
+  vs -0.019R adaptive (103 vs 18 same-bar short targets); other setups ~same.
+  Still a guess - a picked combo gets a final check on 1-second bars.
+So: default FillModel (no slippage), limits fill on touch. A stop child that is
+already in the market when its entry fills (entry + stop inside one bar tick) is
+rejected by Nautilus -> flattened at once, exit reason "rejected".
 Grid: engine.reset() + clear_strategies() between combos, data stays loaded.
 """
 import numpy as np
@@ -65,13 +72,15 @@ def feed(days: list, flat: int, inst) -> tuple[list, dict, dict]:
 
 
 class Engine:
-    def __init__(self, sid: str, days: list, flat: int):
+    def __init__(self, sid: str, days: list, flat: int, **venue_kw):
+        """venue_kw: extra add_venue settings - diagnostics only, runs use the defaults."""
         self.cls, self.days = SETUPS[sid], days
         self.engine = BacktestEngine(BacktestEngineConfig(logging=LoggingConfig(log_level="ERROR")))
         self.engine.add_venue(VENUE, OmsType.NETTING, AccountType.MARGIN, [Money(1_000_000, USD)],
                               base_currency=USD,
                               fee_model=PerContractFeeModel(Money(FEE_PER_SIDE_USD, USD)),
-                              use_message_queue=False)
+                              use_message_queue=False,
+                              **{"bar_adaptive_high_low_ordering": True, **venue_kw})
         inst = instrument()
         self.engine.add_instrument(inst)
         bars, self.where, self.n_fed = feed(days, flat, inst)
@@ -82,8 +91,9 @@ class Engine:
         s = self.cls().bind(BAR_TYPE, self.where, self.n_fed, spec, params)
         self.engine.add_strategy(s)
         self.engine.run()
+        self.rejected = s.rejected
         if s.rejected:
-            print(f"  note: {s.rejected} orders rejected by Nautilus")
+            print(f"  note: {len(s.rejected)} orders rejected by Nautilus, e.g. {s.rejected[0]}")
         self.engine.reset()
         self.engine.clear_strategies()
         by = {}

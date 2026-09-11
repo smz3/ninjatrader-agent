@@ -22,8 +22,10 @@ Trade P/L = Nautilus fill prices x $50 - Nautilus commissions. R uses the
 planned risk (what the size is based on). peak_r = best bar high/low from the
 entry bar to the exit bar.
 """
-from nautilus_trader.model.enums import OrderSide, OrderType
+from nautilus_trader.core.uuid import UUID4
+from nautilus_trader.model.enums import ContingencyType, OrderSide, OrderType, TimeInForce, TriggerType
 from nautilus_trader.model.objects import Price, Quantity
+from nautilus_trader.model.orders import OrderList, StopMarketOrder
 from nautilus_trader.trading.strategy import Strategy
 
 from ..data import PT_USD, TICK, hm
@@ -42,7 +44,7 @@ class SetupStrategy(Strategy):
         self.flat = hm(spec["flat_by"])
         self.max_trades, self.max_stop = spec["max_trades_per_day"], spec["max_stop_pts"]
         self.buffer = spec["news_buffer_min"]
-        self.trades, self.news_skipped, self.rejected = [], 0, 0
+        self.trades, self.news_skipped, self.rejected = [], 0, []   # rejected: (date, t, tag, reason)
         self.d, self.pos, self.pending = None, None, {}
         return self
 
@@ -84,15 +86,28 @@ class SetupStrategy(Strategy):
         k = KINDS[kind]
         ol = self.order_factory.bracket(
             instrument_id=self.iid, order_side=OrderSide.BUY if side > 0 else OrderSide.SELL,
-            quantity=Quantity.from_int(1), entry_order_type=k,
+            quantity=Quantity.from_int(1),
+            entry_order_type=OrderType.MARKET if k == OrderType.STOP_MARKET else k,
             entry_price=Price(entry, 2) if k == OrderType.LIMIT else None,
-            entry_trigger_price=Price(entry, 2) if k == OrderType.STOP_MARKET else None,
             tp_price=Price(target, 2), sl_trigger_price=Price(stop, 2), tp_post_only=False,
             entry_tags=["entry"], tp_tags=["target"], sl_tags=["stop"])
+        if k == OrderType.STOP_MARKET:
+            ol = self.stop_entry(ol, Price(entry, 2))
         oid = ol.first.client_order_id
         self.pending[oid] = (side, entry, stop, target, ol.orders)
         self.submit_order_list(ol)
         return oid
+
+    def stop_entry(self, ol: OrderList, trigger: Price) -> OrderList:
+        """bracket() has no STOP_MARKET entry: swap its (unsent) market entry for a
+        stop-market one with the same id/list/links, as bracket() builds the others."""
+        e = ol.first
+        stop = StopMarketOrder(
+            self.trader_id, self.id, e.instrument_id, e.client_order_id, e.side, e.quantity,
+            trigger, TriggerType.DEFAULT, UUID4(), self.clock.timestamp_ns(), TimeInForce.GTC,
+            contingency_type=ContingencyType.OTO, order_list_id=ol.id,
+            linked_order_ids=e.linked_order_ids, tags=e.tags)
+        return OrderList(ol.id, [stop, *ol.orders[1:]])
 
     def cancel_pending(self):
         for *_, orders in self.pending.values():
@@ -149,8 +164,8 @@ class SetupStrategy(Strategy):
             self.close_trade(tag, px, fi, fee)
 
     def on_order_rejected(self, e):
-        self.rejected += 1
         tag = (self.cache.order(e.client_order_id).tags or [""])[0]
+        self.rejected.append((self.d.date, int(self.d.mins[self.i]) + 1, tag, str(e.reason)))
         if tag == "entry":
             self.pending.pop(e.client_order_id, None)
         elif self.pos is not None:          # unprotected position -> get out

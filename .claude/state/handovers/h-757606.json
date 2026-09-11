@@ -1,0 +1,8 @@
+{
+  "id": "h-757606",
+  "ts": "2026-09-11T08:00:59.955826+00:00",
+  "session_id": "de3cba79-d906-4ea2-9647-b102587e3a36",
+  "summary": "Nautilus engine runs all 5 setups: ORB stop-entry bracket fixed (base.stop_entry swaps bracket's market entry for StopMarketOrder). ~30s/combo in-sample. Smoke vs old engine (0 slip): orb/vwap/gap ~same. Found Nautilus default O-H-L-C faked a key-level-fade edge (2023 +0.163R vs -0.019R adaptive). User chose: bar_adaptive_high_low_ordering=True (now engine default) + final check of a picked combo on Databento 1s bars. Rejections recorded with reasons (stop child in the market on gap -> flatten, reason 'rejected'). Notes doc + task #2 updated.",
+  "next_steps": "Synthetic-day tests (target, stop, gap through stop, stop+target same bar, news flatten, flat_by); hand-check ~10 trades per setup vs raw bars; full in-sample grids -> registry (python -m tools.backtest run all); then price + buy 1s bars (~37 USD/yr) for the final check of a picked combo. Scratch scripts smoke.py/diff.py/adaptive.py were in session scratchpad (pattern: Engine(sid, days, flat).backtest(spec, params), runner.apply(store.get('strategy', sid), {})).",
+  "questions": ""
+}

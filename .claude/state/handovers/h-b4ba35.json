@@ -1,0 +1,8 @@
+{
+  "id": "h-b4ba35",
+  "ts": "2026-09-11T07:22:52.290639+00:00",
+  "session_id": "814543de-2ff3-4f1a-b559-13dc1070c01a",
+  "summary": "Explained old 23 USD/trade = 3.50 comm + our own 1 tick/side slippage guess. User: use Nautilus DEFAULTS, no own tweaks (memory saved; notes doc updated). Only non-defaults (user OK'd): PerContractFeeModel 1.75/side, use_message_queue=False (instant OCO cancel of other pending entries). Built tools/backtest/nautilus/ (engine.py feed+venue+grid via reset/clear_strategies, base.py day rules/brackets/trades from fills, setups.py 5 setups), runner --engine nautilus-1m (default) | python-1m, registry ENGINES += nautilus-1m. Committed as WIP.",
+  "next_steps": "Fix ORB: order_factory.bracket() rejects entry STOP_MARKET -> build the bracket by hand in base.enter (stop_market entry with contingency OTO + linked ids, SL/TP children with parent_order_id + OUO, OrderList) or check factory args. Then rerun the smoke test (6 months, all 5 setups, script pattern in session: Engine(sid, days, flat).backtest(spec, params)), fix bugs, check speed, synthetic-day tests, 5 base combos vs old engine trade files, hand-check ~10 trades, then grids -> registry. Show user plainly.",
+  "questions": "None open - defaults agreed, message queue off agreed."
+}

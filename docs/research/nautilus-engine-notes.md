@@ -85,6 +85,27 @@ with NautilusTrader (open source, trusted), keep our data. Then test it, before 
   the old engine's trade files (data/backtests/r-*.parquet), hand-check ~10 trades vs
   raw bars, then full grids -> registry runs.
 
+## First results + bar-path decision (2026-09-11, session de3cba79)
+
+- `order_factory.bracket()` has no STOP_MARKET entry -> base.stop_entry() swaps the
+  unsent market entry for a StopMarketOrder with the same id/list/OTO links. ORB runs.
+- Speed: ~1.5-2.5 s per combo per 6 months (~30 s per combo for in-sample).
+- Smoke test 2023 H1 vs old engine at 0 slippage: orb, gap-fill, vwap-snap ~same trades.
+  key-level-fade jumped to 80% WR: 43 of 65 shorts hit target INSIDE the entry bar -
+  default O-H-L-C path = short limit fills at the high, then the low hits the target,
+  even when the real low came first (e.g. 2023-01-10 09:31, low near the open).
+- Full 2023, base combos, default vs `bar_adaptive_high_low_ordering=True`:
+  key-level-fade +0.163R -> -0.019R (same-bar short targets 103 -> 18); range-mode
+  -0.051 -> -0.060; orb/vwap/gap unchanged.
+- USER DECISION: adaptive ordering ON for grids (Nautilus's own option); final check of a
+  picked combo on Databento 1-second bars. Prices (free estimate): ohlcv-1s ~$37/year,
+  $375 for 2016-09 -> 2026-09; trades ~$123/year, $1,139 for 10y.
+- Nautilus rejects a stop child already "in the market" when the entry fills on the same
+  bar tick (bar gaps through entry and stop) -> we flatten at once (reason "rejected",
+  exit at that tick, a bit worse than the stop). ~4 per 6 months on key-level-fade.
+- Limits still fill on touch (default) - key-level-fade enters earlier than the old
+  engine's 1-tick trade-through. Left as default.
+
 ## Old engine reference (base combos, in-sample, for comparison)
 
 | setup | real costs expR | zero costs expR |

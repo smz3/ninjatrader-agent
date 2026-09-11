@@ -85,7 +85,8 @@ def run(sid: str, split: str = "in-sample", varies: list[dict] | None = None, re
         from .nautilus import COSTS as costs, Engine
         eng = Engine(sid, days, max(data.hm(apply(st, v)[0]["flat_by"]) for v in varies))
         bt = eng.backtest
-        how = "NautilusTrader defaults (no slippage, touch fills, O-H-L-C bar path), no message queue"
+        how = ("NautilusTrader defaults (no slippage, touch fills), adaptive high/low bar path, "
+               "no message queue")
     else:
         costs, bt = COSTS, lambda spec, params: backtest(sid, days, spec, params)
         how = "tools/backtest sim.py: stop-first, limits need 1-tick trade-through"
