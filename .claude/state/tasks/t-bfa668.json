@@ -1,0 +1,10 @@
+{
+  "id": "t-bfa668",
+  "status": "closed",
+  "priority": 3,
+  "category": "infra",
+  "task_title": "PDF-to-text tool to save context",
+  "task_details": "2026-09-11: pasting the 32-page DeepCharts PDF ate ~55-60k tokens (pages sent as images). Build tools/pdf_extract: PDF -> text .md + list of image pages, --render for chart pages only. PDFs go in gitignored inbox/. Note it in CLAUDE.md.\n[2026-09-11T00:14:05.693837+00:00 -> closed] 2026-09-11: done - tools/pdf_extract (text .md + image-page list, --pages, --render PNGs), inbox/ gitignored, CLAUDE.md 'Reading PDFs' section. Tested on a sample PDF.",
+  "created_ts": "2026-09-11T00:13:32.897516+00:00",
+  "updated_ts": "2026-09-11T00:14:05.693852+00:00"
+}

@@ -61,3 +61,13 @@
 - Instrument: ES (MES only when a stop is too wide for exact risk sizing).
 - Prop math / risk sizing: `tools/prop_sim` (eval) and
   `python -m tools.prop_sim.funded` (funded payouts).
+
+## Reading PDFs
+
+- Don't paste big PDFs into chat - every page goes in as an image
+  (~1.5-2k tokens/page; a 32-page ebook ate ~55-60k). Drop them in `inbox/`
+  (gitignored) and run `python -m tools.pdf_extract inbox/<file>.pdf`: text
+  goes to `inbox/<file>.md`, and it lists which pages have images. Render
+  only the chart pages that matter with `--render 13,17`, then Read those PNGs.
+- Whole-book reads can also go to a subagent (if the user asks) so only the
+  summary lands in the main context. Save findings in full to `docs/research/`.

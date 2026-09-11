@@ -8,6 +8,10 @@
 .claude/db-history/
 __pycache__/
 
+# PDFs/ebooks dropped in for reading (third-party, don't push) + their
+# extracts from tools/pdf_extract - findings go to docs/research/ instead
+inbox/
+
 # secrets - never track these (see .claude/scripts/git_safe.py SECRET_GLOBS)
 .env
 .env.*
