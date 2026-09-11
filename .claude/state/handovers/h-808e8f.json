@@ -1,0 +1,8 @@
+{
+  "id": "h-808e8f",
+  "ts": "2026-09-11T04:48:02.993884+00:00",
+  "session_id": "91aa5300-d9e9-402b-b22d-0fdc62c1853f",
+  "summary": "User asked where the strategy table is - expected it inside .claude/state.db. It's JSON files in registry/ (git-tracked), viewed via python -m tools.registry list; state.db is only a gitignored cache for tasks/handovers/sessions.",
+  "next_steps": "Ask/confirm: mirror registry/strategies + registry/runs into state.db as cached tables (rebuilt from the JSON files, same pattern as tasks via lib/state_files.py) so the user can browse them in a SQLite viewer. Then task #2 step 2 (pin numbers in the registry).",
+  "questions": "Does the user want the registry mirrored into state.db (SQLite view), or is the JSON + CLI table enough?"
+}
