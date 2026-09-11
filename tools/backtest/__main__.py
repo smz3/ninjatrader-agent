@@ -1,4 +1,4 @@
-"""CLI: python 1m backtests of registry strategies.
+"""CLI: NautilusTrader 1m backtests of registry strategies.
 
   python -m tools.backtest run orb vwap-snap         full grid, in-sample, recorded as runs
   python -m tools.backtest run all                   every strategy that has a setup file
@@ -13,7 +13,7 @@ import argparse
 import json
 
 from . import runner
-from .setups import SETUPS
+from .nautilus import SETUPS
 
 
 def parse_vary(items: list[str]) -> dict:
@@ -40,8 +40,6 @@ def main():
     r.add_argument("--eval-risk", type=float, default=800)
     r.add_argument("--funded-risk", type=float, default=300)
     r.add_argument("--sims", type=int, default=2000)
-    r.add_argument("--engine", default="nautilus-1m", choices=["nautilus-1m", "python-1m"],
-                   help="python-1m = the old home-made fill engine, kept only to compare")
     a = p.parse_args()
 
     ids = list(SETUPS) if a.ids == ["all"] else a.ids

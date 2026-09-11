@@ -78,7 +78,8 @@
 - Python 1m backtester: `python -m tools.backtest run <id>|all` (grid, in-sample
   2016-09 -> 2024, recorded as a run + prop_sim on resampled real days).
   Out-of-sample (2025+) = one final check of a picked combo only (`--vary`).
-  Fill model + rules: docstrings in `tools/backtest/sim.py` and `setups/*.py`.
+  Engine = NautilusTrader (`tools/backtest/nautilus/`). Fill settings + rules:
+  docstrings in `nautilus/engine.py`, `nautilus/base.py` and the setup files.
 - Also mirrored into `.claude/state.db` as tables `strategies`, `runs`,
   `run_rows` (one line per combo tested) - read-only cache, rebuilt on the
   next db call. Edit the JSON (via tools/registry), never these tables.

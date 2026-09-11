@@ -1,0 +1,8 @@
+{
+  "id": "h-831077",
+  "ts": "2026-09-11T08:08:19.260999+00:00",
+  "session_id": "de3cba79-d906-4ea2-9647-b102587e3a36",
+  "summary": "User: deleted old python engine (sim.py + setups/). Trade/tick moved to nautilus/base.py, profile() to nautilus/setups.py; runner/CLI Nautilus-only (--engine gone); CLAUDE.md + notes updated; python-1m kept in ENGINES for old runs. Tested: gap-fill base in-sample runs (844 trades, +0.056R), registry check ok. User was angry all 5 setups sit in one file (nautilus/setups.py) - agreed to split.",
+  "next_steps": "1) Split tools/backtest/nautilus/setups.py into package nautilus/setups/ (orb.py, key_level_fade.py, range_mode.py, vwap_snap.py, gap_fill.py, __init__ with SETUPS; keep 'from .setups import SETUPS'). Put each old rule docstring (git show 1f06c91:tools/backtest/setups/<x>.py) into its new file, adapted to Nautilus fills. Update registry/strategies/*.json rules 'Code: ...' paths via tools.registry store (no version bump), run registry check. 2) Flag to user: orb rules text says 'bar breaking both sides = skip' but Nautilus fills the first on the path - rule/text mismatch. 3) Then synthetic-day tests, hand-check trades, full grids.",
+  "questions": ""
+}

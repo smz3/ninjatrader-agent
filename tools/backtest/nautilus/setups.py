@@ -1,6 +1,5 @@
-"""The 5 registry setups as Nautilus strategies. Same rules as the old
-tools/backtest/setups/*.py (read their docstrings); numbers live in
-registry/strategies/<id>.json.
+"""The 5 registry setups as Nautilus strategies. Rules in words: the "rules"
+field of registry/strategies/<id>.json; numbers: its spec/params.
 
 What changes because Nautilus does the fills (its defaults, see engine.py):
 - market entries fill at the signal bar's close (= the next bar's open time),
@@ -15,9 +14,27 @@ What changes because Nautilus does the fills (its defaults, see engine.py):
 import numpy as np
 
 from ..data import RTH_OPEN, TICK, hm
-from ..setups.range_mode import profile
-from ..sim import tick
-from .base import SetupStrategy
+from .base import SetupStrategy, tick
+
+
+def profile(h, l, v, pct):
+    """(poc, vah, val) of 1m bars with volume spread evenly per tick."""
+    lo = min(l)
+    n = int(round((max(h) - lo) / TICK)) + 1
+    vol = np.zeros(n)
+    for hi, lw, vv in zip(h, l, v):
+        a, b = int(round((lw - lo) / TICK)), int(round((hi - lo) / TICK))
+        vol[a:b + 1] += vv / (b - a + 1)
+    poc = int(vol.argmax())
+    need, have, up, dn = pct / 100 * vol.sum(), vol[poc], poc, poc
+    while have < need:
+        nu = vol[up + 1] if up + 1 < n else -1.0
+        nd = vol[dn - 1] if dn > 0 else -1.0
+        if nu >= nd:
+            up, have = up + 1, have + nu
+        else:
+            dn, have = dn - 1, have + nd
+    return lo + poc * TICK, lo + up * TICK, lo + dn * TICK
 
 
 def window_mask(d, spec: str):

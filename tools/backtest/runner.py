@@ -12,13 +12,12 @@ import pandas as pd
 from tools.registry import store
 
 from . import data, metrics, prop
-from .setups import SETUPS
-from .sim import Sim
+from .nautilus import COSTS, SETUPS, Engine
 
 SPLITS = {"in-sample": ("2016-09-01", "2024-12-31"),
           "out-of-sample": ("2025-01-01", "2099-12-31"),
           "full": ("2016-09-01", "2099-12-31")}
-COSTS = {"commission_rt_usd": 3.50, "slippage_ticks": 1}
+ENGINE = "nautilus-1m"
 MIN_TRADES_FOR_PROP = 30
 TRADES_DIR = data.ROOT / "data" / "backtests"
 
@@ -42,20 +41,6 @@ def apply(st: dict, vary: dict) -> tuple[dict, dict]:
     return spec, params
 
 
-def backtest(sid: str, days: list, spec: dict, params: dict, costs: dict = COSTS):
-    """(trades, news_skipped, per-day [(r, peak_r), ...] incl. empty days)."""
-    fn = SETUPS[sid]
-    trades, skipped, per_day = [], 0, []
-    for d in days:
-        sim = Sim(d, spec, costs)
-        if not sim.dead:
-            fn(d, sim, params, spec)
-        trades += sim.trades
-        skipped += sim.news_skipped
-        per_day.append([(t.r, t.peak_r) for t in sim.trades])
-    return trades, skipped, per_day
-
-
 def fmt(k: int, vary: dict, m: dict, pr: dict | None) -> str:
     v = ", ".join(f"{key.split('.', 1)[1]}={val}" for key, val in vary.items()) or "(base)"
     pf = f"{m['profit_factor']:.2f}" if m["profit_factor"] is not None else "-"
@@ -69,31 +54,24 @@ def fmt(k: int, vary: dict, m: dict, pr: dict | None) -> str:
 
 
 def run(sid: str, split: str = "in-sample", varies: list[dict] | None = None, record: bool = True,
-        eval_risk: float = 800, funded_risk: float = 300, sims: int = 2000, log=print,
-        engine: str = "nautilus-1m"):
+        eval_risk: float = 800, funded_risk: float = 300, sims: int = 2000, log=print):
     """Test every combo in `varies` (default: the strategy's full grid)."""
     st = store.get("strategy", sid)
     if sid not in SETUPS:
-        raise SystemExit(f"{sid}: no setup file in tools/backtest/setups")
+        raise SystemExit(f"{sid}: no setup in tools/backtest/nautilus/setups")
     if st["status"] not in ("spec", "tested", "candidate", "nt8", "live"):
         raise SystemExit(f"{sid} is '{st['status']}' - pin its spec first")
     days = data.window(*SPLITS[split])
     varies = varies if varies is not None else (combos(st.get("grid") or {}) or [{}])
     log(f"== {sid} v{st['version']} | {split} {days[0].date} -> {days[-1].date} "
         f"({len(days)} days) | {len(varies)} combos")
-    if engine == "nautilus-1m":
-        from .nautilus import COSTS as costs, Engine
-        eng = Engine(sid, days, max(data.hm(apply(st, v)[0]["flat_by"]) for v in varies))
-        bt = eng.backtest
-        how = ("NautilusTrader defaults (no slippage, touch fills), adaptive high/low bar path, "
-               "no message queue")
-    else:
-        costs, bt = COSTS, lambda spec, params: backtest(sid, days, spec, params)
-        how = "tools/backtest sim.py: stop-first, limits need 1-tick trade-through"
+    eng = Engine(sid, days, max(data.hm(apply(st, v)[0]["flat_by"]) for v in varies))
+    how = ("NautilusTrader defaults (no slippage, touch fills), adaptive high/low bar path, "
+           "no message queue")
     rows, frames = [], []
     for k, vary in enumerate(varies):
         spec, params = apply(st, vary)
-        trades, skipped, per_day = bt(spec, params)
+        trades, skipped, per_day = eng.backtest(spec, params)
         m = metrics.compute(trades, len(days), skipped)
         pr = (prop.simulate(per_day, eval_risk, funded_risk, sims)
               if m["trades"] >= MIN_TRADES_FOR_PROP and m["expectancy_r"] > 0 else None)
@@ -101,12 +79,13 @@ def run(sid: str, split: str = "in-sample", varies: list[dict] | None = None, re
         log(fmt(k, vary, m, pr))
         if trades:
             frames.append(pd.DataFrame([vars(t) for t in trades]).drop(columns="exit_i").assign(row=k))
+    eng.close()
     if not record:
         return rows, None
     rec = store.new_run(
-        sid, engine,
+        sid, ENGINE,
         {"source": data.SOURCE, "start": days[0].date, "end": days[-1].date, "split": split},
-        costs, rows,
+        COSTS, rows,
         notes=(f"1m bars, {how}. prop = "
                f"LucidDaily eval (risk ${eval_risk:.0f}) + funded daily {prop.FUNDED_DAYS}d "
                f"(risk ${funded_risk:.0f}), {sims} sims on resampled real days; only rows with "

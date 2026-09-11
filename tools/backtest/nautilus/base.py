@@ -22,6 +22,8 @@ Trade P/L = Nautilus fill prices x $50 - Nautilus commissions. R uses the
 planned risk (what the size is based on). peak_r = best bar high/low from the
 entry bar to the exit bar.
 """
+from dataclasses import dataclass
+
 from nautilus_trader.core.uuid import UUID4
 from nautilus_trader.model.enums import ContingencyType, OrderSide, OrderType, TimeInForce, TriggerType
 from nautilus_trader.model.objects import Price, Quantity
@@ -29,7 +31,30 @@ from nautilus_trader.model.orders import OrderList, StopMarketOrder
 from nautilus_trader.trading.strategy import Strategy
 
 from ..data import PT_USD, TICK, hm
-from ..sim import Trade, tick
+
+
+@dataclass
+class Trade:
+    date: str
+    side: int            # +1 long, -1 short
+    entry_min: int
+    entry: float
+    stop: float
+    target: float
+    exit_min: int
+    exit: float
+    reason: str          # target | stop | flat | news | eod | rejected
+    pnl_pts: float       # Nautilus fill prices, before commission
+    pnl_usd: float       # per 1 ES, after commission
+    risk_pts: float
+    r: float
+    peak_r: float        # best open profit in R (for intraday-trailing drawdown)
+    exit_i: int = 0
+
+
+def tick(x: float) -> float:
+    return round(x / TICK) * TICK
+
 
 KINDS = {"market": OrderType.MARKET, "limit": OrderType.LIMIT, "stop": OrderType.STOP_MARKET}
 

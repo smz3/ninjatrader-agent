@@ -106,6 +106,12 @@ with NautilusTrader (open source, trusted), keep our data. Then test it, before 
 - Limits still fill on touch (default) - key-level-fade enters earlier than the old
   engine's 1-tick trade-through. Left as default.
 
+## Old engine deleted (2026-09-11, user)
+
+- tools/backtest/sim.py + setups/ removed (still in git history before this commit).
+  Nautilus is the only engine; `--engine` flag gone. Old runs (engine "python-1m") and
+  their trade files data/backtests/r-*.parquet stay, so "python-1m" stays in ENGINES.
+
 ## Old engine reference (base combos, in-sample, for comparison)
 
 | setup | real costs expR | zero costs expR |
