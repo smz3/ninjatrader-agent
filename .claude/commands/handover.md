@@ -1,5 +1,5 @@
 ---
-description: Wrap up this session - save uncommitted work, sync the tasks table, log a handover, confirm it's safe to close.
+description: Wrap up this session - save uncommitted work, sync the tasks table, log a handover, reply "Handover done."
 allowed-tools: Bash(python .claude/scripts/db.py *), Bash(python .claude/scripts/git_safe.py *), Bash(git status)
 ---
 
@@ -27,4 +27,4 @@ Wrap up this session so the next session (or the next agent picking this repo ba
    python .claude/scripts/db.py log --session <this session's id> --summary "..." --next "..." --questions "..."
    ```
 
-5. **Confirm to the user**, in 1-2 sentences, that the handover is logged and it's safe to close this session now. Remind them that closing the session itself is still their action - you can't do it for them.
+5. **Confirm to the user** with exactly: `Handover done.` Nothing else - no "safe to close", no "closing is your action", no recap. Only add a line if something failed or needs their input.
