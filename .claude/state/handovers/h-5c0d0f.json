@@ -1,0 +1,8 @@
+{
+  "id": "h-5c0d0f",
+  "ts": "2026-09-11T04:51:42.687675+00:00",
+  "session_id": "91aa5300-d9e9-402b-b22d-0fdc62c1853f",
+  "summary": "Registry now IN state.db (user demanded it): lib/registry_mirror.py, get_conn() rebuilds tables strategies, runs, run_rows from registry/*.json on change. Verified 8 strategies visible; mirror tested with a fake run (rows, selected, prop cols, bad-file keeps last copy). Earlier this session: news dates done (data/news/usd_high.csv), strategy registry built + seeded.",
+  "next_steps": "1) User reviews registry fields (state.db tables or python -m tools.registry schema) - adjust if asked, then close t-0b84f0. 2) Task #2 step 2: pin spec + params for the 5 setups in registry/strategies/*.json, set status spec. 3) Build Python 1m backtester recording via tools.registry.store.new_run(), then prop_sim.",
+  "questions": ""
+}
