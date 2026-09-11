@@ -1,0 +1,8 @@
+{
+  "id": "h-dc53d7",
+  "ts": "2026-09-11T04:52:44.659710+00:00",
+  "session_id": "91aa5300-d9e9-402b-b22d-0fdc62c1853f",
+  "summary": "Session 2026-09-11 wrap-up. (1) News dates DONE: tools/news_dates scrapes ForexFactory month pages (exact unix times) + FOMC dates from federalreserve.gov -> data/news/usd_high.csv (gitignored), 3,191 USD High events 2016-09 -> 2026-12, verified (NFP/CPI 08:30, ISM 10:00, FOMC 14:00). HF dataset rejected (broken timezones). 10:00 ET news hits 507 times - matters for opening setups. (2) Strategy registry BUILT (task t-0b84f0): tools/registry (schema + validator + version-drift guard + CLI list/runs/show/status/note/check/schema), records in registry/strategies + registry/runs JSON, 8 ideas seeded as status idea. (3) User wanted it IN state.db: lib/registry_mirror.py makes get_conn() rebuild tables strategies, runs, run_rows from the JSON on change. Lesson: user wants things built where they asked (state.db), not asked about. All committed + pushed.",
+  "next_steps": "1) t-0b84f0: user reviews registry fields (state.db tables or python -m tools.registry schema); adjust if asked, then close. 2) Task #2 step 2: pin spec + params for the 5 setups (orb, range-mode, vwap-snap, key-level-fade, gap-fill) in registry/strategies/*.json, user sanity-checks, set status spec. 3) Task #2 step 3: Python 1m backtester (ET, rolls via instrument_id, stop-first intrabar, ES costs, news filter from data/news/usd_high.csv) recording via tools.registry.store.new_run(), then prop_sim. Tasks t-d47e1f, t-6d0bb8 unchanged.",
+  "questions": "Does the registry schema need any field changes? Optional: free FRED API key to cross-check CPI/NFP dates officially (low priority)."
+}
