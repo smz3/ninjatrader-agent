@@ -1,0 +1,42 @@
+{
+  "id": "key-level-fade",
+  "name": "Key level fade",
+  "kind": "setup",
+  "family": "mean-reversion",
+  "status": "idea",
+  "version": 1,
+  "source": "task #2 test plan 2026-09-11",
+  "thesis": "First touch of an obvious level (prior-day high/low, overnight high/low) often bounces at least a few points.",
+  "rules": "Mark prior-day RTH high/low and overnight high/low. On the first touch in the session, fade it with a small target; stop a few points past the level.",
+  "data_needed": [
+    "ohlcv-1m",
+    "news"
+  ],
+  "spec": null,
+  "params": {
+    "levels": [
+      "pdh",
+      "pdl",
+      "onh",
+      "onl"
+    ],
+    "touch_ticks": null,
+    "first_touch_only": true
+  },
+  "grid": {
+    "params.touch_ticks": [
+      0,
+      1,
+      2
+    ]
+  },
+  "filters": [],
+  "notes": [
+    {
+      "ts": "2026-09-11T04:42:55+00:00",
+      "text": "seeded - idea, numbers not pinned yet"
+    }
+  ],
+  "created_ts": "2026-09-11T04:42:55+00:00",
+  "updated_ts": "2026-09-11T04:42:55+00:00"
+}

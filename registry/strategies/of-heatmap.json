@@ -1,0 +1,31 @@
+{
+  "id": "of-heatmap",
+  "name": "Order book magnet / refill",
+  "kind": "setup",
+  "family": "any",
+  "status": "idea",
+  "version": 1,
+  "source": "docs/research/orderflow-deepcharts-ebook.md; task t-d47e1f s7",
+  "thesis": "Big stable limit-order clusters pull price toward them; passive orders refilling at the level just attacked tend to hold it as support/resistance.",
+  "rules": "From L2 depth: find large stable resting clusters (magnet targets) and sudden refills at an attacked level; trade toward magnets / bounce off refills.",
+  "data_needed": [
+    "mbp-10",
+    "trades",
+    "news"
+  ],
+  "spec": null,
+  "params": {
+    "cluster_min": null,
+    "refill_window_s": null
+  },
+  "grid": {},
+  "filters": [],
+  "notes": [
+    {
+      "ts": "2026-09-11T04:42:55+00:00",
+      "text": "seeded - idea, numbers not pinned yet"
+    }
+  ],
+  "created_ts": "2026-09-11T04:42:55+00:00",
+  "updated_ts": "2026-09-11T04:42:55+00:00"
+}

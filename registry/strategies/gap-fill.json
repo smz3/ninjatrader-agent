@@ -1,0 +1,32 @@
+{
+  "id": "gap-fill",
+  "name": "Small gap fill",
+  "kind": "setup",
+  "family": "mean-reversion",
+  "status": "idea",
+  "version": 1,
+  "source": "task #2 test plan 2026-09-11",
+  "thesis": "Small opening gaps vs the prior RTH close often fill the same morning.",
+  "rules": "At 9:30 ET, if the open is gapped a little (between min and max size) from the prior RTH close (16:00 ET), trade toward that close; target = gap filled; stop = fixed size or beyond the opening extreme.",
+  "data_needed": [
+    "ohlcv-1m",
+    "news"
+  ],
+  "spec": null,
+  "params": {
+    "gap_unit": null,
+    "min_gap": null,
+    "max_gap": null,
+    "entry_delay_min": null
+  },
+  "grid": {},
+  "filters": [],
+  "notes": [
+    {
+      "ts": "2026-09-11T04:42:55+00:00",
+      "text": "seeded - idea, numbers not pinned yet"
+    }
+  ],
+  "created_ts": "2026-09-11T04:42:55+00:00",
+  "updated_ts": "2026-09-11T04:42:55+00:00"
+}

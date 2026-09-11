@@ -1,0 +1,8 @@
+{
+  "id": "h-3ef03c",
+  "ts": "2026-09-11T04:43:33.908434+00:00",
+  "session_id": "91aa5300-d9e9-402b-b22d-0fdc62c1853f",
+  "summary": "News dates DONE: tools/news_dates scrapes ForexFactory month pages (exact unix times) -> data/news/usd_high.csv, 3,191 USD High events 2016-09 -> 2026-12, verified (NFP/CPI 08:30, ISM 10:00, FOMC 14:00); FOMC dates from federalreserve.gov unioned (1 extra day). HF dataset rejected (broken timezones). Strategy registry BUILT (task t-0b84f0): tools/registry + registry/strategies|runs JSON, universal SPEC/RUN/METRICS/PROP schema, validator + version-drift check, 8 setup ideas seeded as status idea. CLAUDE.md got a Strategy registry section.",
+  "next_steps": "1) User reviews the registry schema (python -m tools.registry schema / list) - adjust if asked, then close t-0b84f0. 2) Task #2 step 2: pin spec + params for the 5 setups in registry/strategies/*.json (draft sensible numbers, user sanity-checks), set status spec. 3) Build the Python 1m backtester (ET, rolls via instrument_id, stop-first intrabar, ES costs, news filter from data/news/usd_high.csv) that records via store.new_run(), then prop_sim.",
+  "questions": "Optional: FRED API key (free) would let us cross-check CPI/NFP dates officially; low priority since FF passed all checks."
+}

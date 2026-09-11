@@ -1,0 +1,36 @@
+{
+  "id": "of-big-trade",
+  "name": "Big-trade trapped filter",
+  "kind": "filter",
+  "family": "any",
+  "status": "idea",
+  "version": 1,
+  "source": "docs/research/orderflow-deepcharts-ebook.md; task t-d47e1f s4, s10",
+  "thesis": "A big print at an extreme that price then moves against = trapped traders -> confirms a fade (range-mode) or a breakout (orb).",
+  "rules": "Big trade = single print >= N ES contracts (or top X% of sizes). Trapped = price moves >= m ticks against it within n bars. Allow the host setup's trade only when this shows up.",
+  "data_needed": [
+    "trades"
+  ],
+  "spec": null,
+  "params": {
+    "big_trade_min": null,
+    "trap_ticks": null,
+    "trap_bars": null
+  },
+  "grid": {
+    "params.big_trade_min": [
+      20,
+      50,
+      100
+    ]
+  },
+  "filters": [],
+  "notes": [
+    {
+      "ts": "2026-09-11T04:42:55+00:00",
+      "text": "seeded - idea, numbers not pinned yet"
+    }
+  ],
+  "created_ts": "2026-09-11T04:42:55+00:00",
+  "updated_ts": "2026-09-11T04:42:55+00:00"
+}

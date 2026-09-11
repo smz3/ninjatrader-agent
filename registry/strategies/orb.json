@@ -1,0 +1,47 @@
+{
+  "id": "orb",
+  "name": "Opening Range Breakout",
+  "kind": "setup",
+  "family": "breakout",
+  "status": "idea",
+  "version": 1,
+  "source": "task #2 plan 2026-09-10 (user)",
+  "thesis": "Momentum out of the first 15-min range tends to continue. Usually a lower-WR breakout play - must prove it fits high-WR / low-RR after costs.",
+  "rules": "Range = high/low of 9:15-9:30 ET (A) or 9:30-9:45 ET (B), tested separately. Enter on a break of the range high (long) or low (short). Stop at the other side or the middle of the range. Fixed target. Variant: ATR-based stop/target and/or skip days whose range is too wide vs ATR.",
+  "data_needed": [
+    "ohlcv-1m",
+    "ohlcv-1d",
+    "news"
+  ],
+  "spec": null,
+  "params": {
+    "range_window": null,
+    "stop_at": null,
+    "atr_mode": null,
+    "atr_len": null
+  },
+  "grid": {
+    "params.range_window": [
+      "09:15-09:30",
+      "09:30-09:45"
+    ],
+    "params.stop_at": [
+      "other-side",
+      "middle"
+    ],
+    "params.atr_mode": [
+      "off",
+      "stop-target",
+      "range-filter"
+    ]
+  },
+  "filters": [],
+  "notes": [
+    {
+      "ts": "2026-09-11T04:42:55+00:00",
+      "text": "seeded - idea, numbers not pinned yet"
+    }
+  ],
+  "created_ts": "2026-09-11T04:42:55+00:00",
+  "updated_ts": "2026-09-11T04:42:55+00:00"
+}

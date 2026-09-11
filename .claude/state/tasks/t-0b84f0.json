@@ -1,0 +1,10 @@
+{
+  "id": "t-0b84f0",
+  "status": "discussing",
+  "priority": 1,
+  "category": "infra",
+  "task_title": "Strategy registry: universal schema for setups + runs",
+  "task_details": "2026-09-11 user: before pinning setup numbers, build one universal strategy table + schema so every test after this has a place to refer to. Plan: git-tracked JSON per record (registry/strategies/<id>.json + registry/runs/<id>.json, same merge-friendly pattern as .claude/state), schema + validator + table CLI in tools/registry, seed the 5 task #2 setups + order-flow ideas as status=idea.\n[2026-09-11T04:43:32.626821+00:00 -> discussing] 2026-09-11 BUILT: tools/registry (schema.py = single source of truth + validator, store.py = load/save/new_run/check, CLI list/runs/show/status/note/check/schema). Records in registry/strategies/*.json + registry/runs/*.json. Seeded 8 ideas (orb, range-mode, vwap-snap, key-level-fade, gap-fill, of-discovery, of-big-trade [filter], of-heatmap). Guards tested: can't record a run while status=idea, status spec+ needs a complete spec, check catches spec edits without a version bump, bad types/enums rejected. CLAUDE.md has a Strategy registry section. Waiting on user review of the schema before step 2.",
+  "created_ts": "2026-09-11T04:40:46.458961+00:00",
+  "updated_ts": "2026-09-11T04:43:32.626837+00:00"
+}

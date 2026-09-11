@@ -1,0 +1,44 @@
+{
+  "id": "range-mode",
+  "name": "Range mode - failed auction to POC",
+  "kind": "setup",
+  "family": "mean-reversion",
+  "status": "idea",
+  "version": 1,
+  "source": "docs/research/orderflow-deepcharts-ebook.md; task t-d47e1f s5; task #2",
+  "thesis": "In a balanced open, pokes beyond the value-area edge that fail (trapped traders) snap back to the POC - high WR, small target.",
+  "rules": "Volume profile of 9:30-10:00 ET, value area 70%. After it, when price pokes beyond VAH/VAL and fails back inside, fade it: stop beyond the poke extreme, target POC (or the opposite edge).",
+  "data_needed": [
+    "ohlcv-1m",
+    "trades",
+    "news"
+  ],
+  "spec": null,
+  "params": {
+    "profile_window": null,
+    "value_area_pct": null,
+    "poke_ticks": null,
+    "reclaim_bars": null,
+    "target_at": null
+  },
+  "grid": {
+    "params.value_area_pct": [
+      68,
+      70
+    ],
+    "params.profile_window": [
+      "09:30-10:00",
+      "09:15-09:30",
+      "09:30-09:45"
+    ]
+  },
+  "filters": [],
+  "notes": [
+    {
+      "ts": "2026-09-11T04:42:55+00:00",
+      "text": "seeded - idea, numbers not pinned yet"
+    }
+  ],
+  "created_ts": "2026-09-11T04:42:55+00:00",
+  "updated_ts": "2026-09-11T04:42:55+00:00"
+}

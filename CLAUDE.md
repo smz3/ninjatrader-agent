@@ -62,6 +62,20 @@
 - Prop math / risk sizing: `tools/prop_sim` (eval) and
   `python -m tools.prop_sim.funded` (funded payouts).
 
+## Strategy registry
+
+- Every setup idea and every test lives in `registry/` (git-tracked, one
+  JSON per record): `strategies/<id>.json` = rules + numbers + status,
+  `runs/<id>.json` = one test (data window, costs, spec snapshot, results
+  for every combo tried). Schema + rules: `tools/registry/schema.py`
+  docstring, or `python -m tools.registry schema`.
+- New idea -> add a strategy record (status `idea`), never just a task note.
+  Check `python -m tools.registry list` first - it may already be there.
+- Backtests record results via `tools.registry.store.new_run()`; compare
+  with `python -m tools.registry list` / `runs`. Rule/number change = bump
+  `version`. Never delete runs or rejected strategies.
+- Run `python -m tools.registry check` before committing registry changes.
+
 ## Reading PDFs
 
 - Don't paste big PDFs into chat - every page goes in as an image

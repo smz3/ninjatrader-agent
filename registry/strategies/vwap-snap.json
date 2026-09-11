@@ -1,0 +1,43 @@
+{
+  "id": "vwap-snap",
+  "name": "VWAP snap-back",
+  "kind": "setup",
+  "family": "mean-reversion",
+  "status": "idea",
+  "version": 1,
+  "source": "task #2 test plan 2026-09-11",
+  "thesis": "Morning moves stretched far from VWAP tend to revert toward it - frequent small wins.",
+  "rules": "In the morning, when price is stretched N ATR (or N std-dev bands) from session VWAP, fade back toward VWAP. Stop beyond the stretch extreme; target VWAP or part of the way.",
+  "data_needed": [
+    "ohlcv-1m",
+    "ohlcv-1d",
+    "news"
+  ],
+  "spec": null,
+  "params": {
+    "vwap_anchor": null,
+    "stretch_unit": null,
+    "stretch_mult": null,
+    "target_at": null
+  },
+  "grid": {
+    "params.stretch_unit": [
+      "atr",
+      "std"
+    ],
+    "params.stretch_mult": [
+      1.5,
+      2.0,
+      2.5
+    ]
+  },
+  "filters": [],
+  "notes": [
+    {
+      "ts": "2026-09-11T04:42:55+00:00",
+      "text": "seeded - idea, numbers not pinned yet"
+    }
+  ],
+  "created_ts": "2026-09-11T04:42:55+00:00",
+  "updated_ts": "2026-09-11T04:42:55+00:00"
+}

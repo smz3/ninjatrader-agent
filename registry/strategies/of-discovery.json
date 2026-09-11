@@ -1,0 +1,31 @@
+{
+  "id": "of-discovery",
+  "name": "Discovery mode / 3-step trend",
+  "kind": "setup",
+  "family": "trend",
+  "status": "idea",
+  "version": 1,
+  "source": "docs/research/orderflow-deepcharts-ebook.md; task t-d47e1f s5-6",
+  "thesis": "When value breaks with acceptance + real aggression, price trends; the retest into the low-volume node is the low-risk entry. Likely lower WR / higher RR - test anyway.",
+  "rules": "Profile a clear directional move; mark the low-volume node with the strongest delta. Wait for a retest where the counter side gets absorbed, enter on aggression with follow-through. Stop beyond the absorbed lows; trail or target the prior session POC.",
+  "data_needed": [
+    "trades",
+    "news"
+  ],
+  "spec": null,
+  "params": {
+    "acceptance_bars": null,
+    "lvn_pct_of_poc": null,
+    "aggression_delta": null
+  },
+  "grid": {},
+  "filters": [],
+  "notes": [
+    {
+      "ts": "2026-09-11T04:42:55+00:00",
+      "text": "seeded - idea, numbers not pinned yet"
+    }
+  ],
+  "created_ts": "2026-09-11T04:42:55+00:00",
+  "updated_ts": "2026-09-11T04:42:55+00:00"
+}
