@@ -40,6 +40,8 @@ def main():
     r.add_argument("--eval-risk", type=float, default=800)
     r.add_argument("--funded-risk", type=float, default=300)
     r.add_argument("--sims", type=int, default=2000)
+    r.add_argument("--engine", default="nautilus-1m", choices=["nautilus-1m", "python-1m"],
+                   help="python-1m = the old home-made fill engine, kept only to compare")
     a = p.parse_args()
 
     ids = list(SETUPS) if a.ids == ["all"] else a.ids

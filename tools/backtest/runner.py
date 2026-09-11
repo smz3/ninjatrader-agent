@@ -69,7 +69,8 @@ def fmt(k: int, vary: dict, m: dict, pr: dict | None) -> str:
 
 
 def run(sid: str, split: str = "in-sample", varies: list[dict] | None = None, record: bool = True,
-        eval_risk: float = 800, funded_risk: float = 300, sims: int = 2000, log=print):
+        eval_risk: float = 800, funded_risk: float = 300, sims: int = 2000, log=print,
+        engine: str = "nautilus-1m"):
     """Test every combo in `varies` (default: the strategy's full grid)."""
     st = store.get("strategy", sid)
     if sid not in SETUPS:
@@ -80,10 +81,18 @@ def run(sid: str, split: str = "in-sample", varies: list[dict] | None = None, re
     varies = varies if varies is not None else (combos(st.get("grid") or {}) or [{}])
     log(f"== {sid} v{st['version']} | {split} {days[0].date} -> {days[-1].date} "
         f"({len(days)} days) | {len(varies)} combos")
+    if engine == "nautilus-1m":
+        from .nautilus import COSTS as costs, Engine
+        eng = Engine(sid, days, max(data.hm(apply(st, v)[0]["flat_by"]) for v in varies))
+        bt = eng.backtest
+        how = "NautilusTrader defaults (no slippage, touch fills, O-H-L-C bar path), no message queue"
+    else:
+        costs, bt = COSTS, lambda spec, params: backtest(sid, days, spec, params)
+        how = "tools/backtest sim.py: stop-first, limits need 1-tick trade-through"
     rows, frames = [], []
     for k, vary in enumerate(varies):
         spec, params = apply(st, vary)
-        trades, skipped, per_day = backtest(sid, days, spec, params)
+        trades, skipped, per_day = bt(spec, params)
         m = metrics.compute(trades, len(days), skipped)
         pr = (prop.simulate(per_day, eval_risk, funded_risk, sims)
               if m["trades"] >= MIN_TRADES_FOR_PROP and m["expectancy_r"] > 0 else None)
@@ -94,10 +103,10 @@ def run(sid: str, split: str = "in-sample", varies: list[dict] | None = None, re
     if not record:
         return rows, None
     rec = store.new_run(
-        sid, "python-1m",
+        sid, engine,
         {"source": data.SOURCE, "start": days[0].date, "end": days[-1].date, "split": split},
-        COSTS, rows,
-        notes=(f"tools/backtest: 1m bars, stop-first, limits need 1-tick trade-through. prop = "
+        costs, rows,
+        notes=(f"1m bars, {how}. prop = "
                f"LucidDaily eval (risk ${eval_risk:.0f}) + funded daily {prop.FUNDED_DAYS}d "
                f"(risk ${funded_risk:.0f}), {sims} sims on resampled real days; only rows with "
                f">= {MIN_TRADES_FOR_PROP} trades and expectancy_r > 0."))
