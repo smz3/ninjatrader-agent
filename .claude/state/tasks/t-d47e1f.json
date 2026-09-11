@@ -1,0 +1,10 @@
+{
+  "id": "t-d47e1f",
+  "status": "open",
+  "priority": 2,
+  "category": "app",
+  "task_title": "Backtest order-flow setups (DeepCharts ebook) + source data",
+  "task_details": "Doc: docs/research/orderflow-deepcharts-ebook.md (full breakdown, 2026-09-11). Test order: (1) Range mode = failed auction at VAH/VAL of 9:30-10:00 ET profile -> target POC (also a task #2 candidate), (2) Discovery mode / 3-step trend model, (3) big-trade trapped/effective filter as add-on to (1) and ORB, (4) order book heatmap magnet/refill. First pin numbers on vague terms (absorption, trapped, big trade, acceptance - see doc section 10). Rule (user): missing data -> source historical data, never drop the idea. Tick+aggressor data: NT8 tick/Tick Replay, Databento GLBX.MDP3 trades/tbbo. L2 depth: NT8 Market Replay (Playback) or Databento mbp-10/mbo. Report WR/RR/expectancy after ES costs -> prop_sim.",
+  "created_ts": "2026-09-11T00:07:26.250904+00:00",
+  "updated_ts": "2026-09-11T00:07:26.250904+00:00"
+}
