@@ -3,8 +3,10 @@
 Every pull is priced first with Databento's free cost estimate; anything over
 the cap is refused before a cent is spent. Pulls are split into calendar-year
 chunks, each fetched as its own Databento batch job: the server builds the
-file, then we download it (resumable). Plain streaming (timeseries.get_range)
-kept breaking mid-pull on this connection. Each chunk's job id is saved next
+file, then we download it (resumable). Never use plain streaming
+(timeseries.get_range) here: it kept breaking mid-pull on this connection AND
+each broken stream was billed as if complete (2026-09-11: 12.90 USD pull
+cost 26.92 USD). Each chunk's job id is saved next
 to it (<chunk>.dbn.zst.job) so a re-run reuses the job instead of paying
 again, and a re-run only fetches chunks still missing.
 
