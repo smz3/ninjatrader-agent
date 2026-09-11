@@ -53,8 +53,15 @@ to press anything in NT8 -> everything automated. ORB only first.
    (CSV/JSON) to a results folder. No Python metrics - NT's numbers only.
 3. One-time bootstrap: get the AddOn compiled once (editor-open trick or NT
    restart), then everything else is file drops.
-4. Data: check NT server minute depth for ES; else import Databento 1m bars.
-   Commission template $3.50 RT (Lucid ES). Check Order Fill Resolution High
-   needs 1-tick/1-second data.
+4. Data: no need for a new data-trial account or MultiCharts - we already
+   own 10y of ES 1m bars from Databento. `python -m tools.nt_export` converts
+   `data/databento/ES...1m...parquet` to NT8 import format (yearly .txt,
+   `data/nt_import/`, America/Chicago timestamps - CME session templates are
+   in Central time; verify against NT8's own Time Zone setting before
+   trusting ORB's session-open minute). Import into a dedicated
+   backtest-only instrument, not a live contract, so this doesn't collide
+   with the real "ES 09-26" data used for trading. Commission template $3.50
+   RT (Lucid ES). Check Order Fill Resolution High needs 1-tick/1-second
+   data - 1m bars only support lower fill-resolution settings for now.
 5. ORB in NinjaScript per registry/strategies/orb.json (both-sides-bar rule
    still open with user).

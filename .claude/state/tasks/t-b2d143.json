@@ -4,7 +4,7 @@
   "priority": 1,
   "category": "infra",
   "task_title": "Automate NT8: compile + backtest ORB with no clicks",
-  "task_details": "User 2026-09-11: backtest in NinjaTrader 8 directly with NT8's own metrics; user must not press anything in NT8. ORB only first. Research + plan: docs/research/nt8-automation-notes.md (StrategyBase.RunBacktest() public; AddOn job-folder runner; auto-compile on file save while NinjaScript Editor open; ES 1m history not in NT db yet).",
+  "task_details": "User 2026-09-11: backtest in NinjaTrader 8 directly with NT8's own metrics; user must not press anything in NT8. ORB only first. Research + plan: docs/research/nt8-automation-notes.md (StrategyBase.RunBacktest() public; AddOn job-folder runner; auto-compile on file save while NinjaScript Editor open; ES 1m history not in NT db yet).\n[2026-09-11T08:41:15.683136+00:00 -> open] Built tools/nt_export: Databento ES 1m parquet -> NT8 import text (yearly .txt files, data/nt_import/, America/Chicago timestamps). No new data account/trial or MultiCharts needed - we already own the 1m history. Next: import into a dedicated backtest-only NT8 instrument, verify timezone against NT8 chart settings, then build Orb.cs + BacktestRunner AddOn.",
   "created_ts": "2026-09-11T08:28:13.602894+00:00",
-  "updated_ts": "2026-09-11T08:28:13.602894+00:00"
+  "updated_ts": "2026-09-11T08:41:15.683151+00:00"
 }
