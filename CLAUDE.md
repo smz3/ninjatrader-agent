@@ -75,6 +75,9 @@
   with `python -m tools.registry list` / `runs`. Rule/number change = bump
   `version`. Never delete runs or rejected strategies.
 - Run `python -m tools.registry check` before committing registry changes.
+- Also mirrored into `.claude/state.db` as tables `strategies`, `runs`,
+  `run_rows` (one line per combo tested) - read-only cache, rebuilt on the
+  next db call. Edit the JSON (via tools/registry), never these tables.
 
 ## Reading PDFs
 

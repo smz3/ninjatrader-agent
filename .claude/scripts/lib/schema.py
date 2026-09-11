@@ -84,9 +84,16 @@ Table: meta(key, value)
   Local bookkeeping. files_sig = signature of the .claude/state/ files at
   the last successful import.
 
+  registry_sig = same, for the strategy registry mirror.
+Tables: strategies, runs, run_rows
+  Read-only mirror of the strategy registry (repo-root registry/*.json,
+  written by tools/registry). Rebuilt by get_conn() when those files
+  change - see lib/registry_mirror.py. Never write to them directly.
+
 Migrations: PRAGMA user_version. 0 = a brand-new db or the old git-tracked
 layout (integer ids, handovers.delivered column, maybe a `todos` table).
-_migrate takes it straight to v2 once.
+_migrate takes it straight to v2 once. The registry mirror tables are
+dropped + recreated on every re-import, so they need no migration.
 """
 import json
 import sqlite3
@@ -94,6 +101,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from lib.registry_mirror import sync_registry
 from lib.state_files import (
     HANDOVER_FIELDS,
     TASK_FIELDS,
@@ -165,6 +173,13 @@ def get_conn():
         problems = [f"import failed: {e}"]
     if problems:
         print(format_problems(problems), file=sys.stderr)
+    try:
+        reg_problems = sync_registry(conn)
+    except (OSError, sqlite3.Error) as e:
+        reg_problems = [f"import failed: {e}"]
+    if reg_problems:
+        print("[state] NOT mirroring registry/ into state.db - keeping the last good copy. "
+              "Fix these first:\n  " + "\n  ".join(reg_problems), file=sys.stderr)
     return conn
 
 
