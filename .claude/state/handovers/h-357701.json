@@ -1,0 +1,8 @@
+{
+  "id": "h-357701",
+  "ts": "2026-09-11T08:17:22.954566+00:00",
+  "session_id": "e16b4d21-288c-4424-8603-01cc3d1d24ef",
+  "summary": "Split tools/backtest/nautilus/setups.py into package nautilus/setups/ (orb, key_level_fade, range_mode, vwap_snap, gap_fill; old rule docstrings adapted to Nautilus fills; window_mask -> base.py). 5 base combos in-sample identical before/after. Registry rules Code: paths updated, check ok. New tools/backtest/tests/test_fills.py: 10 synthetic-day fill tests pass. Committed bf13f46 + pushed.",
+  "next_steps": "1) User to pick ORB both-sides-bar rule: keep Nautilus (first side on bar path fills) and fix rules text, or restore skip-the-day in orb.py. 2) Hand-check ~10 real trades (2 per setup) vs raw 1m bars. 3) Full in-sample grids -> registry runs. 4) Look at key-level-fade base: 212 stop children rejected ('stop px in the market') -> flattened as 'rejected'. 5) 1s-bar final check of any picked combo.",
+  "questions": "ORB bar breaking both sides: skip the day (old rule) or take the first side on Nautilus's path?"
+}

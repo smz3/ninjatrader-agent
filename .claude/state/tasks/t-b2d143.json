@@ -1,0 +1,10 @@
+{
+  "id": "t-b2d143",
+  "status": "open",
+  "priority": 1,
+  "category": "infra",
+  "task_title": "Automate NT8: compile + backtest ORB with no clicks",
+  "task_details": "User 2026-09-11: backtest in NinjaTrader 8 directly with NT8's own metrics; user must not press anything in NT8. ORB only first. Research + plan: docs/research/nt8-automation-notes.md (StrategyBase.RunBacktest() public; AddOn job-folder runner; auto-compile on file save while NinjaScript Editor open; ES 1m history not in NT db yet).",
+  "created_ts": "2026-09-11T08:28:13.602894+00:00",
+  "updated_ts": "2026-09-11T08:28:13.602894+00:00"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "h-9c40e4",
+  "ts": "2026-09-11T08:28:14.278465+00:00",
+  "session_id": "e16b4d21-288c-4424-8603-01cc3d1d24ef",
+  "summary": "Setups split into nautilus/setups/ + 10 fill tests (bf13f46). Then USER DECISION: drop Python backtests, backtest in NinjaTrader 8 with NT8's own metrics, fully automated (user presses nothing in NT8), ORB only first. Researched NT8 automation: StrategyBase.RunBacktest() is public (same path Strategy Analyzer uses), compile auto-triggers on file save while a NinjaScript Editor window is open, NT8 8.1.8.2 running here on Simulation connection, ES 1m history NOT in NT db (only 7 days). Notes: docs/research/nt8-automation-notes.md. New task logged.",
+  "next_steps": "1) Build per docs/research/nt8-automation-notes.md: repo ninjascript/ source + deploy copy into Documents/NinjaTrader 8/bin/Custom; AddOn BacktestRunner (job folder -> RunBacktest -> write SystemPerformance + trades). 2) Solve one-time AddOn compile without user clicks. 3) Get ES 1m history into NT (NT server depth vs import Databento 1m). 4) Write Orb.cs from registry/strategies/orb.json, run first automated backtest, commission 3.50 RT.",
+  "questions": "ORB bar breaking both sides: skip the day (old rule) or take the first side hit?"
+}
