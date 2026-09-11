@@ -1,0 +1,8 @@
+{
+  "id": "h-c5f579",
+  "ts": "2026-09-11T00:08:02.410346+00:00",
+  "session_id": "1e58e158-99d1-4406-a5e6-9b4f0cf2fac4",
+  "summary": "Dissected DeepCharts order flow ebook (32p). Full notes saved in docs/research/orderflow-deepcharts-ebook.md (concepts, Range/Discovery modes, 3-step model, heatmap, ebook errors, NT8 tool map, numbers to pin, data sources, test order). New task t-d47e1f; Range mode noted as task #2 candidate. Memory: missing data -> source historical data, never drop the idea.",
+  "next_steps": "Pin numeric definitions (doc section 10) and start ORB + Range mode backtests on the opening window; check Order Flow+ availability on Lucid/Tradovate NT8 license; price out tick/L2 data (NT8 Market Replay vs Databento) if needed.",
+  "questions": ""
+}
