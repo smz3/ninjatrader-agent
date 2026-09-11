@@ -1,0 +1,8 @@
+{
+  "id": "h-0a1f24",
+  "ts": "2026-09-11T06:42:49.475983+00:00",
+  "session_id": "90d7b4af-b5f1-42d0-b46f-da63563a20db",
+  "summary": "Cost split on old python engine: setups ~breakeven before costs, costs ~23 USD/trade kill them. User chose NautilusTrader to replace the home-made fill engine (keep our data). Installed nautilus_trader 1.231.0 (global pandas pinned back to 2.3.3). Read its bar fill source: O-H-L-C synthetic path (adaptive option), limit fills on touch, stops fill at trigger mid-bar / at open on gaps, prob_slippage hits limit fills too, use_message_queue must be False for same-bar cancels, ts_init = bar close. Everything in docs/research/nautilus-engine-notes.md. Engine NOT built yet - context ran out.",
+  "next_steps": "Build the Nautilus engine per docs/research/nautilus-engine-notes.md 'Build plan': replace tools/backtest/sim.py + setups/*.py with Nautilus strategies, keep data.py/metrics/prop/CLI, add 'nautilus-1m' engine to registry schema. Then synthetic-day tests, 5 base combos vs old trade files data/backtests/r-*.parquet, hand-check ~10 trades, then grids -> registry. Show user plainly. Then NT8.",
+  "questions": "Limit fills: Nautilus fills limits on touch (optimistic) - keep default or use prob_fill_on_limit < 1? Databento tick price-check still pending (free, no purchase)."
+}
