@@ -1,0 +1,8 @@
+{
+  "id": "h-81f132",
+  "ts": "2026-09-11T09:03:37.140215+00:00",
+  "session_id": "2a635280-e4ec-42ec-8bee-83a9a3079b85",
+  "summary": "Built and shipped tools/nt_export (Databento ES 1m parquet -> NT8 import text, yearly .txt files, America/Chicago timestamps) - committed+pushed as b57d6ae. Confirmed we don't need a new data-trial account or MultiCharts (already own the 1m history). Researched whether NT8's manual GUI steps (create instrument, import data) can be automated: confirmed via NT8 forum that both are unsupported to script/headless - Import Wizard's .ncd conversion and instrument creation are GUI-only. User asked about switching to MT5 out of frustration; rejected after confirming Tradovate (Lucid's execution venue) has no MT5 integration, so MT5 backtests would be disconnected from the live platform. Decision: stay on NT8, eat the one-time manual setup.",
+  "next_steps": "See task t-b2d143 for the exact 3 manual steps still pending (create ESBT instrument, import data/nt_import/ES_1m_*.txt, confirm NT8 timezone setting = America/Chicago) - user has not done these yet. Once done and timezone confirmed, next session builds Orb.cs (standard OCO stop-entry ORB - both-sides-bar question already resolved, see task #2 latest note) + the BacktestRunner AddOn per docs/research/nt8-automation-notes.md.",
+  "questions": "None open - waiting on user to do the 3 manual NT8 GUI steps before strategy code can be tested."
+}

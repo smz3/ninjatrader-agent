@@ -12,6 +12,10 @@ raw price of whichever contract was highest-volume that day, same convention
 the Python/Nautilus backtests used. Import this into a dedicated
 backtest-only NT8 instrument, never a live-tradeable contract, so a rollover
 mid-file doesn't corrupt real trading data.
+
+export_news() converts data/news/usd_high.csv (red-folder USD events, ET) to
+the same tz as the bars, for ninjascript/Strategies/Orb.cs's news filter -
+drop the result next to the compiled strategy (see ninjascript/deploy.ps1).
 """
 from pathlib import Path
 
@@ -19,6 +23,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 BARS = ROOT / "data" / "databento" / "ES.v.0_ohlcv-1m_2016-09-01_2026-09-10.parquet"
+NEWS = ROOT / "data" / "news" / "usd_high.csv"
 OUT_DIR = ROOT / "data" / "nt_import"
 DEFAULT_TZ = "America/Chicago"
 
@@ -39,3 +44,20 @@ def export(tz: str = DEFAULT_TZ, out_dir: Path = OUT_DIR) -> list[Path]:
         path.write_text("\n".join(chunk), encoding="ascii")
         written.append(path)
     return written
+
+
+def export_news(tz: str = DEFAULT_TZ, out_dir: Path = OUT_DIR) -> Path:
+    """data/news/usd_high.csv (ET) -> one CSV Orb.cs loads, in the bars' own
+    timezone so the strategy never has to convert ET at runtime. Columns:
+    yyyyMMdd,HHmm,all_day (1/0)."""
+    df = pd.read_csv(NEWS)
+    local = pd.to_datetime(df.utc, utc=True).dt.tz_convert(tz)
+    out = pd.DataFrame({
+        "date": local.dt.strftime("%Y%m%d"),
+        "time": local.dt.strftime("%H%M"),
+        "all_day": df.all_day.astype(int),
+    })
+    out_dir.mkdir(parents=True, exist_ok=True)
+    path = out_dir / "news_usd_high.csv"
+    out.to_csv(path, index=False, header=False)
+    return path
