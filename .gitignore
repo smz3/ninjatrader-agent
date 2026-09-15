@@ -15,6 +15,10 @@ inbox/
 # market data (Databento etc.) - licensed, large; re-download via tools/databento_dl
 data/
 
+# BacktestRunner AddOn job queue - runtime scratch, not source
+ninjascript/jobs/
+ninjascript/results/
+
 # secrets - never track these (see .claude/scripts/git_safe.py SECRET_GLOBS)
 .env
 .env.*

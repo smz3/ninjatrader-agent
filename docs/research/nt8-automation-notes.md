@@ -42,17 +42,38 @@ to press anything in NT8 -> everything automated. ORB only first.
   -> keep an Editor window in the saved workspace; copying a file in = compile.
 - Or: our AddOn calls `Compiler.Compile` via reflection (unsupported API).
 
-## Plan (not built yet)
+## Plan (built 2026-09-15, not compiled yet)
 
-1. Source of truth in repo (e.g. `ninjascript/Strategies/Orb.cs`,
-   `ninjascript/AddOns/BacktestRunner.cs`); a deploy step copies into
-   `bin\Custom\...`.
-2. AddOn `BacktestRunner` inside NT: watches a jobs folder; job JSON = strategy,
-   params, instrument, dates, fill resolution, commission; creates the strategy,
-   sets props, `RunBacktest()`, writes SystemPerformance summary + every trade
-   (CSV/JSON) to a results folder. No Python metrics - NT's numbers only.
-3. One-time bootstrap: get the AddOn compiled once (editor-open trick or NT
-   restart), then everything else is file drops.
+1. Source of truth in repo: `ninjascript/Strategies/Orb.cs`,
+   `ninjascript/AddOns/BacktestRunner.cs`; `ninjascript/deploy.ps1` copies both
+   into `bin\Custom\...`.
+2. AddOn `BacktestRunner` inside NT: watches `ninjascript/jobs/` **directly in
+   this repo checkout** (not copied into NT8's folder - the AddOn reads the
+   repo path off disk, hardcoded to this machine, single-user project).
+   Job file = plain `key=value` lines (not JSON - avoids an uncertain
+   NinjaScript library reference), e.g.:
+   ```
+   strategy=Orb
+   instrument=ES 12-26
+   bars_minutes=1
+   from=2016-09-01
+   to=2024-12-31
+   prop.Slippage=0
+   ```
+   `prop.X=Y` sets any public strategy property X by reflection (covers both
+   StrategyBase props like `Slippage` and the strategy's own
+   `[NinjaScriptProperty]` params like `RangeStartTime`). Drop a `.job` file
+   in `ninjascript/jobs/`, AddOn picks it up via FileSystemWatcher, calls
+   `RunBacktest()`, writes `ninjascript/results/<jobid>.result.txt` (perf
+   summary + full trade list) and moves the job to `jobs/done/`.
+3. One-time bootstrap: get the AddOn compiled once (editor-open-while-saving
+   trick, or F5 in NinjaScript Editor - same as any strategy), then everything
+   else is file drops, no more clicking.
+4. Genuinely unverified: `Instrument.GetInstrument(name)`, whether
+   `RunBacktest()` needs no other setup beyond `Instrument`/`BarsPeriod`/
+   `From`/`To`, and the exact `SystemPerformance` property names used in
+   `FormatPerformance()`. First compile will likely surface a few of these as
+   errors - expected, fix forward same as Orb.cs's OrderFillResolution bug.
 4. Data: no need for a new data-trial account or MultiCharts - we already
    own 10y of ES 1m bars from Databento. `python -m tools.nt_export` converts
    `data/databento/ES...1m...parquet` to NT8 import format (yearly .txt,

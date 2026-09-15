@@ -25,6 +25,11 @@ New-Item -ItemType Directory -Force -Path $strategiesDst | Out-Null
 Copy-Item (Join-Path $repoRoot "ninjascript\Strategies\*.cs") $strategiesDst -Force
 Write-Host "Copied strategies -> $strategiesDst"
 
+$addOnsDst = Join-Path $nt8Root "bin\Custom\AddOns"
+New-Item -ItemType Directory -Force -Path $addOnsDst | Out-Null
+Copy-Item (Join-Path $repoRoot "ninjascript\AddOns\*.cs") $addOnsDst -Force
+Write-Host "Copied add-ons -> $addOnsDst"
+
 $newsSrc = Join-Path $repoRoot "data\nt_import\news_usd_high.csv"
 if (Test-Path $newsSrc) {
     Copy-Item $newsSrc (Join-Path $nt8Root "news_usd_high.csv") -Force

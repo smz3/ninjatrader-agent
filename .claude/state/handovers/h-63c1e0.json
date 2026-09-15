@@ -1,0 +1,8 @@
+{
+  "id": "h-63c1e0",
+  "ts": "2026-09-13T23:31:55.000257+00:00",
+  "session_id": "ce0ec5d7-3332-4ae5-8d14-3d8752194e57",
+  "summary": "Wrote first NinjaScript strategy: ninjascript/Strategies/Orb.cs (vanilla ORB - OCO stop entries off opening range, other-side stop, 0.5R target, 1 trade/day, flat-by time, red-folder news blocking via CSV, max-stop-points cap), mirroring registry/strategies/orb.json + tools/backtest/nautilus/setups/orb.py. Added ninjascript/deploy.ps1 (copies source + news CSV into NT8's folder) and tools/nt_export --news (data/news/usd_high.csv ET -> Central CSV Orb.cs reads). Committed+pushed as b1f50a6.",
+  "next_steps": "Not compiled or tested - no headless NT8 compiler available here. User needs to: (1) do the 3 pending manual NT8 GUI steps from task t-b2d143 (create ESBT instrument, import data/nt_import/ES_1m_*.txt, confirm Time Zone=America/Chicago), (2) run ninjascript/deploy.ps1, (3) open NinjaScript Editor in NT8 to trigger compile, (4) run in Strategy Analyzer and report back. Two assumptions in Orb.cs need empirical verification once it compiles: bar timestamp = close-time labeling, and the CT=ET-1h shift for session times - check the 'Orb: range ...' Print() log lines. After that: build the BacktestRunner AddOn (job-folder automation) for the no-click backtest loop.",
+  "questions": "None open - waiting on user to do the manual NT8 steps + report the Print() log output for verification."
+}
