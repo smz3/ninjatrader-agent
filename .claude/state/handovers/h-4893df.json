@@ -1,0 +1,8 @@
+{
+  "id": "h-4893df",
+  "ts": "2026-09-17T02:34:49.797399+00:00",
+  "session_id": "b40dfaf7-78b5-45fb-a80a-b6d6c8dd829d",
+  "summary": "Fixed 2 NT8 compile errors blocking task t-b2d143 (NT8 no-click automation): (1) Orb.cs was compiling from a STALE copy in NT8's bin/Custom folder (old OrderFillResolution=OrderFillResolution.Minute line, already removed in repo) - fixed by rerunning ninjascript/deploy.ps1. (2) BacktestRunner.cs's FormatPerformance() called wrong TradesPerformance property names (TotalTrades/PercentProfitable/AverageProfit/Drawdown) - fixed with real names found via PowerShell reflection on the installed NinjaTrader.Core.dll. User confirmed both Orb.cs and BacktestRunner.cs now compile clean in NT8 (Orb appears in the strategy list). Committed + pushed (685fb19).",
+  "next_steps": "Get the NT8 instrument name from the user's earlier ES 1m data import (check NT8's Historical Data Loaded panel) - needed to write the first .job file for BacktestRunner. Then drop a test .job into ninjascript/jobs/, confirm BacktestRunner's FileSystemWatcher picks it up, runs RunBacktest() via reflection, and writes a correct .result.txt to ninjascript/results/ (first real end-to-end test of the AddOn - untested so far). See task #t-b2d143 for full history.",
+  "questions": "None blocking - just need the instrument name from the user next session."
+}

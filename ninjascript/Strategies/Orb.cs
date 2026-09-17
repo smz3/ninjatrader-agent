@@ -84,7 +84,9 @@ namespace NinjaTrader.NinjaScript.Strategies
         private DateTime currentSessionDate = DateTime.MinValue;
         private bool rangeSet, doneForDay, pendingPlaced, tradedToday;
         private double rangeHigh, rangeLow, breakoutUp, breakoutDn;
-        private Order longEntryOrder, shortEntryOrder;
+        private Order longEntryOrder, shortEntryOrder, stopOrder, targetOrder;
+        private double stopForLongPending, stopForShortPending, targetLongPending, targetShortPending;
+        private string entryOcoId, exitOcoId;
 
         protected override void OnStateChange()
         {
@@ -93,8 +95,6 @@ namespace NinjaTrader.NinjaScript.Strategies
                 Description = "Opening Range Breakout - vanilla stop-entry OCO, other-side stop, R target. See registry/strategies/orb.json.";
                 Name = "Orb";
                 Calculate = Calculate.OnBarClose;
-                EntriesPerDirection = 1;
-                EntryHandling = EntryHandling.AllEntries;
                 IsExitOnSessionCloseStrategy = false;
                 IsFillLimitOnTouch = false;
                 MaximumBarsLookBack = MaximumBarsLookBack.TwoHundredFiftySix;
@@ -103,9 +103,15 @@ namespace NinjaTrader.NinjaScript.Strategies
                 TimeInForce = TimeInForce.Gtc;
                 TraceOrders = false;
                 RealtimeErrorHandling = RealtimeErrorHandling.StopCancelClose;
-                StopTargetHandling = StopTargetHandling.PerEntryExecution;
                 BarsRequiredToTrade = 1;
                 IsInstantiatedOnEachOptimizationIteration = true;
+                // Unmanaged: the Managed approach's "Internal Order Handling Rules
+                // that Reduce Unwanted Positions" silently ignores BOTH entries
+                // whenever a long-stop and short-stop are working at once (our
+                // straddle OCO pattern) - confirmed in NT log, this is why every
+                // backtest showed TotalTrades=0. Unmanaged bypasses that check and
+                // lets us use a real OCO id to link the two opposite entries.
+                IsUnmanaged = true;
 
                 RangeStartTime = 830;        // 08:30 CT = 09:30 ET
                 RangeEndTime = 845;          // 08:45 CT = 09:45 ET
@@ -132,8 +138,16 @@ namespace NinjaTrader.NinjaScript.Strategies
             }
         }
 
+        private static bool markerPrinted = false;
+
         protected override void OnBarUpdate()
         {
+            if (!markerPrinted)
+            {
+                Print("ORB_BUILD_MARKER_9942");
+                markerPrinted = true;
+            }
+
             if (CurrentBar < 1)
                 return;
 
@@ -207,23 +221,38 @@ namespace NinjaTrader.NinjaScript.Strategies
         protected override void OnOrderUpdate(Order order, double limitPrice, double stopPrice, int quantity,
             int filled, double averageFillPrice, OrderState orderState, DateTime time, ErrorCode error, string comment)
         {
+            Print(string.Format("Orb DEBUG OnOrderUpdate: name={0} state={1} filled={2} avgFill={3:F2} stop={4:F2} error={5} comment={6} time={7:HH:mm:ss}",
+                order.Name, orderState, filled, averageFillPrice, stopPrice, error, comment, time));
+
             if (order.Name == "OrbLong")
                 longEntryOrder = order;
             else if (order.Name == "OrbShort")
                 shortEntryOrder = order;
+            else if (order.Name == "OrbStop")
+                stopOrder = order;
+            else if (order.Name == "OrbTarget")
+                targetOrder = order;
 
             if (orderState != OrderState.Filled)
                 return;
 
+            // Entry OCO id already made NT cancel the other side's resting
+            // entry order natively - CancelIfWorking here is just a safety net.
             if (order.Name == "OrbLong")
             {
                 tradedToday = true;
                 CancelIfWorking(shortEntryOrder);
+                exitOcoId = "OrbExit" + currentSessionDate.ToString("yyyyMMdd");
+                stopOrder = SubmitOrderUnmanaged(0, OrderAction.Sell, OrderType.StopMarket, Qty, 0, RoundToTick(stopForLongPending), exitOcoId, "OrbStop");
+                targetOrder = SubmitOrderUnmanaged(0, OrderAction.Sell, OrderType.Limit, Qty, targetLongPending, 0, exitOcoId, "OrbTarget");
             }
             else if (order.Name == "OrbShort")
             {
                 tradedToday = true;
                 CancelIfWorking(longEntryOrder);
+                exitOcoId = "OrbExit" + currentSessionDate.ToString("yyyyMMdd");
+                stopOrder = SubmitOrderUnmanaged(0, OrderAction.BuyToCover, OrderType.StopMarket, Qty, 0, RoundToTick(stopForShortPending), exitOcoId, "OrbStop");
+                targetOrder = SubmitOrderUnmanaged(0, OrderAction.BuyToCover, OrderType.Limit, Qty, targetShortPending, 0, exitOcoId, "OrbTarget");
             }
         }
 
@@ -238,19 +267,24 @@ namespace NinjaTrader.NinjaScript.Strategies
             bool longOk = riskLong > 0 && riskLong <= MaxStopPoints;
             bool shortOk = riskShort > 0 && riskShort <= MaxStopPoints;
 
+            Print(string.Format("Orb DEBUG ArmEntries {0:HH:mm}: longOk={1} shortOk={2} breakoutUp={3:F2} breakoutDn={4:F2} stopLong={5:F2} stopShort={6:F2} riskLong={7:F2} riskShort={8:F2}",
+                Time[0], longOk, shortOk, breakoutUp, breakoutDn, stopForLong, stopForShort, riskLong, riskShort));
+
+            entryOcoId = "OrbEntry" + currentSessionDate.ToString("yyyyMMdd");
+            stopForLongPending = stopForLong;
+            stopForShortPending = stopForShort;
+
             if (longOk)
             {
-                double target = RoundToTick(breakoutUp + TargetR * riskLong);
-                EnterLongStopMarket(Qty, breakoutUp, "OrbLong");
-                SetStopLoss("OrbLong", CalculationMode.Price, RoundToTick(stopForLong), false);
-                SetProfitTarget("OrbLong", CalculationMode.Price, target);
+                targetLongPending = RoundToTick(breakoutUp + TargetR * riskLong);
+                Print(string.Format("Orb DEBUG submitting OrbLong: entry={0:F2} stop={1:F2} target={2:F2}", breakoutUp, stopForLong, targetLongPending));
+                longEntryOrder = SubmitOrderUnmanaged(0, OrderAction.Buy, OrderType.StopMarket, Qty, 0, breakoutUp, entryOcoId, "OrbLong");
             }
             if (shortOk)
             {
-                double target = RoundToTick(breakoutDn - TargetR * riskShort);
-                EnterShortStopMarket(Qty, breakoutDn, "OrbShort");
-                SetStopLoss("OrbShort", CalculationMode.Price, RoundToTick(stopForShort), false);
-                SetProfitTarget("OrbShort", CalculationMode.Price, target);
+                targetShortPending = RoundToTick(breakoutDn - TargetR * riskShort);
+                Print(string.Format("Orb DEBUG submitting OrbShort: entry={0:F2} stop={1:F2} target={2:F2}", breakoutDn, stopForShort, targetShortPending));
+                shortEntryOrder = SubmitOrderUnmanaged(0, OrderAction.SellShort, OrderType.StopMarket, Qty, 0, breakoutDn, entryOcoId, "OrbShort");
             }
 
             pendingPlaced = longOk || shortOk;
@@ -268,12 +302,14 @@ namespace NinjaTrader.NinjaScript.Strategies
         {
             CancelIfWorking(longEntryOrder);
             CancelIfWorking(shortEntryOrder);
+            CancelIfWorking(stopOrder);
+            CancelIfWorking(targetOrder);
             pendingPlaced = false;
 
             if (Position.MarketPosition == MarketPosition.Long)
-                ExitLong("OrbFlat", "OrbLong");
+                SubmitOrderUnmanaged(0, OrderAction.Sell, OrderType.Market, Position.Quantity, 0, 0, "", "OrbFlat");
             else if (Position.MarketPosition == MarketPosition.Short)
-                ExitShort("OrbFlat", "OrbShort");
+                SubmitOrderUnmanaged(0, OrderAction.BuyToCover, OrderType.Market, Position.Quantity, 0, 0, "", "OrbFlat");
         }
 
         private void NewSessionReset(DateTime sessionDate)
@@ -289,6 +325,10 @@ namespace NinjaTrader.NinjaScript.Strategies
             breakoutDn = 0;
             longEntryOrder = null;
             shortEntryOrder = null;
+            stopOrder = null;
+            targetOrder = null;
+            entryOcoId = null;
+            exitOcoId = null;
 
             todayBlocks.Clear();
             foreach (NewsEvent ev in newsEvents)
