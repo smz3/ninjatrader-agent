@@ -86,3 +86,60 @@ to press anything in NT8 -> everything automated. ORB only first.
    data - 1m bars only support lower fill-resolution settings for now.
 5. ORB in NinjaScript per registry/strategies/orb.json (both-sides-bar rule
    still open with user).
+
+## Headless recompile via Windows UI Automation (found + proven 2026-09-17)
+
+User asked why every AddOn/Strategy code change still needed a manual click
+in NT8's GUI. Answer: it doesn't - NT8's NinjaScript Editor is a normal
+top-level window, drivable from PowerShell with no NT8-side changes needed.
+Proven working end-to-end this session:
+
+1. Find the editor window (it's a *separate top-level HWND* under the
+   NinjaTrader.exe process, not just the Control Center's MainWindowTitle -
+   use `EnumWindows` + `GetWindowThreadProcessId` filtered to NT8's pid, not
+   `FindWindow`/`Get-Process .MainWindowTitle`, which only sees one window
+   per process). Title is `"NinjaScript Editor - <context>"` (e.g. `- Add on
+   - BacktestRunner`) - substring-match, it changes with whatever tab has
+   focus.
+2. **Gotcha #1 - stale tab buffer:** if that file's tab was already open
+   before you overwrote it on disk (via deploy.ps1 or otherwise), the editor
+   does **not** auto-reload it. Pressing F5 recompiles the *stale in-memory
+   buffer*, silently ignoring your on-disk change - no error, no warning, it
+   just keeps running old code. Detectable/fixable: try to close that tab: if
+   NT8 pops "Close Tab - unsaved changes will be lost", the tab is stale
+   relative to disk (we never edit inside the NT8 editor ourselves, so any
+   "unsaved changes" it thinks it has are exactly this drift). Click **Yes**
+   to discard, then reopen the file fresh by double-clicking it in the
+   "NinjaScript Explorer" tree panel (docked top-right) - that forces a
+   read from disk. *Only* safe to always-discard because this repo is the
+   sole source of truth for these files (deploy.ps1 is the only writer) -
+   if a human ever edits directly in NT8's editor instead, this would
+   silently blow that away.
+3. Restore-if-minimized (`ShowWindow(hwnd, 9)` then `3`), `SetForegroundWindow`,
+   click into the editor body once (keyboard focus needs to land in the text
+   pane, not just the window), then `SendKeys::SendWait("{F5}")`. F5 recompiles
+   the **whole custom assembly**, not just the open tab - doesn't matter which
+   file is showing as long as *no* open tab for a changed file has gone stale
+   per #2.
+4. **Gotcha #2 - no readable output surface:** NinjaScript `Print()` output
+   (the "NinjaScript Output" window) and compile errors are **not** exposed
+   via UI Automation `TextPattern`/`ValuePattern`/`Name` - it's a
+   custom-rendered editor control, `AutomationElement.FromHandle` +
+   `TreeWalker` only surfaces tab labels and button glyphs, never the actual
+   log text. The only way found to read it back programmatically: restore +
+   foreground the window, screenshot the whole screen
+   (`System.Drawing.Graphics.CopyFromScreen`), save PNG, read the PNG as an
+   image. Same applies to checking for compile errors - no error text is
+   queryable, only visually confirmable (screenshot the editor after F5 and
+   look for an error-list panel / red markers).
+5. NT8's platform log files (`Documents\NinjaTrader 8\log\log.*.txt`) do
+   **not** reliably capture new activity - one log file's mtime updated
+   without any new lines appearing in it across two full recompile+job
+   cycles this session (cause unclear, possibly a session-numbering quirk
+   after Session Break). Don't trust "no new log lines" as proof nothing
+   happened - always cross-check with an Output-panel screenshot instead.
+6. Not yet built: a consolidated script wrapping steps 1-4 (e.g.
+   `tools/nt8_recompile.ps1` or under `.claude/scripts/`) - this session did
+   every step by hand via ad hoc PowerShell each time. Next session doing
+   another Orb.cs/BacktestRunner.cs change should build that script rather
+   than repeating the manual dance.
