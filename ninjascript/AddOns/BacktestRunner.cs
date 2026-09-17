@@ -232,12 +232,14 @@ namespace NinjaTrader.NinjaScript.AddOns
             var perf = strategy.SystemPerformance;
             var sb = new StringBuilder();
             sb.AppendLine("OK");
+            int totalTrades = perf.AllTrades.Count;
+            double percentProfitable = totalTrades > 0 ? 100.0 * perf.AllTrades.WinningTrades.Count / totalTrades : 0.0;
             sb.AppendLine("NetProfit=" + perf.AllTrades.TradesPerformance.NetProfit.ToString(CultureInfo.InvariantCulture));
-            sb.AppendLine("TotalTrades=" + perf.AllTrades.TradesPerformance.TotalTrades.ToString(CultureInfo.InvariantCulture));
-            sb.AppendLine("PercentProfitable=" + perf.AllTrades.TradesPerformance.PercentProfitable.ToString(CultureInfo.InvariantCulture));
+            sb.AppendLine("TotalTrades=" + totalTrades.ToString(CultureInfo.InvariantCulture));
+            sb.AppendLine("PercentProfitable=" + percentProfitable.ToString(CultureInfo.InvariantCulture));
             sb.AppendLine("ProfitFactor=" + perf.AllTrades.TradesPerformance.ProfitFactor.ToString(CultureInfo.InvariantCulture));
-            sb.AppendLine("AvgTrade=" + perf.AllTrades.TradesPerformance.AverageProfit.ToString(CultureInfo.InvariantCulture));
-            sb.AppendLine("MaxDrawdown=" + perf.AllTrades.TradesPerformance.Drawdown.ToString(CultureInfo.InvariantCulture));
+            sb.AppendLine("AvgTrade=" + perf.AllTrades.TradesPerformance.Currency.AverageProfit.ToString(CultureInfo.InvariantCulture));
+            sb.AppendLine("MaxDrawdown=" + perf.AllTrades.TradesPerformance.Currency.Drawdown.ToString(CultureInfo.InvariantCulture));
             sb.AppendLine();
             sb.AppendLine("# entryTime,exitTime,entryPrice,exitPrice,qty,pnl");
             foreach (Trade trade in perf.AllTrades)
