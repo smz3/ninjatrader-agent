@@ -143,3 +143,26 @@ Proven working end-to-end this session:
    every step by hand via ad hoc PowerShell each time. Next session doing
    another Orb.cs/BacktestRunner.cs change should build that script rather
    than repeating the manual dance.
+
+## No-restart workflow (2026-09-23)
+
+- Every recompile loads a NEW custom assembly next to the old ones (never
+  unloaded). Code that resolves a type by name must take the LAST-loaded
+  match, or it silently runs the build from NT8 startup. Result files print
+  `StrategyAssembly=` - a random-hex name = a post-startup build (good).
+- AddOns are instantiated only at NT8 startup. So `BacktestRunner.cs` is now
+  a thin FileSystemWatcher only; all job logic is in `BacktestJob.cs`
+  (static, looked up newest-first per job). Changing Orb.cs or BacktestJob.cs
+  = `ninjascript/deploy.ps1` only. Changing BacktestRunner.cs = restart +
+  re-login (avoid; ask the user first).
+- `deploy.ps1` now opens the NinjaScript Editor via UI Automation if needed,
+  touches the deployed .cs files (Copy-Item keeps old mtimes) and waits for
+  `NinjaTrader.Custom.dll` to update. Exit 1 = no compile in 60s.
+- A brand-new .cs file in AddOns triggers NT8's one-time "detected new add
+  on(s) ... authorize?" prompt - that's a security prompt, left for a human
+  (or explicit approval) to click, not auto-clicked.
+- Needed `IncludeTradeHistoryInBacktest = true` - without it AllTrades is
+  empty (TotalTrades=0) even when orders fill.
+- Orb debug lines mirror to `ninjascript/results/orb_debug.log` (gitignored),
+  so no Output-window screenshots are needed.
+- Closing NT8's Control Center = full shutdown = re-login. Never do it.

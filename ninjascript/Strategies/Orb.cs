@@ -104,6 +104,7 @@ namespace NinjaTrader.NinjaScript.Strategies
                 TraceOrders = false;
                 RealtimeErrorHandling = RealtimeErrorHandling.StopCancelClose;
                 BarsRequiredToTrade = 1;
+                IncludeTradeHistoryInBacktest = true;
                 IsInstantiatedOnEachOptimizationIteration = true;
                 // Unmanaged: the Managed approach's "Internal Order Handling Rules
                 // that Reduce Unwanted Positions" silently ignores BOTH entries
@@ -134,8 +135,22 @@ namespace NinjaTrader.NinjaScript.Strategies
                 entryWindowStartMin = ToMinutes(EntryWindowStartTime);
                 entryWindowEndMin = ToMinutes(EntryWindowEndTime);
                 flatByMin = ToMinutes(FlatByTime);
+                Dbg(string.Format("=== Orb run {0:o}: {1} {2} TickSize={3} PointValue={4} IsUnmanaged={5}",
+                    DateTime.Now, Instrument.FullName, BarsPeriod, TickSize, Instrument.MasterInstrument.PointValue, IsUnmanaged));
                 LoadNewsEvents();
             }
+        }
+
+        // Print() only reaches NT8's Output window, which nothing outside NT8
+        // can read - mirror every debug line into a repo file so automated
+        // backtests (ninjascript/jobs) can be diagnosed headlessly.
+        private const string DebugLogPath = @"C:\Users\User\Desktop\ninjatrader-agent\ninjascript\results\orb_debug.log";
+
+        private void Dbg(string msg)
+        {
+            Print(msg);
+            try { File.AppendAllText(DebugLogPath, msg + Environment.NewLine); }
+            catch { }
         }
 
         private static bool markerPrinted = false;
@@ -144,7 +159,7 @@ namespace NinjaTrader.NinjaScript.Strategies
         {
             if (!markerPrinted)
             {
-                Print("ORB_BUILD_MARKER_9942");
+                Dbg("ORB_BUILD_MARKER_9942");
                 markerPrinted = true;
             }
 
@@ -184,7 +199,7 @@ namespace NinjaTrader.NinjaScript.Strategies
                 rangeSet = true;
                 breakoutUp = RoundToTick(rangeHigh + TickSize);
                 breakoutDn = RoundToTick(rangeLow - TickSize);
-                Print(string.Format("Orb {0:yyyy-MM-dd}: range {1:F2}-{2:F2}, breakout {3:F2}/{4:F2}, session-start bar Time[0]={5:HH:mm}",
+                Dbg(string.Format("Orb {0:yyyy-MM-dd}: range {1:F2}-{2:F2}, breakout {3:F2}/{4:F2}, session-start bar Time[0]={5:HH:mm}",
                     sessionDate, rangeLow, rangeHigh, breakoutUp, breakoutDn, bt));
             }
 
@@ -221,7 +236,7 @@ namespace NinjaTrader.NinjaScript.Strategies
         protected override void OnOrderUpdate(Order order, double limitPrice, double stopPrice, int quantity,
             int filled, double averageFillPrice, OrderState orderState, DateTime time, ErrorCode error, string comment)
         {
-            Print(string.Format("Orb DEBUG OnOrderUpdate: name={0} state={1} filled={2} avgFill={3:F2} stop={4:F2} error={5} comment={6} time={7:HH:mm:ss}",
+            Dbg(string.Format("Orb DEBUG OnOrderUpdate: name={0} state={1} filled={2} avgFill={3:F2} stop={4:F2} error={5} comment={6} time={7:HH:mm:ss}",
                 order.Name, orderState, filled, averageFillPrice, stopPrice, error, comment, time));
 
             if (order.Name == "OrbLong")
@@ -267,7 +282,7 @@ namespace NinjaTrader.NinjaScript.Strategies
             bool longOk = riskLong > 0 && riskLong <= MaxStopPoints;
             bool shortOk = riskShort > 0 && riskShort <= MaxStopPoints;
 
-            Print(string.Format("Orb DEBUG ArmEntries {0:HH:mm}: longOk={1} shortOk={2} breakoutUp={3:F2} breakoutDn={4:F2} stopLong={5:F2} stopShort={6:F2} riskLong={7:F2} riskShort={8:F2}",
+            Dbg(string.Format("Orb DEBUG ArmEntries {0:HH:mm}: longOk={1} shortOk={2} breakoutUp={3:F2} breakoutDn={4:F2} stopLong={5:F2} stopShort={6:F2} riskLong={7:F2} riskShort={8:F2}",
                 Time[0], longOk, shortOk, breakoutUp, breakoutDn, stopForLong, stopForShort, riskLong, riskShort));
 
             entryOcoId = "OrbEntry" + currentSessionDate.ToString("yyyyMMdd");
@@ -277,13 +292,13 @@ namespace NinjaTrader.NinjaScript.Strategies
             if (longOk)
             {
                 targetLongPending = RoundToTick(breakoutUp + TargetR * riskLong);
-                Print(string.Format("Orb DEBUG submitting OrbLong: entry={0:F2} stop={1:F2} target={2:F2}", breakoutUp, stopForLong, targetLongPending));
+                Dbg(string.Format("Orb DEBUG submitting OrbLong: entry={0:F2} stop={1:F2} target={2:F2}", breakoutUp, stopForLong, targetLongPending));
                 longEntryOrder = SubmitOrderUnmanaged(0, OrderAction.Buy, OrderType.StopMarket, Qty, 0, breakoutUp, entryOcoId, "OrbLong");
             }
             if (shortOk)
             {
                 targetShortPending = RoundToTick(breakoutDn - TargetR * riskShort);
-                Print(string.Format("Orb DEBUG submitting OrbShort: entry={0:F2} stop={1:F2} target={2:F2}", breakoutDn, stopForShort, targetShortPending));
+                Dbg(string.Format("Orb DEBUG submitting OrbShort: entry={0:F2} stop={1:F2} target={2:F2}", breakoutDn, stopForShort, targetShortPending));
                 shortEntryOrder = SubmitOrderUnmanaged(0, OrderAction.SellShort, OrderType.StopMarket, Qty, 0, breakoutDn, entryOcoId, "OrbShort");
             }
 
@@ -359,7 +374,7 @@ namespace NinjaTrader.NinjaScript.Strategies
             string path = Path.Combine(NinjaTrader.Core.Globals.UserDataDir, "news_usd_high.csv");
             if (!File.Exists(path))
             {
-                Print("Orb: news_usd_high.csv not found at " + path + " - running with NO news filter. Run `python -m tools.nt_export --news` and ninjascript/deploy.ps1 first.");
+                Dbg("Orb: news_usd_high.csv not found at " + path + " - running with NO news filter. Run `python -m tools.nt_export --news` and ninjascript/deploy.ps1 first.");
                 return;
             }
             foreach (string line in File.ReadAllLines(path))
