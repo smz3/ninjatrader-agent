@@ -1,0 +1,8 @@
+{
+  "id": "h-b83927",
+  "ts": "2026-09-23T06:11:17.380399+00:00",
+  "session_id": "342585a7-f0c4-4944-9b2e-c19ea4e31fed",
+  "summary": "ORB now trades end to end in NT8 via the no-click runner (1-week test 2024-01-01..08: 5 trades, 40% win, net $0). Fixed: runner picked the stale startup assembly after recompiles (now last-loaded match), IncludeTradeHistoryInBacktest=true, Orb debug mirrored to ninjascript/results/orb_debug.log. Built no-restart workflow: BacktestRunner.cs = thin watcher, logic in new BacktestJob.cs (active after next NT8 restart); deploy.ps1 opens NinjaScript Editor + waits for compile. Instrument ES_1M_2024 specs already correct (0.25/50). Docs: nt8-automation-notes.md 'No-restart workflow'. Committed+pushed ed080b5. Saved memory: never close/restart NT8 (forces user re-login).",
+  "next_steps": "See task t-b2d143: (1) hand-check the 5 test trades vs raw bars/orb.py - Jan 5 fill at 08:55 right at news-block edge, and stop/target submitted ~1 bar after fill; (2) run full 2024 then 2016-2024 (instruments ES_1M_2016..2026 still have wrong tick/point specs 0.01/1 - only 2024 fixed; user must fix in NT8 Instruments or pick another way); (3) feed results into prop_sim + registry. Use deploy.ps1 for all code changes, never restart NT8.",
+  "questions": "ES_1M_2016-2023/2025/2026 instruments still have TickSize 0.01 / PointValue 1 - user needs to set 0.25/50 in NT8 (GUI) before multi-year runs, unless we find a scriptable way."
+}
