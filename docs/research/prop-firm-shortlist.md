@@ -442,3 +442,15 @@ https://blog.traderspost.io/article/elite-trader-funding-review , https://phidia
 https://tradingfinder.com/props/earn2trade/ ,
 https://propfirmmatch.com/futures/prop-firm-lists/restricted-countries/malaysia ,
 https://damnpropfirms.com/best-prop-firms-for-algo-trading/
+
+Re-check 2026-09-30 (Take Profit Trader + MyFundedFutures) - both still OUT:
+- MyFundedFutures: bots allowed, but **Malaysia is on its official restricted list**
+  (help.myfundedfutures.com 8229993, verified in page HTML, "M-S" column). Can't sign up.
+- Take Profit Trader: Malaysia NOT on its 12-country restricted list (Belarus, Iran,
+  Lebanon, Libya, Morocco, Qatar, Russia, S. Africa, Sri Lanka, Syria, Vietnam, Yemen),
+  but **Universal Trading Policies ban bots/algos on Test, PRO and PRO+**; PRO trades
+  must be manually executed. Our fully automated NT8 bot = breach.
+Sources: https://help.myfundedfutures.com/en/articles/8229993-restricted-countries-policy,
+https://traderssecondbrain.com/prop-firm/take-profit-trader/restricted-countries,
+https://crosstrade.io/learn/prop-firm-ai-trading/takeprofittrader,
+https://proptradingvibes.com/blog/takeprofittrader-pro-account-rules

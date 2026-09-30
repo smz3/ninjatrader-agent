@@ -1,0 +1,8 @@
+{
+  "id": "h-81c89e",
+  "ts": "2026-09-30T04:47:15.509921+00:00",
+  "session_id": "c88cf123-f602-4278-85be-209c2bc494c5",
+  "summary": "No code changes. Lucid REJECTED user's registration KYC ('multiple items inconsistent', final, no appeal) - likely cause: user filled optional company field with sole prop 'Quantum Capital Global'. User emailed compliance@lucidtrading.com explaining the mistake (reply pending); advised NOT to re-register with a new email (ban evasion). Researched replacement firms for Malaysia + own NT8 bot; all findings saved in docs/research/prop-firm-shortlist.md (sections 'Lucid REJECTED us', TradeDay vs Topstep side by side, wider sweep). Shortlist: TradeDay (legit, MY ok, own bots, EOD; user uneasy about only ~$11M paid since 2020), Bulenox (vague flipping payout denials), BluSky (confirm bots in writing), Topstep. User now leaning Topstep via Quantower: bots OK in Combine + Express Funded, not Live; home PC only (no VPS/VPN), must actively monitor (~2h/night MYT for ORB window); NinjaScript -> Quantower C# port. All logged on task t-6d0bb8 (discussing).",
+  "next_steps": "t-6d0bb8: wait for Lucid compliance reply; if no/negative, user to email TradeDay/Bulenox/BluSky asking 'own fully automated NT8 bot on VPS OK in eval + funded?' or commit to Topstep+Quantower. Keep proving a setup in NT8 first (t-b2d143, #2) - only port to Quantower once a setup shows edge; then forward-test NT8 vs Quantower on same days. Home PC needs UPS + phone-hotspot backup if Topstep.",
+  "questions": "Final firm: Topstep (Quantower, home PC, sit in front ~2h/night) vs TradeDay/Bulenox/BluSky (keep NT8 + VPS)? Depends on Lucid reply."
+}
