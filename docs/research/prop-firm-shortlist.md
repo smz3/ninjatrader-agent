@@ -383,3 +383,15 @@ https://help.alpha-futures.com/en/articles/9508585-prohibited-trading-practices,
 https://proptradingvibes.com/blog/takeprofittrader-restricted-countries,
 https://help.myfundedfutures.com/en/articles/8229993-restricted-countries-policy,
 https://proptradingvibes.com/blog/lucid-trading-kyc
+
+Follow-up 2026-09-30 (legitimacy + Malaysia):
+- TradeDay: legit - Chicago LLC since 2020, Trustpilot 4.6 (~1,430 reviews), ~$11.3M paid,
+  publishes pass rate. **Malaysia NOT on its prohibited list** (tradeday.freshdesk.com
+  prohibited-countries; propfirmmatch MY list). Own bots OK, EOD drawdown option.
+- Bulenox: legit - since 2022, Trustpilot 4.7, $10M+ paid. **Malaysia not on its restricted
+  list** (surgefunded copy of list). Top complaint: vague "flipping" rule + 40% consistency
+  -> payout denials.
+- Topstep: Malaysia fully eligible (proptradingvibes 2026-08-04). But bots only via TopstepX
+  API ($29/mo), no NinjaTrader, **no VPS/VPN** (must run on own PC), no API in Live Funded.
+- Pick: TradeDay #1 (EOD, legit, MY OK, NT8 works), Bulenox #2 (watch flipping rule),
+  Topstep last (bot rewrite + home PC only).
