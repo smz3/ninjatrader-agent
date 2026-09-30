@@ -347,3 +347,39 @@ trade live). Lucid's eval is also sim, but costs money - do the free steps first
 - https://proptradingvibes.com/blog/lucid-pro-vs-lucid-flex-vs-lucid-direct
 - https://proptradingvibes.com/blog/lucid-trading-discount
 - https://phidiaspropfirm.com/education/luciddaily (daily profit ceiling, via search)
+
+## Lucid REJECTED us (2026-09-30) - new firm search
+
+Lucid registration KYC: "Account Under Review ... multiple items were found to be
+inconsistent ... decision is final, not subject to appeal." No reason given. Common
+causes (proptradingvibes KYC guide, Trustpilot): name on account != ID exactly,
+address proof mismatch/old, blurry docs; signup IP/VPS/VPN location vs stated country
+is a likely extra flag. **Before the next signup: exact passport/MyKad name, Malaysian
+address matching proof-of-address, sign up from home internet (not the VPS, no VPN),
+personal profile.** Don't open a second Lucid account (ban evasion).
+
+Re-check for a Malaysian + fully automated NinjaTrader bot (third-party, 2026-09-30):
+
+| Firm | Full bots? | Platform | Drawdown | Malaysia | Verdict |
+|---|---|---|---|---|---|
+| **Bulenox** | Yes, if user-built (ours is) | NinjaTrader via **Rithmic** | Trailing or **EOD** (pick) | Conflicting lists - **ask support** | **#1 candidate** |
+| TradeDay | Own-built bots OK, no bought bots | NT via Rithmic/Tradovate | Trailing / Static / **EOD** | 82-country list, MY unclear - **ask** | #2 |
+| Topstep | Yes via TopstepX API (not in Live) | **TopstepX only, no NT8**, no VPS/VPN | EOD | Unclear | Backup - needs bot rewrite + home PC |
+| Apex | Eval only; no full auto on funded | NT | EOD/trailing | - | Out |
+| Alpha Futures | No bots | - | - | Restricted | Out |
+| Take Profit Trader | No bots | - | - | Restricted | Out |
+| MyFundedFutures | Yes | NT | EOD | Restricted | Out |
+| Tradeify | Yes | NT | EOD | Restricted | Out |
+
+NT8 work carries over to Bulenox/TradeDay (NT8 connects to Rithmic natively).
+
+Sources: https://crosstrade.io/prop-funding, https://crosstrade.io/prop-firms/bulenox,
+https://www.surgefunded.com/bulenox-prop-firm-supported-and-restricted-countries/,
+https://www.dojidojo.org/country-restrictions,
+https://proptradingvibes.com/blog/tradeday-eligibility-requirements,
+https://blog.traderspost.io/article/tradeday-review, https://algoproven.com/topstepx-api-bot-rules,
+https://blog.pickmytrade.trade/apex-funded-automation-rules-2026/,
+https://help.alpha-futures.com/en/articles/9508585-prohibited-trading-practices,
+https://proptradingvibes.com/blog/takeprofittrader-restricted-countries,
+https://help.myfundedfutures.com/en/articles/8229993-restricted-countries-policy,
+https://proptradingvibes.com/blog/lucid-trading-kyc
