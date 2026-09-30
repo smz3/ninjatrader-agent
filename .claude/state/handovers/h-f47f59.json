@@ -1,0 +1,8 @@
+{
+  "id": "h-f47f59",
+  "ts": "2026-09-30T12:20:59.966006+00:00",
+  "session_id": "db50b63c-2f2a-4e4c-96ff-6acf14a374b4",
+  "summary": "No code changes. Ruled out Take Profit Trader (bots banned), MyFundedFutures + FundedNext Futures + Tradeify (Malaysia restricted), E8 Futures (bots banned) - logged in docs/research/prop-firm-shortlist.md. Wrote docs/research/topstep-rules.md from all 57 official Topstep help articles (eligibility, pricing, Combine/XFA/Live, consistency, news/CPI, bot/API/VPS, banned conduct, payouts). Key: Malaysia eligible; bots only via ProjectX API from own PC, no VPS/VPN; no bots in Live and Live call-up can't be declined; Quantower via TopstepX lacks Strategy Runner; payouts only SWIFT to own-name bank. If Topstep, user leans 50K No-Activation-Fee path ($95/mo, $85 w/ $1k DLL at checkout = doubled payout cap), Standard XFA payout path, start 1 account. User waiting on Lucid compliance reply before choosing firm. All on t-6d0bb8.",
+  "next_steps": "NEXT SESSION FOCUS (user request): decide the exact platform to run the Topstep bot - Python on ProjectX API vs Quantower (paid license for Strategy Runner?) vs other ProjectX-connected platforms; verify API vs 1-device limit and VPS ban scope (t-6d0bb8). Also: check Lucid compliance reply; ask Topstep support if sole-prop bank (Quantum Capital Global) counts as own name for SWIFT payouts. Keep proving a setup (#2, t-b2d143).",
+  "questions": "Lucid reply? Final firm choice. Does sole-prop bank work for Topstep payouts? Which Topstep bot platform?"
+}
