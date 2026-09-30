@@ -1,0 +1,8 @@
+{
+  "id": "h-801a28",
+  "ts": "2026-09-30T07:29:21.903415+00:00",
+  "session_id": "db50b63c-2f2a-4e4c-96ff-6acf14a374b4",
+  "summary": "Checked more prop firms for Malaysia + own bot: Take Profit Trader (bots banned), MyFundedFutures (Malaysia restricted), E8 Futures (bots banned), FundedNext Futures (bots+VPS OK but Malaysia restricted), Tradeify (Malaysia restricted) - all OUT, logged in prop-firm-shortlist.md. User now focusing on Topstep; pulled all 57 official help articles and wrote docs/research/topstep-rules.md (eligibility, pricing, Combine/XFA/Live rules, news/CPI, bot/API/VPS rules, banned conduct, payouts).",
+  "next_steps": "t-6d0bb8: user to ask Topstep support (1) does a Malaysian sole-prop bank account (Quantum Capital Global) count as 'own name' for SWIFT payouts, (2) does an API session count toward the 1-device limit; verify 50K XFA scaling tiers on dashboard. Then plan bot as Python on ProjectX API (not Quantower - its Strategy Runner isn't included). Keep proving a setup (#2, t-b2d143).",
+  "questions": "Sole-prop bank OK for Topstep payouts? Python ProjectX bot vs NT8 port?"
+}
