@@ -454,3 +454,8 @@ Sources: https://help.myfundedfutures.com/en/articles/8229993-restricted-countri
 https://traderssecondbrain.com/prop-firm/take-profit-trader/restricted-countries,
 https://crosstrade.io/learn/prop-firm-ai-trading/takeprofittrader,
 https://proptradingvibes.com/blog/takeprofittrader-pro-account-rules
+
+Re-check 2026-09-30 (E8 Futures) - OUT: official Trading Policies (updated 2026-08-16)
+prohibit "Semi-Automated or Fully-Automated Trading, such as trading bots, AI tools, HFT".
+Malaysia not hard-restricted per TSB, but moot.
+Source: https://intercom.help/E8futures/en/articles/10209270-trading-policies
