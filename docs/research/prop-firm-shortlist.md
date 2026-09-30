@@ -420,3 +420,25 @@ Sources: https://proptradingvibes.com/blog/topstep-trading-combine-rules ,
 https://tradeday.freshdesk.com/en/support/solutions/articles/103000404096-fast-pass-funded-sim-payout-policy ,
 https://fundedtrading.com/propfirm/tradeday/ , https://blog.traderspost.io/article/tradeday-review ,
 https://puravidaedge.com/blog/topstep-vs-tradeday , https://www.quantvps.com/prop-firms/tradeday
+
+## Wider sweep: other firms for Malaysia + own NT8 bot (2026-09-30)
+
+| Firm | Full bots? | NinjaTrader | Malaysia | Trust | Verdict |
+|---|---|---|---|---|---|
+| TradeDay | own-built yes | yes | allowed | TP 4.6, since 2020 | #1 |
+| Bulenox | own-built yes | yes (Rithmic) | allowed | TP 4.7, since 2022; vague "flipping" payout denials | #2 |
+| BluSky | yes per its blog (eval + funded); conduct policy vague - confirm | yes, free NT license | **allowed** (official list) | TP 4.7 (~850) | #3 - confirm bots in writing |
+| Topstep | API only, not Live | **no** | allowed | biggest | backup |
+| Elite Trader Funding | **no** (semi-auto only unless written approval) | yes, VPS ok | allowed | - | only with written approval |
+| Phidias | **no** (official rules) | yes | allowed | - | out |
+| Earn2Trade | **no** | yes | - | - | out |
+| Apex | not on funded | yes | - | - | out |
+| FundedNext Futures, MFF, Tradeify, Blue Guardian, Goat, Ylos | - | - | **restricted** | - | out |
+
+Sources: https://help.blusky.pro/en/articles/12434004-list-of-countries-we-cannot-offer-services-to-can-i-trade-with-blusky ,
+https://crosstrade.io/prop-firms/blusky , https://www.trustpilot.com/review/blusky.pro ,
+https://help.elitetraderfunding.com/help/countries-restricted-and-supported ,
+https://blog.traderspost.io/article/elite-trader-funding-review , https://phidiaspropfirm.com/rules ,
+https://tradingfinder.com/props/earn2trade/ ,
+https://propfirmmatch.com/futures/prop-firm-lists/restricted-countries/malaysia ,
+https://damnpropfirms.com/best-prop-firms-for-algo-trading/
