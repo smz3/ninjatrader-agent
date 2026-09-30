@@ -459,3 +459,15 @@ Re-check 2026-09-30 (E8 Futures) - OUT: official Trading Policies (updated 2026-
 prohibit "Semi-Automated or Fully-Automated Trading, such as trading bots, AI tools, HFT".
 Malaysia not hard-restricted per TSB, but moot.
 Source: https://intercom.help/E8futures/en/articles/10209270-trading-policies
+
+Re-check 2026-09-30 (FundedNext Futures + Tradeify) - both OUT on Malaysia:
+- FundedNext Futures: otherwise a great fit - official help center allows EAs/bots in
+  Challenge + funded (art. 14298560, 2026-04-09), VPS/VPN OK (14264100), no news rule
+  (14298245), NinjaTrader + Tradovate. But **Malaysia is on its official "restricted
+  countries to purchase accounts" list** (14274473). Worth re-checking later - they say
+  the list is reviewed over time.
+- Tradeify: Malaysia on its official restricted list (help.tradeify.co 10495888, via TSB).
+Sources: https://helpfutures.fundednext.com/en/articles/14274473-are-any-countries-restricted-on-fundednext-futures,
+https://helpfutures.fundednext.com/en/articles/14298560,
+https://helpfutures.fundednext.com/en/articles/14264100-can-i-use-vpn-vps-to-trade-in-fundednext-futures,
+https://traderssecondbrain.com/prop-firm/tradeify/restricted-countries
