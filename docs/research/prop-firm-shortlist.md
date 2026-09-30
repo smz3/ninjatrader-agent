@@ -395,3 +395,28 @@ Follow-up 2026-09-30 (legitimacy + Malaysia):
   API ($29/mo), no NinjaTrader, **no VPS/VPN** (must run on own PC), no API in Live Funded.
 - Pick: TradeDay #1 (EOD, legit, MY OK, NT8 works), Bulenox #2 (watch flipping rule),
   Topstep last (bot rewrite + home PC only).
+
+## TradeDay vs Topstep 50K side by side (2026-09-30, third-party - verify before buying)
+
+| | TradeDay Fast Pass EOD 50K | Topstep 50K Combine -> Express Funded |
+|---|---|---|
+| Price | monthly; list $189, ~$85 w/ promo TDNEW | $49/mo + $149 activation, or $95/mo no activation |
+| Target / drawdown | $3,000 / $2,000 EOD trailing (eval + funded) | $3,000 / $2,000 EOD trailing, breach checked live incl. open P/L |
+| Daily loss limit | none | optional $1,000 (soft, not a fail) |
+| Min days | 3 | none |
+| Max size | 5 minis / 50 micros | 5 minis / 50 micros |
+| Eval consistency | 45% (post 2026-07-26 accounts) | best day <= 50-55% of target, breaking raises target |
+| Funded payout | 5 days of $150+, 45% consistency, cap $1,500, max 50% of balance, **80/20** | 5 winning days of $150+ (or consistency path), **90/10** |
+| Platform | NinjaTrader via Tradovate/CQG or Rithmic | **TopstepX only** (API $29/mo), no NinjaTrader |
+| Bots | own-built OK, bought bots banned | API bots OK in Combine + Express, **banned in Live** |
+| VPS | not restricted (confirm) | **banned** (own device, no VPS/VPN) |
+| Malaysia | allowed | allowed |
+| Track record | since 2020, TP 4.6, ~$11M paid | biggest/oldest, 0.71% of XFA reach Live (2025) |
+
+Verdict: TradeDay fits our NT8 + VPS bot as-is. Topstep = better split + brand but full bot
+rewrite, home PC only, and bots end at Live. Sources conflict on TradeDay split (80 vs 90)
+and activation fee - confirm with support.
+Sources: https://proptradingvibes.com/blog/topstep-trading-combine-rules ,
+https://tradeday.freshdesk.com/en/support/solutions/articles/103000404096-fast-pass-funded-sim-payout-policy ,
+https://fundedtrading.com/propfirm/tradeday/ , https://blog.traderspost.io/article/tradeday-review ,
+https://puravidaedge.com/blog/topstep-vs-tradeday , https://www.quantvps.com/prop-firms/tradeday
