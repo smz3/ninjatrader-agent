@@ -21,6 +21,10 @@ most updated Aug-Sep 2026). Times are CT (Chicago). MYT = CT + 13h (CDT) / + 14h
 | Reset | $49 | $95 |
 | XFA activation | $149 once per XFA | $0 |
 
+- **Confirmed on the checkout page (2026-10-02), 50K No Activation Fee + RTA:** $85/mo,
+  **reset $85** (not $95), XFA activation free, **1 free Reset Credit every monthly
+  rebill** (goes to your Reset Bank, same size/type, expires 1 year, use any time - no
+  auto-reset on rebill since Aug 2025).
 - Path can't be changed after purchase. Combine rebills every 30 days until passed or
   cancelled; cancel = gone for good. No time limit to pass.
 - Adding the $1,000 DLL at checkout: $10 off No-Activation path + (limited offer) **doubles
@@ -67,7 +71,7 @@ Combine checkout). Sources: help.topstep.com payout policy (8284233, updated 202
 XFA parameters (8284215, updated 2026-08-05), DLL article (10490293, updated 2026-06-30).
 
 - **Responsible Trading Advantage (RTA):** add the $1,000 DLL at Combine checkout ->
-  $85/mo instead of $95, $50 off Back2Funded, and (limited time, since 2026-06-02, no end
+  $85/mo instead of $95 (reset also $85), $50 off Back2Funded, and (limited time, since 2026-06-02, no end
   date) doubled per-request caps. The DLL is fixed and **carries into the XFA**. Hit it =
   flatten, orders cancelled, no trades until 5 PM CT, account still fine.
 - Path chosen **once at XFA activation, can't change** (official article; some third-party
@@ -75,7 +79,7 @@ XFA parameters (8284215, updated 2026-08-05), DLL article (10490293, updated 202
 
 | 50K + RTA | Standard | Consistency |
 |---|---|---|
-| Qualify | 5 winning days of $150+ net (not consecutive) | 3+ trading days (1+ trade each) AND best day <= 40% of net profit |
+| Qualify | 5 winning days of $150+ net (not consecutive) AND "maintain your balance between payouts" = net profit since last payout >= $0.01 (1st payout exempt) | 3+ trading days (1+ trade each) AND best day <= 40% of net profit |
 | Request | 50% of balance, cap **$4,000** | 50% of balance, cap **$6,000** |
 | Cap starts to bite at | balance > $8,000 | balance > $12,000 |
 | Losing days | don't matter (only count wins) | lower total profit -> push ratio over 40% |
