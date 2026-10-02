@@ -100,6 +100,12 @@ XFA parameters (8284215, updated 2026-08-05), DLL article (10490293, updated 202
   we want payouts every ~3 days.
 - Don't withdraw too early: e.g. $1,000 balance -> take $500 -> $500 left above a $0 MLL.
   Build cushion first (~$2k-3k+ balance), then request.
+- **Rough sim (2026-10-02, 4,000 runs x 120 days, made-up day profiles, 50K + RTA,
+  EOD-only MLL check):** steady trader (65% green, +$300/-$250): Standard ~$9.2k vs
+  Consistency ~$9.4k paid - a tie. Lumpy trader (50% green, big-day tail): Standard
+  ~$3.0k vs Consistency ~$2.2k - Standard wins. No-edge trader: both lose. Biggest lever
+  was the withdraw buffer, not the path: waiting for $2k-4k balance before requesting cut
+  blow-ups from ~68% to ~3% (steady profile). Re-run with real daily P/L before choosing.
 - Separate rule: the **Combine** still has its own 55% consistency (best day < $1,650 on a
   $3,000 target) no matter which XFA path you pick.
 
