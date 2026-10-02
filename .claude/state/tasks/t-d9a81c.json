@@ -1,0 +1,10 @@
+{
+  "id": "t-d9a81c",
+  "status": "open",
+  "priority": 2,
+  "category": "app",
+  "task_title": "Topstep manual trading plan (Combine -> XFA)",
+  "task_details": "2026-10-02: user plans to trade Topstep 50K MANUALLY (no bots allowed in Live), time critical. Agreed rules so far: Combine $3k target, best day < $1,650 (55%) -> aim ~$500-750/day over 4-6 days, stop day at +$750 or -$300/-400. Instrument: start MNQ ($2/pt, exact sizing), NQ later; ES/MES calmer alt; total limit 5 minis/50 micros shared, no opposite positions in related products. XFA: Standard (5 x $150+ wins, $8k balance for $4k cap) vs Consistency (3 days, best day <= 40% of profit since last payout, $12k balance for $6k cap) - decide at activation from a daily P/L journal (re-run scratch sim in topstep-rules.md 4a). Keep cushion $2-4k before 1st payout. Next: turn a backtested setup into a written manual checklist; platform TopstepX or Quantower. Open: user may still want algo later (NT8 research + Python ProjectX bot, or all-Python).",
+  "created_ts": "2026-10-02T10:43:13.532218+00:00",
+  "updated_ts": "2026-10-02T10:43:13.532218+00:00"
+}

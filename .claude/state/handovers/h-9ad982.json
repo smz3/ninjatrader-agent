@@ -1,0 +1,8 @@
+{
+  "id": "h-9ad982",
+  "ts": "2026-10-02T10:43:24.122834+00:00",
+  "session_id": "6ab17186-f375-4415-83ef-c39d3da99677",
+  "summary": "No code. Researched Topstep 50K No Activation Fee + Responsible Trading Advantage and corrected docs/research/topstep-rules.md (sec 2 + new 4a): $85/mo, reset $85, free reset credit each rebill, DLL $1k carries into XFA, caps $4k Standard / $6k Consistency, path fixed at XFA activation, Standard also needs net-positive since last payout. Ran rough scratch sim: paths ~tie for steady days, Standard wins for lumpy days, withdraw buffer ($2-4k) matters most. User now plans MANUAL trading on Topstep (no bots in Live); explained Combine 55% rule, Consistency 40% math, MNQ vs NQ, XFA parameters, TopstepX-only platforms. Lucid still no reply.",
+  "next_steps": "See t-d9a81c (manual trading plan: write checklist for a setup, daily P/L journal, pick path at activation) and t-6d0bb8 (firm/account: buy Topstep 50K NoActFee+RTA when ready; ask Topstep if sole-prop bank OK for SWIFT payouts). Keep proving a setup (#2, t-b2d143).",
+  "questions": "Buy Topstep now or wait on Lucid? Manual only, or algo later (NT8 research + Python ProjectX bot vs all-Python)? MNQ vs MES? Sole-prop bank OK for Topstep payouts?"
+}
