@@ -60,6 +60,45 @@ most updated Aug-Sep 2026). Times are CT (Chicago). MYT = CT + 13h (CDT) / + 14h
 - Split **90/10**. Min payout $125. Must be net positive since last payout.
 - Payout day doesn't count toward the next cycle. Winning days lock at 4:00 PM CT.
 
+### 4a. Standard vs Consistency - deep dive (checked 2026-10-02)
+
+Our pick: 50K, No Activation Fee, Responsible Trading Advantage (= $1,000 DLL added at
+Combine checkout). Sources: help.topstep.com payout policy (8284233, updated 2026-10-01),
+XFA parameters (8284215, updated 2026-08-05), DLL article (10490293, updated 2026-06-30).
+
+- **Responsible Trading Advantage (RTA):** add the $1,000 DLL at Combine checkout ->
+  $85/mo instead of $95, $50 off Back2Funded, and (limited time, since 2026-06-02, no end
+  date) doubled per-request caps. The DLL is fixed and **carries into the XFA**. Hit it =
+  flatten, orders cancelled, no trades until 5 PM CT, account still fine.
+- Path chosen **once at XFA activation, can't change** (official article; some third-party
+  sites wrongly say "per payout").
+
+| 50K + RTA | Standard | Consistency |
+|---|---|---|
+| Qualify | 5 winning days of $150+ net (not consecutive) | 3+ trading days (1+ trade each) AND best day <= 40% of net profit |
+| Request | 50% of balance, cap **$4,000** | 50% of balance, cap **$6,000** |
+| Cap starts to bite at | balance > $8,000 | balance > $12,000 |
+| Losing days | don't matter (only count wins) | lower total profit -> push ratio over 40% |
+| One big day | fine | blocks payout until other days catch up |
+| Split / min | 90/10 (first $10k lifetime 100% for new dashboard users), min $125 | same |
+
+- Consistency % = largest single-day net profit / total net profit **since last payout**.
+  Not rounded: 40.01% fails. Over 40% = not eligible yet, not a breach.
+  Example: $3,000 profit -> best day max $1,200.
+- After **any** payout: MLL = $0 for good, day count restarts, balance drops by the
+  payout -> scaling plan can drop you back to 2 lots, and the leftover balance is your
+  only cushion before $0.
+- **Key point for us:** both paths pay 50% of balance. The cap only matters with a big
+  balance ($8k+ / $12k+), which a 50K bot rarely builds in one cycle. So the real
+  difference is the qualify rule, not the money.
+- **Leaning Standard for a bot:** losing days and one outlier winning day don't block it;
+  just needs 5 days of $150+. Consistency only wins if the bot's days are very even and
+  we want payouts every ~3 days.
+- Don't withdraw too early: e.g. $1,000 balance -> take $500 -> $500 left above a $0 MLL.
+  Build cushion first (~$2k-3k+ balance), then request.
+- Separate rule: the **Combine** still has its own 55% consistency (best day < $1,650 on a
+  $3,000 target) no matter which XFA path you pick.
+
 ## 5. Live Funded Account (LFA) - real money, BOTS END HERE
 
 - Call-up to Live is at Risk Team's discretion. **You can't decline - go Live or lose the XFAs.**
